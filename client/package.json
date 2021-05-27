@@ -8,9 +8,10 @@
     }
   },
   "lint-staged": {
-    "./src/*.{js,jsx,ts,tsx}": [
-      "npx prettier --write",
-      "eslint src/*.js --fix-dry-run"
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "pretty-quick - staged",
+      "git add"
     ]
   },
   "dependencies": {
@@ -55,10 +56,14 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.27.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
-    "prettier": "^2.3.0"
+    "babel-eslint": "^10.1.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-react": "^7.20.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1"
   }
 }
