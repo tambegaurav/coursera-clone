@@ -8,7 +8,7 @@ export default makeStyles((theme) => ({
     fontStyle: 'normal',
     fontVariant: 'normal',
     fontWeight: '600',
-    letterSpacing: '-0.2px',
+    letterSpacing: '2px',
     lineHeight: '92px',
     textDecoration: 'none solid rgb(31, 31, 31)',
     textAlign: 'start',
