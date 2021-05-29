@@ -11,6 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import AppleIcon from '@material-ui/icons/Apple';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Modal from '@material-ui/core/Modal';
@@ -27,6 +28,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import {
   Container,
   TextField,
@@ -117,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(6, 6, 6, 6),
     borderRadius: '5px',
-    height: '95vh',
+    height: '85vh',
     width: '26vw',
   },
   list: {
@@ -320,11 +322,52 @@ const Navbar = () => {
                         size="large"
                         startIcon={google}
                       >
-                        <strong> Continue with Google</strong>
+                        <strong>
+                          {' '}
+                          Continue with Google&nbsp;&nbsp;&nbsp;&nbsp;
+                        </strong>
                       </Button>
                     </div>
+                    <div className={classes.loginDiv}>
+                      <Button
+                        variant="outlined"
+                        style={{
+                          width: '100%',
+                        }}
+                        size="large"
+                        startIcon={<FacebookIcon />}
+                      >
+                        <strong> Continue with Facebook</strong>
+                      </Button>
+                    </div>
+                    <div className={classes.loginDiv}>
+                      <Button
+                        variant="outlined"
+                        style={{
+                          width: '100%',
+                        }}
+                        size="large"
+                        startIcon={<AppleIcon />}
+                      >
+                        <strong>
+                          Continue with Apple
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </strong>
+                      </Button>
+                    </div>
+                    <Container
+                      style={{
+                        color: '#706f6c',
+                        fontSize: '17px',
+                        marginTop: '15px',
+                      }}
+                    >
+                      New to Coursera?&nbsp;
+                      <span style={{ color: '#0056D2' }}>Sign Up</span>
+                    </Container>
                   </Box>
                 </Container>
+                <Divider />
               </div>
             </Fade>
           </Modal>
