@@ -1,4 +1,6 @@
 import React from 'react';
+import 'font-awesome/css/font-awesome.css';
+import classNames from 'classnames';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,6 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import AppleIcon from '@material-ui/icons/Apple';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Modal from '@material-ui/core/Modal';
@@ -25,6 +28,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import {
+  Container,
+  TextField,
+  Grid,
+  InputAdornment,
+  Icon,
+} from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -104,9 +116,11 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(6, 6, 6, 6),
+    borderRadius: '5px',
+    height: '85vh',
+    width: '26vw',
   },
   list: {
     width: 250,
@@ -114,10 +128,44 @@ const useStyles = makeStyles((theme) => ({
   fullList: {
     width: 'auto',
   },
+  modalCont: {
+    fontFamily: 'Source Sans Pro, Arial, sans-serif',
+    color: 'rgb(31,31,31)',
+    fontWeight: 'normal',
+    fontSize: '25px',
+    textAlign: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  spanField: {
+    display: 'block',
+    width: '80%',
+  },
+  inputHead: {
+    fontSize: '15px',
+    textAlign: 'left',
+  },
+  loginDiv: {
+    width: '100%',
+    marginTop: '25px',
+  },
+  fgtPass: {
+    fontSize: '15px',
+    marginTop: '8px',
+    textAlign: 'left',
+    color: '#0056D2',
+  },
+  logo: {
+    height: '24px',
+  },
+  logoDiv: {
+    cursor: 'pointer',
+  },
 }));
 
 const Navbar = () => {
   const classes = useStyles();
+  const google = <Icon className={classNames(classes.icon, 'fa fa-google')} />;
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({
     top: false,
@@ -188,10 +236,138 @@ const Navbar = () => {
           >
             <Fade in={open}>
               <div className={classes.paper}>
-                <h2 id="transition-modal-title">Transition modal</h2>
-                <p id="transition-modal-description">
-                  react-transition-group animates me.
-                </p>
+                <Container className={classes.modalCont}>
+                  <h2 style={{ marginBottom: '30px', letterSpacing: '1px' }}>
+                    Welcome back
+                  </h2>
+                  <Box height="75%">
+                    <Grid container direction="column" spacing={1}>
+                      <Grid
+                        item
+                        container
+                        direction="column"
+                        spacing={1}
+                        alignItems="flex-start"
+                        lg={12}
+                      >
+                        <Grid item lg={12}>
+                          <strong className={classes.inputHead}>EMAIL</strong>
+                        </Grid>
+                        <Grid item lg={12} style={{ width: '400px' }}>
+                          <TextField
+                            variant="outlined"
+                            placeholder="name@email.com"
+                            fullWidth
+                          />
+                        </Grid>
+                      </Grid>
+
+                      <Grid
+                        item
+                        container
+                        direction="column"
+                        spacing={1}
+                        alignItems="flex-start"
+                        lg={12}
+                      >
+                        <Grid item lg={12}>
+                          <strong className={classes.inputHead}>
+                            PASSWORD
+                          </strong>
+                        </Grid>
+                        <Grid item lg={12} style={{ width: '400px' }}>
+                          <TextField
+                            variant="outlined"
+                            placeholder="Enter your password"
+                            fullWidth
+                            InputProps={{
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <IconButton>
+                                    <VisibilityIcon />
+                                  </IconButton>
+                                </InputAdornment>
+                              ),
+                            }}
+                          />
+                          <Grid item>
+                            <p className={classes.fgtPass}>
+                              Forgot your password?
+                            </p>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <div className={classes.loginDiv}>
+                      <Button
+                        variant="contained"
+                        style={{
+                          width: '100%',
+                          background: '#0056D2',
+                          color: 'white',
+                        }}
+                        size="large"
+                      >
+                        Login
+                      </Button>
+                    </div>
+                    <Divider style={{ marginTop: '22px' }} />
+
+                    <div className={classes.loginDiv}>
+                      <Button
+                        variant="outlined"
+                        style={{
+                          width: '100%',
+                        }}
+                        size="large"
+                        startIcon={google}
+                      >
+                        <strong>
+                          {' '}
+                          Continue with Google&nbsp;&nbsp;&nbsp;&nbsp;
+                        </strong>
+                      </Button>
+                    </div>
+                    <div className={classes.loginDiv}>
+                      <Button
+                        variant="outlined"
+                        style={{
+                          width: '100%',
+                        }}
+                        size="large"
+                        startIcon={<FacebookIcon />}
+                      >
+                        <strong> Continue with Facebook</strong>
+                      </Button>
+                    </div>
+                    <div className={classes.loginDiv}>
+                      <Button
+                        variant="outlined"
+                        style={{
+                          width: '100%',
+                        }}
+                        size="large"
+                        startIcon={<AppleIcon />}
+                      >
+                        <strong>
+                          Continue with Apple
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </strong>
+                      </Button>
+                    </div>
+                    <Container
+                      style={{
+                        color: '#706f6c',
+                        fontSize: '17px',
+                        marginTop: '15px',
+                      }}
+                    >
+                      New to Coursera?&nbsp;
+                      <span style={{ color: '#0056D2' }}>Sign Up</span>
+                    </Container>
+                  </Box>
+                </Container>
+                <Divider />
               </div>
             </Fade>
           </Modal>

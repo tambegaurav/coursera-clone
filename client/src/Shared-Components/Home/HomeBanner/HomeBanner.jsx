@@ -5,7 +5,7 @@ import useStyles from './styles';
 export const HomeBanner = () => {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <Container>
         <Grid container justify="space-evenly">
           <Grid
