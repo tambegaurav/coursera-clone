@@ -3,6 +3,7 @@ import Footer from '../../Shared-Components/Footer';
 import Navbar from '../../Shared-Components/Navbar';
 import { HomeBanner } from '../../Shared-Components/Home/HomeBanner/HomeBanner';
 import { HomeCont1 } from '../../Shared-Components/Home/HomeContainers/HomeCont1/HomeCont1';
+import { HomeCont2 } from '../../Shared-Components/Home/HomeContainers/HomeCont2/HomeCont2';
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <h1>Home</h1>
       <HomeBanner />
       <HomeCont1 />
+      <HomeCont2 />
       <Footer />
     </div>
   );
