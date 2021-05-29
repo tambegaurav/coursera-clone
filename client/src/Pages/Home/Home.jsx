@@ -4,6 +4,11 @@ import Navbar from '../../Shared-Components/Navbar';
 import { HomeBanner } from '../../Shared-Components/Home/HomeBanner/HomeBanner';
 // eslint-disable-next-line max-len
 import CommunityReviewSection from '../../Shared-Components/Home/CommunityReviewSection/CommunityReviewSection';
+import {
+  HomeCont1,
+  HomeCont2,
+  HomeCont3,
+} from '../../Shared-Components/Home/HomeContainers';
 
 const Home = () => {
   return (
@@ -11,6 +16,9 @@ const Home = () => {
       <Navbar />
       <h1>Home</h1>
       <HomeBanner />
+      <HomeCont1 />
+      <HomeCont2 />
+      <HomeCont3 />
       <CommunityReviewSection />
       <Footer />
     </div>
