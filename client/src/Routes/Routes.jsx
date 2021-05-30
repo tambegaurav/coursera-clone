@@ -10,7 +10,7 @@ const Routes = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/learn/:code">
+        <Route exact path="/:category/:id">
           <CourseDetailsPage />
         </Route>
         <Route>
