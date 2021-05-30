@@ -5,7 +5,6 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -374,7 +373,7 @@ const Navbar = () => {
         </div>
       </MenuItem>
       <MenuItem>
-        <Button color="inherit">Join For Free</Button>
+        <Button>Join For Free</Button>
       </MenuItem>
     </Menu>
   );
@@ -438,9 +437,7 @@ const Navbar = () => {
             }}
             visibility="visible"
           >
-            <Typography className={classes.title} variant="h6">
-              COURSERA
-            </Typography>
+            <img src="logo.svg" width="120" alt="logo" />
           </Box>
 
           <Hidden mdDown>
