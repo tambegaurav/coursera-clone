@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core';
 
 export default makeStyles(() => ({
   root: {
-    width: '100%',
+    width: '80%',
     color: 'white',
-    padding: '48px 12px',
+    padding: '48px 10%',
   },
   bannerCont: {
     width: '80%',

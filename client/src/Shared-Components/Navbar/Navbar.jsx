@@ -437,7 +437,7 @@ const Navbar = () => {
             }}
             visibility="visible"
           >
-            <img src="logo.svg" width="120" alt="logo" />
+            <img src="/logo.svg" width="120" alt="logo" />
           </Box>
 
           <Hidden mdDown>
