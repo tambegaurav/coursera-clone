@@ -5,15 +5,11 @@ import { HomeBanner } from '../../Shared-Components/Home/HomeBanner/HomeBanner';
 import { HomeCont1 } from '../../Shared-Components/Home/HomeContainers/HomeCont1/HomeCont1';
 import { HomeCont2 } from '../../Shared-Components/Home/HomeContainers/HomeCont2/HomeCont2';
 import { HomeCont3 } from '../../Shared-Components/Home/HomeContainers/HomeCont3/HomeCont3';
-import Searchbar from '../../Shared-Components/Searchbar/Searchbar';
 
 const Home = () => {
   return (
     <div>
       <Navbar />
-      <br />
-      <Searchbar />
-
       <h1>Home</h1>
       <HomeBanner />
       <HomeCont1 />
