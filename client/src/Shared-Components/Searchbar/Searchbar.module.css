@@ -1,0 +1,16 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  width: 70%;
+  margin: auto;
+  gap: 20px;
+  padding: 20px;
+  border-bottom: 1px dotted black;
+}
+
+.emptylist {
+  width: 60%;
+  margin: auto;
+  gap: 20px;
+  padding: 20px;
+}

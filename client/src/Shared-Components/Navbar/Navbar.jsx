@@ -247,7 +247,13 @@ const Navbar = () => {
     <div className={classes.grow}>
       <AppBar
         position="static"
-        style={{ background: 'white', color: 'black', zIndex: 100 }}
+        style={{
+          background: 'white',
+          color: 'black',
+          zIndex: 100,
+          boxShadow: 'none',
+          border: '1px solid #fff',
+        }}
       >
         <Toolbar>
           <Box
@@ -273,6 +279,7 @@ const Navbar = () => {
                 <Button onMouseOver={toggleDrawer(anchor, true)}>
                   <Button
                     variant="contained"
+                    style={{ background: '#0056D2' }}
                     color="primary"
                     endIcon={<ExpandMoreIcon />}
                   >
@@ -343,7 +350,11 @@ const Navbar = () => {
                 </Fade>
               </Modal>
             </div>
-            <Button variant="contained" color="primary">
+            <Button
+              style={{ background: '#0056D2' }}
+              variant="contained"
+              color="primary"
+            >
               JOIN FOR FREE
             </Button>
           </div>
