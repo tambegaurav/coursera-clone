@@ -447,6 +447,7 @@ const Navbar = () => {
                   <Button
                     variant="contained"
                     color="primary"
+                    style={{ backgroundColor: '#0056D2' }}
                     endIcon={<ExpandMoreIcon />}
                   >
                     EXPLORE
@@ -516,7 +517,11 @@ const Navbar = () => {
                 </Fade>
               </Modal>
             </div>
-            <Button variant="contained" color="primary">
+            <Button
+              style={{ backgroundColor: '#0056D2' }}
+              variant="contained"
+              color="primary"
+            >
               JOIN FOR FREE
             </Button>
           </div>
