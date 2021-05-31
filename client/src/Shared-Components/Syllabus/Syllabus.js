@@ -1,12 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import Week from './Week';
 import list from './data.js';
+
+const Cont = styled.div`
+  width: 90%;
+  margin: auto;
+`;
 
 function Syllabus() {
   // const [data, setData] = useState(list);
 
   return (
-    <main>
+    <Cont>
       <header style={{ textAlign: 'center' }}>
         <h2>Syllabus</h2>
         <h2> What you will learn from this course</h2>
@@ -29,7 +36,7 @@ function Syllabus() {
           );
         })}
       </div>
-    </main>
+    </Cont>
   );
 }
 
