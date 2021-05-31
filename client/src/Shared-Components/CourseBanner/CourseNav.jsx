@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Cont = styled.div`
   width: 100%;
-  border-bottom: 2px solid grey;
+  border-bottom: 1px solid grey;
 `;
 
 const Flex = styled.div`
@@ -16,6 +16,11 @@ const Flex = styled.div`
   gap: 20px;
   font-size: 20px;
   padding: 25px 0;
+
+  & > a {
+    text-decoration: none;
+    color: grey;
+  }
 `;
 
 const CourseNav = () => {
@@ -28,7 +33,7 @@ const CourseNav = () => {
         <a href="#reviews">Reviews</a>
         <a href="#enrollment">Enrollment</a>
         <a href="#options">Options</a>
-        <a href="faq">FAQ</a>
+        <a href="#faq">FAQ</a>
       </Flex>
     </Cont>
   );
