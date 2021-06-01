@@ -4,7 +4,7 @@ import { Rating } from '@material-ui/lab';
 import BreadCrumb from './BreadCrumb';
 import useStyles from './style';
 
-export const CourseBanner = () => {
+const CourseBanner = () => {
   const classes = useStyles();
   const color2 = '#021B79';
   const color3 = '#0056D2';
@@ -100,3 +100,5 @@ export const CourseBanner = () => {
     </div>
   );
 };
+
+export default CourseBanner;
