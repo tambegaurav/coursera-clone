@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
@@ -23,17 +24,23 @@ const useStyles = makeStyles(() => ({
     fontWeight: 'normal',
     fontSize: '15px',
   },
+  img: {
+    border: '1px solid black',
+    width: '100%',
+  },
+  info: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 5,
+  },
 }));
 
 // eslint-disable-next-line react/prop-types
 const CoursesList = () => {
   const { query } = useParams();
-  // console.log(query);
   const classes = useStyles();
   const [data, setData] = React.useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [Skip, setSkip] = React.useState(0);
-  // eslint-disable-next-line no-unused-vars
   const [Limit, setLimit] = React.useState(0);
   const [filters, setFilters] = React.useState([]);
 
@@ -44,30 +51,6 @@ const CoursesList = () => {
       list.push(data[i][j]);
     }
   }
-  // if (filters.length === 0) {
-  //   list = courses;
-  //   // console.log(courses);
-  // }
-  console.log(data);
-
-  // let j = 0;
-
-  // for (let i = 1; i < list.length; i++) {
-  //   // eslint-disable-next-line no-underscore-dangle
-  //   if (list[j]._id !== list[i]._id) {
-  //     j++;
-  //     list[j] = list[i];
-  //   }
-  //   // eslint-disable-next-line no-underscore-dangle
-  //   // console.log(list[i]._id);
-  // }
-  // console.log(j);
-  // const newList = [];
-
-  // for (let i = 0; i <= j; i++) {
-  //   newList.push(list[i]);
-  // }
-  // console.log(newList);
 
   const getData = (variables) => {
     axios
@@ -78,6 +61,7 @@ const CoursesList = () => {
       })
       .catch((err) => console.log(err));
   };
+
   React.useEffect(() => {
     const variables = {
       skip: Skip,
@@ -85,16 +69,14 @@ const CoursesList = () => {
       filters,
       query: query.toLowerCase(),
     };
-    console.log(filters);
-
     getData(variables);
   }, [filters]);
+
   React.useEffect(() => {
     const variables = {
       query: query.toLowerCase(),
       filters: [],
     };
-
     getData(variables);
   }, []);
 
@@ -117,10 +99,10 @@ const CoursesList = () => {
       ) : (
         list?.map((item) => (
           <div className={styles.list}>
-            <div style={{ border: '1px solid black', width: '100%' }}>
+            <div className={styles.img}>
               <img src="" alt="img" />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+            <div className={styles.info}>
               <h3>{item.course_name} </h3>
               <p>{item.author} </p>
               <p>Course </p>
@@ -136,7 +118,7 @@ const CoursesList = () => {
                     />
                   </Grid>
                   <Grid item>
-                    <p className={classes.ratingNum}>4.5 | 34256 K students</p>
+                    <p className={classes.ratingNum}> 4.5 | 34256 K students</p>
                   </Grid>
                 </Grid>
               </div>

@@ -45,9 +45,13 @@ router.post("/getCourses", async (req, res) => {
   var query = req.body.query;
   console.log(filters, query);
   var data = [];
-  if (filters.length === 0 || filters === []) {
+  if (filters.length === 0) {
     const courses = await Course.find({
-      course_name: { $regex: query, $options: "i" },
+      $or: [
+        { course_name: { $regex: query, $options: "i" } },
+        { author: { $regex: query, $options: "i" } },
+        { course_details: { $regex: query, $options: "i" } },
+      ],
     });
     console.log(courses);
     data.push(courses);

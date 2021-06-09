@@ -7,13 +7,11 @@ import Home from '../Pages/Home';
 import { CourseMaterial } from '../Pages/CourseMaterialPage/CourseMaterial';
 import AdminLogin from '../Pages/AdminLogin';
 import AdminDashboard from '../Pages/AdminDashboard';
-import Searchbar from '../Shared-Components/Searchbar/Searchbar';
 import CoursesList from '../Shared-Components/Searchbar/CoursesList';
 
 const Routes = () => {
   return (
     <div>
-      <Searchbar />
       <Switch>
         <Route exact path="/">
           <Home />

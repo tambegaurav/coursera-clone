@@ -10,10 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, IconButton } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
-// import InputAdornment from '@material-ui/core/InputAdornment';
-// import top100Films from './data.js';
-// import styles from './CoursesList.module.css';
-// import CoursesList from './CoursesList';
 
 const useStyles = makeStyles(() => ({
   iconButton: {
@@ -23,12 +19,10 @@ const useStyles = makeStyles(() => ({
 
 function Searchbar() {
   const [query, setQuery] = React.useState('');
-  // const [list, setList] = React.useState([]);
   const [courses, setCourses] = React.useState([]);
   const history = useHistory();
   const classes = useStyles();
 
-  // console.log(query);
   const options = courses.map((option) => {
     const firstLetter = option.course_name[0].toUpperCase();
     return {
@@ -36,16 +30,8 @@ function Searchbar() {
       ...option,
     };
   });
-  // console.log(courses, list);
   const handleSearch = () => {
-    // console.log(query);
-    // const updated = options.filter((option) =>
-    //   option.course_name.toLowerCase().includes(query?.toLowerCase()),
-    // );
-    // console.log(query.toLowerCase(), updated[0].title);
-
     setQuery(query);
-    // setList(updated);
     history.push(`/search/query/${query}`);
   };
 
@@ -97,18 +83,6 @@ function Searchbar() {
         )}
       />
       <br />
-      {/* <div>
-        {list.length === 0 ? (
-          <div className={styles.emptylist}>
-            <h2>No Course Found.</h2>
-            <p>Try Another Keyword</p>
-          </div>
-        ) : (
-          <div>
-            <CoursesList query={query} courses={list} />
-          </div>
-        )}
-      </div> */}
     </div>
   );
 }

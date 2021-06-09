@@ -9,7 +9,7 @@ import { AccordionDetails, Checkbox } from '@material-ui/core';
 const level = [
   {
     idx: 1,
-    name: 'Beginner',
+    name: 'Beginners',
   },
   {
     idx: 2,
@@ -42,8 +42,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     gap: '20px',
     margin: 'auto',
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   main: {
     width: '20%',
@@ -77,7 +75,6 @@ export default function Filters(props) {
     props.handleFilter(newChecked);
   };
 
-  // console.log(checked);
   return (
     <div className={classes.root}>
       <div>
