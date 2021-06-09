@@ -40,4 +40,37 @@ router.patch("/:id", async (req, res) => {
   res.status(203).json({ data: course });
 });
 
+router.post("/getCourses", async (req, res) => {
+  var filters = req.body.filters;
+  var query = req.body.query;
+  console.log(filters, query);
+  var data = [];
+  if (filters.length === 0) {
+    const courses = await Course.find({
+      $or: [
+        { course_name: { $regex: query, $options: "i" } },
+        { author: { $regex: query, $options: "i" } },
+        { course_details: { $regex: query, $options: "i" } },
+      ],
+    });
+    console.log(courses);
+    data.push(courses);
+  } else {
+    for (var i = 0; i < filters.length; i++) {
+      const courses = await Course.find({
+        $and: [
+          { course_name: { $regex: query, $options: "i" } },
+          { $or: [{ level: filters[i] }, { category: filters[i] }] },
+        ],
+      });
+      console.log(courses + "  " + filters[i]);
+      data.push(courses);
+    }
+  }
+
+  // data = new Set(data);
+  console.log(data);
+  res.status(200).json({ data: data });
+});
+
 module.exports = router;

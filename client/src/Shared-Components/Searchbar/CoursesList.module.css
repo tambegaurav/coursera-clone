@@ -9,8 +9,8 @@
 }
 
 .emptylist {
-  width: 60%;
-  margin: auto;
+  width: 50%;
+  margin: auto 30%;
   gap: 20px;
-  padding: 20px;
+  padding: 30px;
 }
