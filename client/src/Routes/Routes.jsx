@@ -7,6 +7,7 @@ import { CourseMaterial } from '../Pages/CourseMaterialPage/CourseMaterial';
 import AdminLogin from '../Pages/AdminLogin';
 import AdminDashboard from '../Pages/AdminDashboard';
 import { NewCourseForm } from '../Pages/AdminNewCourseForm/NewCourseForm';
+import AdminCoursePage from '../Pages/AdminCoursePage';
 
 const Routes = () => {
   return (
@@ -30,6 +31,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/admin/newCourse">
           <NewCourseForm />
+        </Route>
+        <Route exact path="/admin/course/:id">
+          <AdminCoursePage />
         </Route>
         <Route>
           <h1>404: Page Not Found</h1>

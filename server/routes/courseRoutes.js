@@ -4,7 +4,7 @@ const Course = require("../models/Course");
 
 //Getting all the courses
 router.get("/all", async (req, res) => {
-  const courses = await Course.find();
+  const courses = await Course.find().populate("video");
   res.status(200).json({ data: courses });
 });
 

@@ -47,7 +47,6 @@ export const addCourseFailure = () => {
 
 export const fetchAllCourses = () => (dispatch) => {
   dispatch(getAllCoursesReq());
-
   return axios
     .get('http://localhost:5000/course/all')
     .then((res) => {
