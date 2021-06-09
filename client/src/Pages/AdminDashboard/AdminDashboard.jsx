@@ -1,7 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
+import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchAllCourses } from '../../Redux/Admin/Course/actions';
 import CourseBox from './CourseBox';
@@ -34,6 +36,14 @@ const AdminDashboard = () => {
   return (
     <div>
       <Heading>Dashboard</Heading>
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to="/admin/newCourse"
+      >
+        Add New Course
+      </Button>
       <CoursesGrid>
         {allCourses.map((el) => (
           <CourseBox key={el._id} course={el} />

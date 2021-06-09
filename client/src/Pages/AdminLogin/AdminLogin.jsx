@@ -18,7 +18,6 @@ const AdminLogin = () => {
   const history = useHistory();
 
   const handleLogin = () => {
-    console.log(username, password);
     if (username === 'admin' && password === 'admin') {
       history.push('/admin/dashboard');
     } else {
