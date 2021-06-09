@@ -33,3 +33,5 @@ router.post("/:course_id/addvideo", async (req, res) => {
   const video = await Video.create({ ...req.body, course_id: course_id });
   res.status(201).json({ data: video });
 });
+
+module.exports = router;

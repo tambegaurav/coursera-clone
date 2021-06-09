@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+// import Searchbar from '../Shared-Components/Searchbar/Searchbar';
 import CourseDetailsPage from '../Pages/CourseDetailsPage';
 import Home from '../Pages/Home';
 import { CourseMaterial } from '../Pages/CourseMaterialPage/CourseMaterial';

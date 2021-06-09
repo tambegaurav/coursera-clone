@@ -1,47 +1,44 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, IconButton, Grid } from '@material-ui/core';
+import { TextField, IconButton } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Rating } from '@material-ui/lab';
 import SearchIcon from '@material-ui/icons/Search';
 // import InputAdornment from '@material-ui/core/InputAdornment';
-import top100Films from './data.js';
-import styles from './Searchbar.module.css';
+// import top100Films from './data.js';
+import styles from './CoursesList.module.css';
+import CoursesList from './CoursesList';
 
 const useStyles = makeStyles(() => ({
   iconButton: {
     padding: 10,
   },
-  ratingNum: {
-    color: 'rgb(247, 187, 86)',
-    fontWeight: '600',
-    fontSize: '15px',
-  },
-  totalRating: {
-    fontWeight: 'normal',
-    fontSize: '15px',
-  },
 }));
+
 function Searchbar() {
   const [query, setQuery] = React.useState('');
   const [list, setList] = React.useState([]);
+  const [courses, setCourses] = React.useState([]);
+
   const classes = useStyles();
-  const options = top100Films.map((option) => {
-    const firstLetter = option.title[0].toUpperCase();
+
+  // console.log(query);
+  const options = courses.map((option) => {
+    const firstLetter = option.course_name[0].toUpperCase();
     return {
       firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
       ...option,
     };
   });
-  // console.log(list);
-
+  // console.log(courses, list);
   const handleSearch = () => {
     // console.log(query);
     const updated = options.filter((option) =>
-      option.title.toLowerCase().includes(query?.toLowerCase()),
+      option.course_name.toLowerCase().includes(query?.toLowerCase()),
     );
     // console.log(query.toLowerCase(), updated[0].title);
 
@@ -49,6 +46,12 @@ function Searchbar() {
     setList(updated);
   };
 
+  React.useEffect(() => {
+    axios
+      .get('http://localhost:5000/course/all')
+      .then((res) => setCourses(res.data.data))
+      .catch((err) => console.log('Error Occured', err));
+  }, []);
   return (
     <div>
       <Autocomplete
@@ -57,10 +60,10 @@ function Searchbar() {
           (a, b) => -b.firstLetter.localeCompare(a.firstLetter),
         )}
         onChange={(event, value) =>
-          value ? setQuery(value.title) : setQuery('')
+          value ? setQuery(value.course_name) : setQuery('')
         }
         groupBy={(option) => option.firstLetter}
-        getOptionLabel={(option) => option.title}
+        getOptionLabel={(option) => option.course_name}
         style={{ width: 300 }}
         autoSelect={true}
         renderInput={(params) => (
@@ -99,45 +102,7 @@ function Searchbar() {
           </div>
         ) : (
           <div>
-            {list?.map((item) => (
-              <div className={styles.list}>
-                <div style={{ border: '1px solid black', width: '100%' }}>
-                  <img src="" alt="img" />
-                </div>
-                <div
-                  style={{ display: 'flex', flexDirection: 'column', gap: 5 }}
-                >
-                  <h3>{item.title} </h3>
-                  <p>{item.university} </p>
-                  <p>{item.course ? 'Course' : 'Specialization'} </p>
-                  <div>
-                    <Grid
-                      Grid
-                      container
-                      spacing={1}
-                      style={{ marginTop: '20px' }}
-                    >
-                      <Grid item>
-                        <Rating
-                          name="half-rating-read"
-                          defaultValue={4.5}
-                          precision={0.5}
-                          readOnly
-                          size="small"
-                        />
-                      </Grid>
-                      <Grid item>
-                        <p className={classes.ratingNum}>
-                          {item.rating} | {item.students}K students
-                        </p>
-                      </Grid>
-                    </Grid>
-                  </div>
-
-                  <h4>Level: {item.level} </h4>
-                </div>
-              </div>
-            ))}
+            <CoursesList query={query} courses={list} />
           </div>
         )}
       </div>
