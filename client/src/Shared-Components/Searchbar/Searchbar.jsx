@@ -1,17 +1,19 @@
+/* eslint-disable react/jsx-indent */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, IconButton } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 // import InputAdornment from '@material-ui/core/InputAdornment';
 // import top100Films from './data.js';
-import styles from './CoursesList.module.css';
-import CoursesList from './CoursesList';
+// import styles from './CoursesList.module.css';
+// import CoursesList from './CoursesList';
 
 const useStyles = makeStyles(() => ({
   iconButton: {
@@ -21,9 +23,9 @@ const useStyles = makeStyles(() => ({
 
 function Searchbar() {
   const [query, setQuery] = React.useState('');
-  const [list, setList] = React.useState([]);
+  // const [list, setList] = React.useState([]);
   const [courses, setCourses] = React.useState([]);
-
+  const history = useHistory();
   const classes = useStyles();
 
   // console.log(query);
@@ -37,13 +39,14 @@ function Searchbar() {
   // console.log(courses, list);
   const handleSearch = () => {
     // console.log(query);
-    const updated = options.filter((option) =>
-      option.course_name.toLowerCase().includes(query?.toLowerCase()),
-    );
+    // const updated = options.filter((option) =>
+    //   option.course_name.toLowerCase().includes(query?.toLowerCase()),
+    // );
     // console.log(query.toLowerCase(), updated[0].title);
 
     setQuery(query);
-    setList(updated);
+    // setList(updated);
+    history.push(`/search/query/${query}`);
   };
 
   React.useEffect(() => {
@@ -94,7 +97,7 @@ function Searchbar() {
         )}
       />
       <br />
-      <div>
+      {/* <div>
         {list.length === 0 ? (
           <div className={styles.emptylist}>
             <h2>No Course Found.</h2>
@@ -105,7 +108,7 @@ function Searchbar() {
             <CoursesList query={query} courses={list} />
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

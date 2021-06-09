@@ -43,20 +43,29 @@ router.patch("/:id", async (req, res) => {
 router.post("/getCourses", async (req, res) => {
   var filters = req.body.filters;
   var query = req.body.query;
-  // console.log(filters, query);
+  console.log(filters, query);
   var data = [];
-  // for (var i = 0; i < filters.length; i++) {
-  //   const courses = await Course.find({
-  //     $and: [
-  //       { course_name: { $regex: query, $options: "i" } },
-  //       { $or: [{ level: filters[i] }, { category: filters[i] }] },
-  //     ],
-  //   });
-  //   // console.log(courses + "  " + filters[i]);
-  //   data.push(courses);
-  // }
+  if (filters.length === 0 || filters === []) {
+    const courses = await Course.find({
+      course_name: { $regex: query, $options: "i" },
+    });
+    console.log(courses);
+    data.push(courses);
+  } else {
+    for (var i = 0; i < filters.length; i++) {
+      const courses = await Course.find({
+        $and: [
+          { course_name: { $regex: query, $options: "i" } },
+          { $or: [{ level: filters[i] }, { category: filters[i] }] },
+        ],
+      });
+      console.log(courses + "  " + filters[i]);
+      data.push(courses);
+    }
+  }
+
   // data = new Set(data);
-  // console.log(data);
+  console.log(data);
   res.status(200).json({ data: data });
 });
 

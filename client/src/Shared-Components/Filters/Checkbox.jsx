@@ -38,9 +38,12 @@ const subject = [
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '80%',
     display: 'flex',
     gap: '20px',
+    margin: 'auto',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   main: {
     width: '20%',
@@ -50,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
+  },
+  options: {
+    display: 'flex',
+    flexDirection: 'column',
   },
 }));
 
@@ -73,51 +80,105 @@ export default function Filters(props) {
   // console.log(checked);
   return (
     <div className={classes.root}>
-      <Accordion className={classes.main}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>Level</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {level.map((el) => (
-            <>
-              <Checkbox
-                // defaultChecked
-                checked={checked.indexOf(el.name) !== -1}
-                onChange={() => handleChange(el.name)}
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
-              />
-              <span>{el.name} </span>
-            </>
-          ))}
-        </AccordionDetails>
-      </Accordion>
+      <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Level</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.options}>
+            {level.map((el) => (
+              <div style={{ display: 'flex' }}>
+                <Checkbox
+                  // defaultChecked
+                  checked={checked.indexOf(el.name) !== -1}
+                  onChange={() => handleChange(el.name)}
+                  inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                />
+                <span>{el.name} </span>
+              </div>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      </div>
 
-      <Accordion className={classes.main}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>Subject</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {subject.map((el) => (
-            <>
-              <Checkbox
-                // defaultChecked
-                checked={checked.indexOf(el.name) !== -1}
-                onChange={() => handleChange(el.name)}
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
-              />
-              <span>{el.name} </span>
-            </>
-          ))}
-        </AccordionDetails>
-      </Accordion>
+      <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Subject</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.options}>
+            {subject.map((el) => (
+              <div style={{ display: 'flex' }}>
+                <Checkbox
+                  // defaultChecked
+                  checked={checked.indexOf(el.name) !== -1}
+                  onChange={() => handleChange(el.name)}
+                  inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                />
+                <span>{el.name} </span>
+              </div>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Skills</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.options}>
+            {level.map((el) => (
+              <div style={{ display: 'flex' }}>
+                <Checkbox
+                  // defaultChecked
+                  checked={checked.indexOf(el.name) !== -1}
+                  onChange={() => handleChange(el.name)}
+                  inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                />
+                <span>{el.name} </span>
+              </div>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      </div>
+
+      <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Duration</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.options}>
+            {level.map((el) => (
+              <div style={{ display: 'flex' }}>
+                <Checkbox
+                  // defaultChecked
+                  checked={checked.indexOf(el.name) !== -1}
+                  onChange={() => handleChange(el.name)}
+                  inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                />
+                <span>{el.name} </span>
+              </div>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </div>
   );
 }
