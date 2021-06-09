@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,7 +36,7 @@ const AdminDashboard = () => {
       <Heading>Dashboard</Heading>
       <CoursesGrid>
         {allCourses.map((el) => (
-          <CourseBox course={el} />
+          <CourseBox key={el._id} course={el} />
         ))}
       </CoursesGrid>
     </div>
