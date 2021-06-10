@@ -1,9 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { courseReducer } from './Admin/Course/courseReducer';
+import { adminVideoReducer } from './Admin/Video/adminVideoReducer';
 
 const rootReducer = combineReducers({
   course: courseReducer,
+  adminVideo: adminVideoReducer,
 });
 
 const customThunk = (store) => (next) => (action) => {
