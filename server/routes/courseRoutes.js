@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Course = require("../models/Course");
+//for populating anything add below line with name of the refencing column that you want to populate
+//eg: Course.find().populate("video_ids").exec()
 
 //Getting all the courses
 router.get("/all", async (req, res) => {
-  const courses = await Course.find().populate("video");
+  const courses = await Course.find().exec();
   res.status(200).json({ data: courses });
 });
 
@@ -17,7 +19,7 @@ router.post("/addcourse", async (req, res) => {
 // Get course by ID
 router.get("/:id", async (req, res) => {
   id = req.params.id;
-  const course = await Course.findById(id);
+  const course = await Course.findById(id).populate("video_ids").exec();
   res.status(200).json({ data: course });
 });
 

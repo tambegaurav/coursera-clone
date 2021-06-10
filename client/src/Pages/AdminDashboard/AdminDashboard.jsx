@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { Button } from '@material-ui/core';
@@ -45,7 +46,7 @@ const AdminDashboard = () => {
       </Button>
       <CoursesGrid>
         {allCourses.map((el) => (
-          <CourseBox course={el} />
+          <CourseBox key={el._id} course={el} />
         ))}
       </CoursesGrid>
     </div>

@@ -6,6 +6,9 @@ import {
   ADD_COURSE_REQ,
   ADD_COURSE_SUCCESS,
   ADD_COURSE_FAILURE,
+  GET_ALL_VIDEOS_PC_FAILURE,
+  GET_ALL_VIDEOS_PC_REQ,
+  GET_ALL_VIDEOS_PC_SUCCESS,
 } from './actionTypes';
 
 export const getAllCoursesReq = () => {
@@ -45,6 +48,25 @@ export const addCourseFailure = () => {
   };
 };
 
+export const getAllVideosPCReq = () => {
+  return {
+    type: GET_ALL_VIDEOS_PC_REQ,
+  };
+};
+
+export const getAllVideosPCSuccess = (payload) => {
+  return {
+    type: GET_ALL_VIDEOS_PC_SUCCESS,
+    payload,
+  };
+};
+
+export const getAllVideosPCFailure = () => {
+  return {
+    type: GET_ALL_VIDEOS_PC_FAILURE,
+  };
+};
+
 export const fetchAllCourses = () => (dispatch) => {
   dispatch(getAllCoursesReq());
   return axios
@@ -54,6 +76,19 @@ export const fetchAllCourses = () => (dispatch) => {
     })
     .catch((err) => {
       dispatch(getAllCoursesFailure(err));
+      console.log(err);
+    });
+};
+
+export const fetchAllVideosParticularCourse = (courseId) => (dispatch) => {
+  dispatch(getAllVideosPCReq());
+  return axios
+    .get(`http://localhost:5000/video/${courseId}/videos`)
+    .then((res) => {
+      dispatch(getAllVideosPCSuccess(res.data.data));
+    })
+    .catch((err) => {
+      dispatch(getAllVideosPCFailure(err));
       console.log(err);
     });
 };

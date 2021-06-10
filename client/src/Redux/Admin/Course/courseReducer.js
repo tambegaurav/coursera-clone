@@ -5,12 +5,16 @@ import {
   ADD_COURSE_REQ,
   ADD_COURSE_SUCCESS,
   ADD_COURSE_FAILURE,
+  GET_ALL_VIDEOS_PC_REQ,
+  GET_ALL_VIDEOS_PC_SUCCESS,
+  GET_ALL_VIDEOS_PC_FAILURE,
 } from './actionTypes';
 
 const init = {
   isLoading: false,
   isError: false,
   courses: [],
+  videos: [],
 };
 
 export const courseReducer = (state = init, { type, payload }) => {
@@ -56,6 +60,31 @@ export const courseReducer = (state = init, { type, payload }) => {
     }
 
     case ADD_COURSE_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+
+    case GET_ALL_VIDEOS_PC_REQ: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case GET_ALL_VIDEOS_PC_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        videos: payload,
+      };
+    }
+
+    case GET_ALL_VIDEOS_PC_FAILURE: {
       return {
         ...state,
         isLoading: false,

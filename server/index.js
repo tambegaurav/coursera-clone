@@ -22,14 +22,13 @@ const options = {
   useUnifiedTopology: true,
   useFindAndModify: false,
 };
-
 mongoose.connect(uri, options);
+
 const connection = mongoose.connection;
 
 connection.once("open", () => {
   console.log("MongoDB connection established successfully");
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on Port ${port}`);
+  app.listen(port, () => {
+    console.log(`Server is running on Port ${port}`);
+  });
 });
