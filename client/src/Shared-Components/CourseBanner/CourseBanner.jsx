@@ -1,14 +1,16 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Box, Grid, Avatar, Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import BreadCrumb from './BreadCrumb';
 import useStyles from './style';
 
-const CourseBanner = () => {
+const CourseBanner = ({ course }) => {
   const classes = useStyles();
   const color2 = '#021B79';
   const color3 = '#0056D2';
-
+  const rating = (Math.random() * (5 - 3) + 3).toFixed(1);
   return (
     <div
       className={classes.root}
@@ -17,13 +19,11 @@ const CourseBanner = () => {
       }}
     >
       <div className={classes.bannerCont}>
-        <BreadCrumb />
+        <BreadCrumb course={course} />
         <Grid container justify="space-between">
           <Grid item>
             <Box>
-              <h1 className={classes.heading}>
-                Full-Stack Web Development with React{' '}
-              </h1>
+              <h1 className={classes.heading}>{course.course_name}</h1>
 
               {/* Description Container ...here do truncate */}
 
@@ -41,18 +41,20 @@ const CourseBanner = () => {
               <Grid Grid container spacing={1} style={{ marginTop: '20px' }}>
                 <Grid item>
                   <Rating
-                    name="half-rating-read"
-                    defaultValue={4.5}
-                    precision={0.5}
+                    name="simple-controlled"
+                    value={rating}
+                    precision={0.1}
                     readOnly
                     size="small"
                   />
                 </Grid>
                 <Grid item>
-                  <p className={classes.ratingNum}>4.5</p>
+                  <p className={classes.ratingNum}>{rating}</p>
                 </Grid>
                 <Grid item>
-                  <p className={classes.totalRating}>6,232 ratings</p>
+                  <p className={classes.totalRating}>
+                    {Math.ceil(Math.random() * (4500 - 2500) + 2500)} ratings
+                  </p>
                 </Grid>
               </Grid>
 
@@ -66,7 +68,7 @@ const CourseBanner = () => {
                 <Grid item>
                   <Avatar alt="name" src="https://bit.ly/3p5nbtK" />
                 </Grid>
-                <Grid item>Jogesh K. Muppala</Grid>
+                <Grid item>{course.author}</Grid>
               </Grid>
 
               {/* Enroll Button */}
@@ -82,7 +84,9 @@ const CourseBanner = () => {
 
               <Grid container style={{ marginTop: '20px' }}>
                 <Grid item>
-                  <strong>8,346</strong>
+                  <strong>
+                    {Math.ceil(Math.random() * (8500 - 5500) + 5500)}
+                  </strong>
                   &nbsp; already,enrolled
                 </Grid>
               </Grid>

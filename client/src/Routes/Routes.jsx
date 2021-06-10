@@ -17,7 +17,7 @@ const Routes = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/browse/:category/:id">
+        <Route exact path="/browse/:category/:courseName">
           <CourseDetailsPage />
         </Route>
         <Route exact path="/courseMat">
