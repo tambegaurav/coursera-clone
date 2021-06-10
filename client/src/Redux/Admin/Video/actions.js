@@ -33,6 +33,7 @@ export const addVideoToCourse = (payload) => (dispatch) => {
     .then((res) => {
       dispatch(addVideoSuccess());
       console.log(res);
+      return res;
     })
     .catch((err) => {
       dispatch(addVideoFailure());
