@@ -82,11 +82,11 @@ export const Controls = forwardRef(
         height: 8,
       },
       thumb: {
-        height: 24,
-        width: 24,
+        height: 19,
+        width: 18,
         backgroundColor: '#fff',
         border: '2px solid currentColor',
-        marginLeft: -12,
+        marginLeft: -1,
         marginTop: '8px',
         '&:focus, &:hover, &$active': {
           boxShadow: 'inherit',
@@ -97,12 +97,12 @@ export const Controls = forwardRef(
         left: 'calc(-50% + 4px)',
       },
       track: {
-        height: 8,
+        height: 6,
         borderRadius: 4,
         marginTop: '15px',
       },
       rail: {
-        height: 8,
+        height: 6,
         borderRadius: 4,
         marginTop: '15px',
       },
