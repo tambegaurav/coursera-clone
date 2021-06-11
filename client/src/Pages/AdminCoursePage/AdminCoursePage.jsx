@@ -1,9 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable spaced-comment */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
@@ -43,6 +41,7 @@ const AdminCoursePage = () => {
   const [courseId, setCourseId] = useState('');
 
   const videos = useSelector((state) => state.course.videos);
+  const [videoIds, setVideoIds] = useState([]);
 
   const dispatch = useDispatch();
   const initialVideoData = {
@@ -64,17 +63,37 @@ const AdminCoursePage = () => {
     });
   };
 
+  const fetchVideoIdsArray = () => {
+    return axios
+      .get(`http://localhost:5000/course/${courseId}/videoids`)
+      .then(({ data }) => {
+        setVideoIds(data.data.video_ids);
+      });
+  };
+
   const handleAddVideo = () => {
     const payload = {
       ...newVideoData,
       week: Number(newVideoData.week),
       course_id: courseId,
     };
-    console.log(payload);
-    dispatch(addVideoToCourse(payload)).then(() => {
-      alert('Video Added Successfully');
-      dispatch(fetchAllVideosParticularCourse(courseId));
-    });
+    dispatch(addVideoToCourse(payload))
+      .then((res) => {
+        alert('Video Added Successfully');
+        const newVideoId = res.data.data._id;
+        // setVideoIds([...videoIds, newVideoId]);
+        videoIds.push(newVideoId);
+      })
+      .then(() => {
+        axios
+          .patch(`http://localhost:5000/course/${courseId}`, {
+            video_ids: videoIds,
+          })
+          .then(() => fetchVideoIdsArray())
+          .catch((err) => console.error(err));
+
+        dispatch(fetchAllVideosParticularCourse(courseId));
+      });
   };
 
   const handleOpen = () => {
@@ -92,6 +111,8 @@ const AdminCoursePage = () => {
   useEffect(() => {
     if (courseId !== '') {
       dispatch(fetchAllVideosParticularCourse(courseId));
+
+      fetchVideoIdsArray();
     }
   }, [courseId]);
 
