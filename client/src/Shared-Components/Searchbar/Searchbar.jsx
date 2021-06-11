@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-boolean-value */
@@ -42,7 +43,7 @@ function Searchbar() {
       .catch((err) => console.log('Error Occured', err));
   }, []);
   return (
-    <div>
+    <div style={{ marginTop: 10 }}>
       <Autocomplete
         id="grouped-demo"
         options={options.sort(
@@ -53,13 +54,14 @@ function Searchbar() {
         }
         groupBy={(option) => option.firstLetter}
         getOptionLabel={(option) => option.course_name}
-        style={{ width: 300 }}
+        style={{ width: 350, paddingLeft: 100 }}
         autoSelect={true}
         renderInput={(params) => (
           <div
             style={{
               display: 'flex',
-              border: '1px solid black',
+              // border: '1px solid #0156D1',
+              padding: '0 10px',
             }}
           >
             <TextField
@@ -67,7 +69,8 @@ function Searchbar() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               label="What do you want to Learn?"
-              variant="filled"
+              variant="outlined"
+              style={{ outline: 'none', borderBottom: 'none' }}
             />
             <IconButton
               variant="contained"

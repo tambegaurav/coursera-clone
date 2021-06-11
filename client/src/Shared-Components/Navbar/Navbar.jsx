@@ -6,10 +6,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-import InputBase from '@material-ui/core/InputBase';
+// import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import AppleIcon from '@material-ui/icons/Apple';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -36,6 +36,7 @@ import {
   Icon,
 } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Searchbar from '../Searchbar/Searchbar';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -388,7 +389,7 @@ const Navbar = () => {
         marginTop: 70,
         top: 0,
 
-        background: 'blue',
+        background: 'white',
         marginLeft: 90,
       }}
       className={clsx(classes.list, {
@@ -447,15 +448,14 @@ const Navbar = () => {
           <Hidden mdDown>
             {['EXPLORE'].map((anchor) => (
               <React.Fragment key={anchor}>
-                <Button onMouseOver={toggleDrawer(anchor, true)}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ backgroundColor: '#0056D2' }}
-                    endIcon={<ExpandMoreIcon />}
-                  >
-                    EXPLORE
-                  </Button>
+                <Button
+                  onClick={toggleDrawer(anchor, true)}
+                  variant="contained"
+                  color="primary"
+                  endIcon={<ExpandMoreIcon />}
+                  style={{ marginLeft: 50 }}
+                >
+                  EXPLORE
                 </Button>
                 <Drawer
                   anchor={anchor}
@@ -477,17 +477,18 @@ const Navbar = () => {
 
           <Hidden xsDown>
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
+              {/* <div className={classes.searchIcon}>
                 <SearchIcon />
-              </div>
-              <InputBase
+              </div> */}
+              {/* <InputBase
                 placeholder="What do you want to learn ?"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
-              />
+              /> */}
+              <Searchbar />
             </div>
           </Hidden>
           <div className={classes.grow} />
