@@ -48,8 +48,9 @@ router.get("/:course_name", async (req, res) => {
 router.get("/:category/:course_name", async (req, res) => {
   course_name = req.params.course_name;
   category = req.params.category;
+  console.log(category, course_name);
   const courses = await Course.find({
-    $and: [
+    $or: [
       { course_name: { $regex: course_name, $options: "i" } },
       { category: { $regex: category, $options: "i" } },
     ],
@@ -81,11 +82,12 @@ router.post("/getCourses", async (req, res) => {
     const courses = await Course.find({
       $or: [
         { course_name: { $regex: query, $options: "i" } },
-        { author: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
         { course_details: { $regex: query, $options: "i" } },
       ],
     });
     console.log(courses);
+
     data.push(courses);
   } else {
     for (var i = 0; i < filters.length; i++) {

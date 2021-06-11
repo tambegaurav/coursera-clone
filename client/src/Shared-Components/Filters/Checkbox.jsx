@@ -24,15 +24,19 @@ const level = [
 const subject = [
   {
     idx: 1,
-    name: 'Web dev',
+    name: 'Web Dev',
   },
   {
     idx: 2,
-    name: 'Computer Science',
+    name: 'Data Science',
   },
   {
     idx: 3,
-    name: 'Information Technology',
+    name: 'M.L',
+  },
+  {
+    idx: 4,
+    name: 'App Dev',
   },
 ];
 
