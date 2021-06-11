@@ -4,13 +4,9 @@ import React, { useState, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
 import { Grid, Paper, Typography } from '@material-ui/core';
-
+import { useSelector } from 'react-redux';
 import useStyles from './style';
 import { Controls } from './Controls';
-
-const url =
-  // eslint-disable-next-line max-len
-  'https://masai-course.s3.ap-south-1.amazonaws.com/lecture/5435/material/88bade49e98db8790df275fcebb37a13/zoom_0.mp4';
 
 let count = 0;
 
@@ -29,6 +25,8 @@ const format = (sec) => {
 };
 
 export const VidPlayer = () => {
+  const videoUrl = useSelector((state) => state.userVideo.videoUrl);
+  const videoTitle = useSelector((state) => state.userVideo.videoTitle);
   const classes = useStyles();
   const [state, setState] = useState({
     playing: false,
@@ -172,69 +170,73 @@ export const VidPlayer = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <div
-        ref={playerDiv}
-        className={classes.playerDiv}
-        onMouseMove={handleMouseMove}
-      >
-        <ReactPlayer
-          url={url}
-          width="100%"
-          height="100%"
-          muted={muted}
-          ref={playerRef}
-          playing={playing}
-          volume={volume}
-          playbackRate={playbackRate}
-          onProgress={handleProgress}
-          config={{
-            file: {
-              attributes: {
-                crossOrigin: 'anonymous',
+    <>
+      <div className={classes.root}>
+        <div
+          ref={playerDiv}
+          className={classes.playerDiv}
+          onMouseMove={handleMouseMove}
+        >
+          <ReactPlayer
+            url={videoUrl}
+            width="100%"
+            height="100%"
+            muted={muted}
+            ref={playerRef}
+            playing={playing}
+            volume={volume}
+            playbackRate={playbackRate}
+            onProgress={handleProgress}
+            config={{
+              file: {
+                attributes: {
+                  crossOrigin: 'anonymous',
+                },
               },
-            },
-          }}
-        />
-        <Controls
-          ref={controlsRef}
-          onPlayPause={handlePlayPause}
-          playing={playing}
-          onRewind={handleRewind}
-          onForward={handleForward}
-          muted={muted}
-          onMute={handleMute}
-          onVolumeChange={handleVolumeChange}
-          onVolumeSeek={handleVolumeSeek}
-          volume={volume}
-          playbackRate={playbackRate}
-          onPlaybackRateChange={handlePlaybackRateChange}
-          onToggleFullScreen={handleToggleFullScreen}
-          played={played}
-          onSeek={handleSeek}
-          onSeekMouseDown={handleSeekMouseDown}
-          onSeekMouseUp={handleSeekMouseUp}
-          elapsedTime={elapsedTime}
-          totalDuration={totalDuration}
-          onChangeDisplayFormat={handleChangeDisplayFormat}
-          onBookmark={addBookmark}
-        />
-      </div>
-      <Grid container style={{ marginTop: '20px' }} spacing={3}>
-        {bookmarks.map((el, ind) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <Grid item key={ind}>
-            <Paper
-              style={{ cursor: 'pointer' }}
-              onClick={() => playerRef.current.seekTo(el.time)}
-            >
-              <img crossOrigin="anonymous" src={el.image} alt="bookmark" />
-              <Typography>Bookmark at {el.display}</Typography>
-            </Paper>
+            }}
+          />
+          <Controls
+            ref={controlsRef}
+            onPlayPause={handlePlayPause}
+            playing={playing}
+            onRewind={handleRewind}
+            onForward={handleForward}
+            muted={muted}
+            onMute={handleMute}
+            onVolumeChange={handleVolumeChange}
+            onVolumeSeek={handleVolumeSeek}
+            volume={volume}
+            playbackRate={playbackRate}
+            onPlaybackRateChange={handlePlaybackRateChange}
+            onToggleFullScreen={handleToggleFullScreen}
+            played={played}
+            onSeek={handleSeek}
+            onSeekMouseDown={handleSeekMouseDown}
+            onSeekMouseUp={handleSeekMouseUp}
+            elapsedTime={elapsedTime}
+            totalDuration={totalDuration}
+            onChangeDisplayFormat={handleChangeDisplayFormat}
+            onBookmark={addBookmark}
+            videoTitle={videoTitle}
+          />
+        </div>
+        <div className={classes.bookmarkCont}>
+          <Grid container style={{ marginTop: '20px' }} spacing={3}>
+            {bookmarks.map((el) => (
+              <Grid item key={el}>
+                <Paper
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => playerRef.current.seekTo(el.time)}
+                >
+                  <img crossOrigin="anonymous" src={el.image} alt="bookmark" />
+                  <Typography>Bookmark at {el.display}</Typography>
+                </Paper>
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-      <canvas ref={canvasRef} />
-    </div>
+          <canvas ref={canvasRef} />
+        </div>
+      </div>
+    </>
   );
 };

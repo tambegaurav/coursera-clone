@@ -3,12 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles(() => ({
   root: {
     position: 'absolute',
-    top: '40%',
+    top: '50%',
     left: '50%',
     transform: 'translate(-50%,-50%)',
   },
   playerDiv: {
     position: 'relative',
+    height: '100%',
+    width: '100%',
   },
   controlsDiv: {
     position: 'absolute',
@@ -21,6 +23,10 @@ export default makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     zIndex: 1,
+  },
+  bookmarkCont: {
+    position: 'absolute',
+    maxWidth: '770px',
   },
   controlBtn: {
     color: '#777',
