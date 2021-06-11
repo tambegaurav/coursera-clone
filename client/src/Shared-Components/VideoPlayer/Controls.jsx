@@ -47,6 +47,7 @@ export const Controls = forwardRef(
       totalDuration,
       onChangeDisplayFormat,
       onBookmark,
+      videoTitle,
     },
     ref,
   ) => {
@@ -120,12 +121,12 @@ export const Controls = forwardRef(
         >
           <Grid item>
             <Typography varaint="h5" style={{ color: '#fff' }}>
-              Video Title
+              {videoTitle}
             </Typography>
           </Grid>
           <Grid item>
             <Button onClick={onBookmark} variant="contained" color="primary">
-              Screenshot
+              Bookmark
             </Button>
           </Grid>
         </Grid>

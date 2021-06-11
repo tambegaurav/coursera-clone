@@ -7,10 +7,9 @@ import {
   getVideos,
   getVideoUrl,
   getCourseName,
-  getVideoTitle,
 } from '../../Redux/User/Video/actions';
 
-export const VideoSideBar = () => {
+export const NotesSideBar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const videosArr = useSelector((state) => state.userVideo.videos);
@@ -22,11 +21,9 @@ export const VideoSideBar = () => {
     );
   }, []);
 
-  const handleVideoMetaData = (index) => {
-    // eslint-disable-next-line camelcase
-    const { video_url, title } = videosArr[index];
-    dispatch(getVideoUrl(video_url));
-    dispatch(getVideoTitle(title));
+  const handleVideoUrl = (index) => {
+    const url = videosArr[index].video_url;
+    dispatch(getVideoUrl(url));
   };
 
   return (
@@ -38,7 +35,7 @@ export const VideoSideBar = () => {
         classes={{
           paper: classes.drawerPaper,
         }}
-        anchor="left"
+        anchor="right"
       >
         <div className={classes.toolbar} />
         <div className={classes.courseName}>
@@ -49,7 +46,7 @@ export const VideoSideBar = () => {
             <ListItem
               button
               key={el.title}
-              onClick={() => handleVideoMetaData(index)}
+              onClick={() => handleVideoUrl(index)}
             >
               <Grid container spacing={1}>
                 <Grid item lg={2}>

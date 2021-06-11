@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -421,8 +424,9 @@ const Navbar = () => {
   return (
     <div className={classes.grow}>
       <AppBar
-        position="static"
-        style={{ background: 'white', color: 'black', zIndex: 100 }}
+        position="relative"
+        style={{ background: 'white', color: 'black' }}
+        className={classes.appBar}
       >
         <Toolbar>
           <Box
