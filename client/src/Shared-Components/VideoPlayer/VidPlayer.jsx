@@ -38,14 +38,16 @@ export const VidPlayer = () => {
     played: 0,
     seeking: false,
   });
+  const [seek, setSeek] = useState(false);
   const playerRef = useRef(null);
   const playerDiv = useRef(null);
   const canvasRef = useRef(null);
   const controlsRef = useRef(null);
   // eslint-disable-next-line no-unused-vars
-  const [timeDispalyFormat, setTimeDispalyFormat] = useState('normal');
+  const [timeDispalyFormat, setTimeDispalyFormat] = useState(true);
   const [bookmarks, setBookmarks] = useState([]);
 
+  // eslint-disable-next-line no-unused-vars
   const { playing, muted, volume, playbackRate, played, seeking } = state;
 
   const handlePlayPause = () => {
@@ -92,30 +94,34 @@ export const VidPlayer = () => {
     if (count > 1) {
       controlsRef.current.style.visibility = 'hidden';
       count = 0;
-      console.log('count', count);
     }
 
     if (controlsRef.current.style.visibility === 'visible') {
       count += 1;
-      console.log('count', count);
     }
 
-    if (!seeking) {
+    if (!seek) {
       setState({ ...state, ...changeState });
     }
   };
 
   const handleSeek = (e, val) => {
+    setSeek(true);
     setState({ ...state, played: parseFloat(val / 100) });
+    setSeek(false);
+    playerRef.current.seekTo(val / 100);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const handleSeekMouseDown = (e) => {
-    setState({ ...state, seeking: true });
+  const handleSeekMouseDown = () => {
+    // setState({ ...state, seeking: true });
+    // console.log(state);
+    // setSeek(true);
+    // console.log('mouse down', seek);
   };
 
   const handleSeekMouseUp = (e, val) => {
-    setState({ ...state, seeking: false });
+    // setState({ ...state, seeking: false });
+    setSeek(false);
     playerRef.current.seekTo(val / 100);
   };
 
@@ -126,18 +132,14 @@ export const VidPlayer = () => {
     ? playerRef.current.getDuration()
     : '00:00';
 
-  const elapsedTime =
-    timeDispalyFormat === 'normal'
-      ? format(currentTime)
-      : `-${format(duration - currentTime)}`;
+  const elapsedTime = timeDispalyFormat
+    ? format(currentTime)
+    : `-${format(duration - currentTime)}`;
   const totalDuration = format(duration);
 
   const handleChangeDisplayFormat = () => {
-    setTimeDispalyFormat({
-      ...state,
-      timeDispalyFormat:
-        timeDispalyFormat === 'normal' ? 'remaining' : 'normal',
-    });
+    setTimeDispalyFormat(!timeDispalyFormat);
+    console.log(timeDispalyFormat);
   };
 
   const addBookmark = () => {

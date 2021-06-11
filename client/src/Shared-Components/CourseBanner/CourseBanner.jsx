@@ -10,7 +10,8 @@ const CourseBanner = ({ course }) => {
   const classes = useStyles();
   const color2 = '#021B79';
   const color3 = '#0056D2';
-  const rating = (Math.random() * (5 - 3) + 3).toFixed(1);
+  const rating = (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
+
   return (
     <div
       className={classes.root}
@@ -87,7 +88,7 @@ const CourseBanner = ({ course }) => {
                   <strong>
                     {Math.ceil(Math.random() * (8500 - 5500) + 5500)}
                   </strong>
-                  &nbsp; already,enrolled
+                  &nbsp; Already Enrolled
                 </Grid>
               </Grid>
             </Box>

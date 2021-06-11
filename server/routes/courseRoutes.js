@@ -16,6 +16,20 @@ router.post("/addcourse", async (req, res) => {
   res.status(201).json({ data: course });
 });
 
+// Get course by ID
+router.get("/:id", async (req, res) => {
+  id = req.params.id;
+  const course = await Course.findById(id).populate("video_ids").exec();
+  res.status(200).json({ data: course });
+});
+
+// Get course by ID and not populate video_ids
+router.get("/:id/videoids", async (req, res) => {
+  id = req.params.id;
+  const course = await Course.findById(id).exec();
+  res.status(200).json({ data: course });
+});
+
 // Get course by Course Name
 router.get("/:course_name", async (req, res) => {
   course_name = req.params.course_name;
