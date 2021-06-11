@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
@@ -16,7 +17,6 @@ const BreadCrumb = (props) => {
   //   const { pathname } = location;
 
   //   const pathArr = pathname.split('/').filter((el) => el);
-
   const { history } = props;
 
   return (
@@ -29,10 +29,10 @@ const BreadCrumb = (props) => {
           Browse
         </Link>
         <Link onClick={() => history.push('/')} style={style}>
-          Computer Science
+          {props.course.category}
         </Link>
         <Link onClick={() => history.push('/')} style={style}>
-          React
+          {props.course.course_name}
         </Link>
         {/* {pathArr.map((path, ind) => {
           const routeTo = `/${pathArr.slice(0, ind + 1).join('/')}`;
