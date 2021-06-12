@@ -35,6 +35,7 @@ import {
   InputAdornment,
   Icon,
 } from '@material-ui/core';
+import { useHistory } from 'react-router';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Searchbar from '../Searchbar/Searchbar';
 
@@ -201,6 +202,12 @@ const Navbar = () => {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const history = useHistory();
+
+  const handleJoin = () => {
+    history.push('/signup');
   };
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -526,6 +533,7 @@ const Navbar = () => {
               style={{ backgroundColor: '#0056D2' }}
               variant="contained"
               color="primary"
+              onClick={handleJoin}
             >
               JOIN FOR FREE
             </Button>

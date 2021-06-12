@@ -7,10 +7,22 @@ const user = new Schema({
   username: String,
   password: String,
   email: String,
-  cart: [{ type: Schema.Types.ObjectId, ref: "Course", default: [] }],
   enrolled_courses: [
     { type: Schema.Types.ObjectId, ref: "Course", default: [] },
   ],
+  notes: {
+    type: Array,
+    default: [],
+  },
+  bookmarks: {
+    type: Array,
+    default: [],
+  },
+  //notes: [{
+  //   videoId,
+  //   img_ul,
+  //   array
+  // }]
 });
 
 module.exports = mongoose.model("User", user);
