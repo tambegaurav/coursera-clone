@@ -35,11 +35,46 @@ router.get("/:course_name", async (req, res) => {
   course_name = req.params.course_name;
   const courses = await Course.find({
     $or: [
-      { course_name: { $regex: search.keyWord, $options: "i" } },
-      { course_details: { $regex: search.keyWord, $options: "i" } },
+      { course_name: { $regex: course_name, $options: "i" } },
+      { course_details: { $regex: course_name, $options: "i" } },
     ],
-  });
+  })
+    .populate("video_ids")
+    .exec();
   res.status(200).json({ data: courses });
+});
+
+// Get course by Category
+router.get("/browse/:category", async (req, res) => {
+  category = req.params.category;
+  const courses = await Course.find({
+    category: { $regex: category, $options: "i" },
+  })
+    .populate()
+    .exec();
+  res.status(200).json({ data: courses });
+});
+
+// Get course by Course Name
+router.get("/:category/:course_name", async (req, res) => {
+  course_name = req.params.course_name;
+  category = req.params.category;
+  console.log(category, course_name);
+  const courses = await Course.find({
+    $and: [
+      { course_name: { $regex: course_name, $options: "i" } },
+      { category: { $regex: category, $options: "i" } },
+    ],
+  })
+    .populate("video_ids")
+    .exec();
+  res.status(200).json({ data: courses });
+});
+// Get course by ID
+router.get("/:id", async (req, res) => {
+  id = req.params.id;
+  const course = await Course.findById(id).populate("video_ids").exec();
+  res.status(200).json({ data: course });
 });
 
 // Edit course
@@ -58,11 +93,12 @@ router.post("/getCourses", async (req, res) => {
     const courses = await Course.find({
       $or: [
         { course_name: { $regex: query, $options: "i" } },
-        { author: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
         { course_details: { $regex: query, $options: "i" } },
       ],
     });
     console.log(courses);
+
     data.push(courses);
   } else {
     for (var i = 0; i < filters.length; i++) {

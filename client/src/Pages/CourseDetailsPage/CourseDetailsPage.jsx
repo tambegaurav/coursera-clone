@@ -1,19 +1,31 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import CourseAbout from '../../Shared-Components/CourseAbout/CourseAbout';
 import CourseBanner from '../../Shared-Components/CourseBanner/CourseBanner';
 import CourseNav from '../../Shared-Components/CourseBanner/CourseNav';
 import Navbar from '../../Shared-Components/Navbar';
 import Syllabus from '../../Shared-Components/Syllabus/Syllabus';
+import { fetchCourse } from '../../Redux/courseDetails/actions';
 
 const CourseDetailsPage = () => {
+  const { category, courseName } = useParams();
+
+  const dispatch = useDispatch();
+  const course = useSelector((state) => state.courseDetails.course);
+
+  React.useEffect(() => {
+    dispatch(fetchCourse(category, courseName));
+  }, [category, courseName]);
   return (
     <div>
       <Navbar />
-      <CourseBanner />
+      <CourseBanner course={course} />
       <CourseNav />
-      <CourseAbout />
+      <CourseAbout courseDetails={course.course_details} />
       <hr />
-
       <Syllabus />
     </div>
   );

@@ -11,6 +11,8 @@ import { NewCourseForm } from '../Pages/AdminNewCourseForm/NewCourseForm';
 import AdminCoursePage from '../Pages/AdminCoursePage';
 import { ProfilePage } from '../Pages/ProfilePage/ProfilePage';
 import { EditProfile } from '../Pages/EditProfile/EditProfile';
+import SignupPage from '../Pages/SignupPage';
+import CategoryCoursesPage from '../Pages/CategoryCoursesPage/CategoryCoursesPage';
 
 const Routes = () => {
   return (
@@ -19,7 +21,10 @@ const Routes = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/browse/:category/:id">
+        <Route exact path="/browse/:category">
+          <CategoryCoursesPage />
+        </Route>
+        <Route exact path="/browse/:category/:courseName">
           <CourseDetailsPage />
         </Route>
         <Route exact path="/courseMat">
@@ -27,6 +32,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/search/query/:query">
           <CoursesList />
+        </Route>
+        <Route exact path="/signup">
+          <SignupPage />
         </Route>
         //Admin Routes
         <Route exact path="/admin/login">

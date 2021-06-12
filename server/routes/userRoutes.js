@@ -16,3 +16,5 @@ router.post("/login", async (req, res) => {
     res.status(404).json({ msg: "Invalid Credentials" });
   }
 });
+
+module.exports = router;

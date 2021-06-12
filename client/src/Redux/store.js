@@ -2,11 +2,13 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { courseReducer } from './Admin/Course/courseReducer';
 import { adminVideoReducer } from './Admin/Video/adminVideoReducer';
+import { courseDetailsReducer } from './courseDetails/courseDetailsReducer';
 import { userVideoReducer } from './User/Video/userVideoReducer';
 
 const rootReducer = combineReducers({
   course: courseReducer,
   adminVideo: adminVideoReducer,
+  courseDetails: courseDetailsReducer,
   userVideo: userVideoReducer,
 });
 

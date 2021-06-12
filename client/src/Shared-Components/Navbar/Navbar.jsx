@@ -1,172 +1,44 @@
 import React from 'react';
 import 'font-awesome/css/font-awesome.css';
 import classNames from 'classnames';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import InputBase from '@material-ui/core/InputBase';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AppleIcon from '@material-ui/icons/Apple';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Hidden from '@material-ui/core/Hidden';
-import Box from '@material-ui/core/Box';
-import clsx from 'clsx';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import FacebookIcon from '@material-ui/icons/Facebook';
 import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  MenuItem,
+  Menu,
+  Button,
+  Modal,
+  Backdrop,
+  Fade,
+  Hidden,
+  Box,
+  Drawer,
+  List,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Container,
   TextField,
   Grid,
   InputAdornment,
   Icon,
 } from '@material-ui/core';
+import AppleIcon from '@material-ui/icons/Apple';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import clsx from 'clsx';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-
-const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: 'none',
-    fontFamily: 'Georgia,serif',
-    fontWeight: 'bolder',
-    fontSize: '1.4em',
-    color: '#0056D2',
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('xs')]: {
-      display: 'block',
-      width: 'auto',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    // border: '1px solid black',
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    border: '1px solid black',
-
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '24ch',
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(6, 6, 6, 6),
-    borderRadius: '5px',
-    height: '85vh',
-    width: '26vw',
-  },
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-  modalCont: {
-    fontFamily: 'Source Sans Pro, Arial, sans-serif',
-    color: 'rgb(31,31,31)',
-    fontWeight: 'normal',
-    fontSize: '25px',
-    textAlign: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  spanField: {
-    display: 'block',
-    width: '80%',
-  },
-  inputHead: {
-    fontSize: '15px',
-    textAlign: 'left',
-  },
-  loginDiv: {
-    width: '100%',
-    marginTop: '25px',
-  },
-  fgtPass: {
-    fontSize: '15px',
-    marginTop: '8px',
-    textAlign: 'left',
-    color: '#0056D2',
-  },
-  logo: {
-    height: '24px',
-  },
-  logoDiv: {
-    cursor: 'pointer',
-  },
-}));
+import { useHistory } from 'react-router-dom';
+import Searchbar from '../Searchbar/Searchbar';
+import useStyles from './NavbarStyles';
 
 const Navbar = () => {
   const classes = useStyles();
+  const history = useHistory();
   const google = <Icon className={classNames(classes.icon, 'fa fa-google')} />;
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState({
@@ -190,6 +62,9 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleClick = (category) => {
+    history.push(`/browse/${category}`);
+  };
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -200,6 +75,10 @@ const Navbar = () => {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleJoin = () => {
+    history.push('/signup');
   };
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -385,11 +264,12 @@ const Navbar = () => {
     <div
       style={{
         position: 'fixed',
-        marginTop: 70,
+        marginTop: 86,
         top: 0,
 
-        background: 'blue',
-        marginLeft: 90,
+        background: 'white',
+        marginLeft: 190,
+        padding: 10,
       }}
       className={clsx(classes.list, {
         [classes.fullList]: anchor === 'top',
@@ -399,24 +279,30 @@ const Navbar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {[
+          'Data Science',
+          'Web Developement',
+          'M.L',
+          'App Development',
+          'Computer Science',
+          'Information Technology',
+          'Health',
+          'Math & Logic',
+        ].map((text) => (
+          <div style={{ width: 280 }}>
+            <ListItem
+              button
+              key={text}
+              onClick={() => {
+                handleClick(text);
+              }}
+            >
+              <ListItemText primary={text} />
+              <ListItemIcon>
+                <ChevronRightIcon />
+              </ListItemIcon>
+            </ListItem>
+          </div>
         ))}
       </List>
     </div>
@@ -447,15 +333,14 @@ const Navbar = () => {
           <Hidden mdDown>
             {['EXPLORE'].map((anchor) => (
               <React.Fragment key={anchor}>
-                <Button onMouseOver={toggleDrawer(anchor, true)}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ backgroundColor: '#0056D2' }}
-                    endIcon={<ExpandMoreIcon />}
-                  >
-                    EXPLORE
-                  </Button>
+                <Button
+                  onClick={toggleDrawer(anchor, true)}
+                  variant="contained"
+                  color="primary"
+                  endIcon={<ExpandMoreIcon />}
+                  style={{ marginLeft: 50 }}
+                >
+                  EXPLORE
                 </Button>
                 <Drawer
                   anchor={anchor}
@@ -477,17 +362,7 @@ const Navbar = () => {
 
           <Hidden xsDown>
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="What do you want to learn ?"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
+              <Searchbar />
             </div>
           </Hidden>
           <div className={classes.grow} />
@@ -525,6 +400,7 @@ const Navbar = () => {
               style={{ backgroundColor: '#0056D2' }}
               variant="contained"
               color="primary"
+              onClick={handleJoin}
             >
               JOIN FOR FREE
             </Button>

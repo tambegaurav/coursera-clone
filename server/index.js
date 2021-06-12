@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const courseRoutes = require("./routes/courseRoutes");
 const videoRoutes = require("./routes/videoRoutes");
+const userRoutes = require("./routes/userRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/course", courseRoutes);
 app.use("/video", videoRoutes);
+app.use("/user", userRoutes);
 
 const uri = process.env.ATLAS_URI;
 

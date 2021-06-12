@@ -1,9 +1,12 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable camelcase */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
@@ -38,11 +41,14 @@ const useStyles = makeStyles(() => ({
 // eslint-disable-next-line react/prop-types
 const CoursesList = () => {
   const { query } = useParams();
+  const history = useHistory();
   const classes = useStyles();
   const [data, setData] = React.useState([]);
   const [Skip, setSkip] = React.useState(0);
   const [Limit, setLimit] = React.useState(0);
   const [filters, setFilters] = React.useState([]);
+
+  const rating = (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
 
   const list = [];
   // eslint-disable-next-line no-plusplus
@@ -85,6 +91,19 @@ const CoursesList = () => {
     setFilters(filters1);
   };
 
+  const handleClick = (id) => {
+    axios
+      .get(`http://localhost:5000/course/${id}`)
+      .then((res) => {
+        const { category, course_name } = res.data.data;
+        // console.log(category, course_name);
+        history.push(`/browse/${category}/${course_name}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // console.log(id);
+  };
   return (
     <div>
       <div>
@@ -96,10 +115,20 @@ const CoursesList = () => {
           <h2>No Course Found.</h2>
           <p>Try Another Filters</p>
         </div>
+      ) : list.length === 1 ? (
+        <Redirect
+          to={`/browse/${list[0].category}/${list[0].course_name}`}
+          push
+        />
       ) : (
         list?.map((item) => (
-          <div className={styles.list}>
-            <div className={styles.img}>
+          <div
+            aria-hidden="true"
+            className={styles.list}
+            onClick={() => handleClick(item._id)}
+            onKeyDown={() => handleClick(item._id)}
+          >
+            <div className={classes.img}>
               <img src="" alt="img" />
             </div>
             <div className={styles.info}>
@@ -110,15 +139,19 @@ const CoursesList = () => {
                 <Grid Grid container spacing={1} style={{ marginTop: '20px' }}>
                   <Grid item>
                     <Rating
-                      name="half-rating-read"
-                      defaultValue={4.5}
-                      precision={0.5}
+                      name="simple-controlled"
+                      value={rating}
+                      precision={0.1}
                       readOnly
                       size="small"
                     />
                   </Grid>
                   <Grid item>
-                    <p className={classes.ratingNum}> 4.5 | 34256 K students</p>
+                    <p className={classes.ratingNum}>
+                      {rating} |{' '}
+                      {Math.ceil(Math.random() * (8500 - 5500) + 5500)} K
+                      students
+                    </p>
                   </Grid>
                 </Grid>
               </div>

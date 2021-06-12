@@ -11,6 +11,10 @@ export const categories = [
     value: 'Machine Learning',
     label: 'M.L',
   },
+  {
+    value: 'Data Science',
+    label: 'Data Science',
+  },
 ];
 
 export const levels = [
@@ -23,8 +27,8 @@ export const levels = [
     label: 'Intermediate',
   },
   {
-    value: 'Advance',
-    label: 'Advance',
+    value: 'Advanced',
+    label: 'Advanced',
   },
 ];
 
