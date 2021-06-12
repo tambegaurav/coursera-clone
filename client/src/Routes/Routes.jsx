@@ -9,6 +9,8 @@ import AdminDashboard from '../Pages/AdminDashboard';
 import CoursesList from '../Shared-Components/Searchbar/CoursesList';
 import { NewCourseForm } from '../Pages/AdminNewCourseForm/NewCourseForm';
 import AdminCoursePage from '../Pages/AdminCoursePage';
+import { ProfilePage } from '../Pages/ProfilePage/ProfilePage';
+import { EditProfile } from '../Pages/EditProfile/EditProfile';
 
 const Routes = () => {
   return (
@@ -38,6 +40,12 @@ const Routes = () => {
         </Route>
         <Route exact path="/admin/course/:id">
           <AdminCoursePage />
+        </Route>
+        <Route exact path="/profile">
+          <ProfilePage />
+        </Route>
+        <Route exact path="/profileForm">
+          <EditProfile />
         </Route>
         <Route>
           <h1>404: Page Not Found</h1>
