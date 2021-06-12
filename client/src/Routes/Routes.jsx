@@ -9,6 +9,7 @@ import AdminDashboard from '../Pages/AdminDashboard';
 import CoursesList from '../Shared-Components/Searchbar/CoursesList';
 import { NewCourseForm } from '../Pages/AdminNewCourseForm/NewCourseForm';
 import AdminCoursePage from '../Pages/AdminCoursePage';
+import SignupPage from '../Pages/SignupPage';
 import CategoryCoursesPage from '../Pages/CategoryCoursesPage/CategoryCoursesPage';
 
 const Routes = () => {
@@ -29,6 +30,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/search/query/:query">
           <CoursesList />
+        </Route>
+        <Route exact path="/signup">
+          <SignupPage />
         </Route>
         //Admin Routes
         <Route exact path="/admin/login">

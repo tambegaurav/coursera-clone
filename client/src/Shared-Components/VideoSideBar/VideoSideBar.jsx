@@ -17,8 +17,8 @@ export const VideoSideBar = () => {
   const courseName = useSelector((state) => state.userVideo.courseName);
 
   useEffect(() => {
-    dispatch(getVideos('60bf461238ac40503ae6670b')).then(() =>
-      dispatch(getCourseName('60bf461238ac40503ae6670b')),
+    dispatch(getVideos('60c32fbc6d111d51caf0bffb')).then(() =>
+      dispatch(getCourseName('60c32fbc6d111d51caf0bffb')),
     );
   }, []);
 

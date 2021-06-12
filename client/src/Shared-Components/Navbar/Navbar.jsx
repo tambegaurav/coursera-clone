@@ -77,6 +77,10 @@ const Navbar = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleJoin = () => {
+    history.push('/signup');
+  };
+
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -396,6 +400,7 @@ const Navbar = () => {
               style={{ backgroundColor: '#0056D2' }}
               variant="contained"
               color="primary"
+              onClick={handleJoin}
             >
               JOIN FOR FREE
             </Button>
