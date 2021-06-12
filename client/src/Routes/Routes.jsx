@@ -10,6 +10,7 @@ import CoursesList from '../Shared-Components/Searchbar/CoursesList';
 import { NewCourseForm } from '../Pages/AdminNewCourseForm/NewCourseForm';
 import AdminCoursePage from '../Pages/AdminCoursePage';
 import SignupPage from '../Pages/SignupPage';
+import CategoryCoursesPage from '../Pages/CategoryCoursesPage/CategoryCoursesPage';
 
 const Routes = () => {
   return (
@@ -17,6 +18,9 @@ const Routes = () => {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/browse/:category">
+          <CategoryCoursesPage />
         </Route>
         <Route exact path="/browse/:category/:courseName">
           <CourseDetailsPage />

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable camelcase */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
@@ -5,7 +6,7 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
@@ -114,6 +115,11 @@ const CoursesList = () => {
           <h2>No Course Found.</h2>
           <p>Try Another Filters</p>
         </div>
+      ) : list.length === 1 ? (
+        <Redirect
+          to={`/browse/${list[0].category}/${list[0].course_name}`}
+          push
+        />
       ) : (
         list?.map((item) => (
           <div
