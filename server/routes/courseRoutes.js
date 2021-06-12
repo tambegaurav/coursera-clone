@@ -44,13 +44,24 @@ router.get("/:course_name", async (req, res) => {
   res.status(200).json({ data: courses });
 });
 
+// Get course by Category
+router.get("/browse/:category", async (req, res) => {
+  category = req.params.category;
+  const courses = await Course.find({
+    category: { $regex: category, $options: "i" },
+  })
+    .populate()
+    .exec();
+  res.status(200).json({ data: courses });
+});
+
 // Get course by Course Name
 router.get("/:category/:course_name", async (req, res) => {
   course_name = req.params.course_name;
   category = req.params.category;
   console.log(category, course_name);
   const courses = await Course.find({
-    $or: [
+    $and: [
       { course_name: { $regex: course_name, $options: "i" } },
       { category: { $regex: category, $options: "i" } },
     ],

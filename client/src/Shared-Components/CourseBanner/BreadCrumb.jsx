@@ -12,6 +12,11 @@ const style = {
   fontWeight: 'bold',
 };
 
+const style1 = {
+  color: 'white',
+  fontWeight: 'bold',
+};
+
 const BreadCrumb = (props) => {
   //   const { history, location } = props;
   //   const { pathname } = location;
@@ -19,6 +24,9 @@ const BreadCrumb = (props) => {
   //   const pathArr = pathname.split('/').filter((el) => el);
   const { history } = props;
 
+  const handleClick = (category) => {
+    history.push(`/browse/${category}`);
+  };
   return (
     <div>
       <Breadcrumbs
@@ -28,12 +36,10 @@ const BreadCrumb = (props) => {
         <Link onClick={() => history.push('/')} style={style}>
           Browse
         </Link>
-        <Link onClick={() => history.push('/')} style={style}>
+        <Link onClick={() => handleClick(props.course.category)} style={style}>
           {props.course.category}
         </Link>
-        <Link onClick={() => history.push('/')} style={style}>
-          {props.course.course_name}
-        </Link>
+        <p style={style1}>{props.course.course_name}</p>
         {/* {pathArr.map((path, ind) => {
           const routeTo = `/${pathArr.slice(0, ind + 1).join('/')}`;
           return (
