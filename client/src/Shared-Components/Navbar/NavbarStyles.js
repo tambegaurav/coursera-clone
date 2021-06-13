@@ -126,4 +126,14 @@ export default makeStyles((theme) => ({
   logoDiv: {
     cursor: 'pointer',
   },
+  avatar: {
+    marginLeft: '10px',
+    background: '#55c1e6',
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+  },
+  person: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
 }));

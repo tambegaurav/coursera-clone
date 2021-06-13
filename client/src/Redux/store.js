@@ -4,12 +4,14 @@ import { courseReducer } from './Admin/Course/courseReducer';
 import { adminVideoReducer } from './Admin/Video/adminVideoReducer';
 import { courseDetailsReducer } from './courseDetails/courseDetailsReducer';
 import { userVideoReducer } from './User/Video/userVideoReducer';
+import { authReducer } from './Auth/authReducer';
 
 const rootReducer = combineReducers({
   course: courseReducer,
   adminVideo: adminVideoReducer,
   courseDetails: courseDetailsReducer,
   userVideo: userVideoReducer,
+  auth: authReducer,
 });
 
 const customThunk = (store) => (next) => (action) => {
