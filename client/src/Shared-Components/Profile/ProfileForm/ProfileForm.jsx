@@ -29,7 +29,9 @@ export const ProfileForm = () => {
   };
 
   const handleSaveChanges = () => {
-    axios.patch(`http://localhost:5000/user/${user[0]._id}`, credentials);
+    axios
+      .patch(`http://localhost:5000/user/${user[0]._id}`, credentials)
+      .then(() => alert('Your changes have been saved'));
   };
 
   return (
@@ -55,7 +57,7 @@ export const ProfileForm = () => {
                   size="large"
                   className={classes.button}
                   component={Link}
-                  to="/profile"
+                  to={`/profile/${user[0]._id}`}
                 >
                   View Profile
                 </Button>

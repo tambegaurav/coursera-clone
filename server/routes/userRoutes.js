@@ -26,4 +26,12 @@ router.patch("/:id", async (req, res) => {
   res.status(203).json({ user });
 });
 
+//get user by id
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const user = await User.findById(id);
+  res.status(200).json(user);
+});
+
 module.exports = router;

@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, IconButton, Avatar } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import PersonIcon from '@material-ui/icons/Person';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 import useStyles from './styles';
 
 export const ProfileBanner = () => {
   const classes = useStyles();
-  const user = useSelector((authState) => authState.auth.user);
-  const space = ' ';
+  const { id } = useParams();
+  const [user, setUser] = useState({});
+
+  React.useEffect(() => {
+    axios.get(`http://localhost:5000/user/${id}`).then((res) => {
+      setUser(res.data);
+    });
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -36,7 +42,7 @@ export const ProfileBanner = () => {
           </Grid>
           <Grid item>
             <h2 className={classes.userName}>
-              {user[0].first_name + space + user[0].last_name}
+              {`${user.first_name} ${user.last_name}`}
             </h2>
           </Grid>
         </Grid>
