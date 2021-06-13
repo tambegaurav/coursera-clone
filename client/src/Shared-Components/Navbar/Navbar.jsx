@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'font-awesome/css/font-awesome.css';
 import classNames from 'classnames';
 import {
@@ -24,17 +24,21 @@ import {
   Grid,
   InputAdornment,
   Icon,
+  Avatar,
 } from '@material-ui/core';
 import AppleIcon from '@material-ui/icons/Apple';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import PersonIcon from '@material-ui/icons/Person';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
 import Searchbar from '../Searchbar/Searchbar';
 import useStyles from './NavbarStyles';
+import { signin } from '../../Redux/Auth/actions';
 
 const Navbar = () => {
   const classes = useStyles();
@@ -44,6 +48,39 @@ const Navbar = () => {
   const [state, setState] = React.useState({
     top: false,
   });
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // LOGIN STUFF
+
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const isAuth = useSelector((authState) => authState.auth.isAuth);
+  const user = useSelector((authState) => authState.auth.user);
+
+  const handleLogin = () => {
+    const payload = {
+      username,
+      password,
+    };
+    dispatch(signin(payload));
+  };
+
+  React.useEffect(() => {
+    if (isAuth) {
+      handleClose();
+    }
+  }, [isAuth]);
+
+  // LOGIN STUFF ENDS
+
   const toggleDrawer = (anchor, open1) => (event) => {
     if (
       event.type === 'keydown' &&
@@ -55,13 +92,6 @@ const Navbar = () => {
     setState({ ...state, [anchor]: open1 });
   };
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const handleClick = (category) => {
     history.push(`/browse/${category}`);
   };
@@ -132,13 +162,17 @@ const Navbar = () => {
                         lg={12}
                       >
                         <Grid item lg={12}>
-                          <strong className={classes.inputHead}>EMAIL</strong>
+                          <strong className={classes.inputHead}>
+                            USERNAME
+                          </strong>
                         </Grid>
                         <Grid item lg={12} style={{ width: '400px' }}>
                           <TextField
                             variant="outlined"
-                            placeholder="name@email.com"
+                            placeholder="username"
                             fullWidth
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                           />
                         </Grid>
                       </Grid>
@@ -161,6 +195,9 @@ const Navbar = () => {
                             variant="outlined"
                             placeholder="Enter your password"
                             fullWidth
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            type="password"
                             InputProps={{
                               endAdornment: (
                                 <InputAdornment position="end">
@@ -188,6 +225,7 @@ const Navbar = () => {
                           color: 'white',
                         }}
                         size="large"
+                        onClick={handleLogin}
                       >
                         Login
                       </Button>
@@ -327,7 +365,9 @@ const Navbar = () => {
             }}
             visibility="visible"
           >
-            <img src="/logo.svg" width="120" alt="logo" />
+            <Link to="/">
+              <img src="/logo.svg" width="120" alt="logo" />
+            </Link>
           </Box>
 
           <Hidden mdDown>
@@ -369,9 +409,11 @@ const Navbar = () => {
           <div className={classes.sectionDesktop}>
             <Button>FOR ENTERPRISE</Button>
             <Button color="inherit">FOR STUDENTS</Button>
-            <Button type="button" color="inherit" onClick={handleOpen}>
-              Login
-            </Button>
+            {!isAuth && (
+              <Button type="button" color="inherit" onClick={handleOpen}>
+                Login
+              </Button>
+            )}
             <div>
               <Modal
                 aria-labelledby="transition-modal-title"
@@ -388,22 +430,38 @@ const Navbar = () => {
                 <Fade in={open}>
                   <div className={classes.paper}>
                     <h2 id="transition-modal-title">LOGIN FORM</h2>
-
-                    <p id="transition-modal-description">
-                      react-transition-group animates me.
-                    </p>
                   </div>
                 </Fade>
               </Modal>
             </div>
-            <Button
-              style={{ backgroundColor: '#0056D2' }}
-              variant="contained"
-              color="primary"
-              onClick={handleJoin}
-            >
-              JOIN FOR FREE
-            </Button>
+            {!isAuth && (
+              <Button
+                style={{ backgroundColor: '#0056D2' }}
+                variant="contained"
+                color="primary"
+                onClick={handleJoin}
+              >
+                JOIN FOR FREE
+              </Button>
+            )}
+
+            {/* After loggen in user's name,Avatar */}
+
+            {isAuth && (
+              <>
+                <Divider orientation="vertical" flexItem />
+                <Avatar
+                  className={classes.avatar}
+                  component={Link}
+                  to="/profile"
+                >
+                  <PersonIcon className={classes.person} />
+                </Avatar>
+                <Button component={Link} to="/profile">
+                  {user[0].first_name}
+                </Button>
+              </>
+            )}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
