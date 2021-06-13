@@ -3,10 +3,14 @@ import { Grid, IconButton, Avatar } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import PersonIcon from '@material-ui/icons/Person';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import useStyles from './styles';
 
 export const ProfileBanner = () => {
   const classes = useStyles();
+  const user = useSelector((authState) => authState.auth.user);
+  const space = ' ';
+
   return (
     <div className={classes.root}>
       <div className={classes.iconDiv}>
@@ -31,7 +35,9 @@ export const ProfileBanner = () => {
             </Avatar>
           </Grid>
           <Grid item>
-            <h2 className={classes.userName}>User Name</h2>
+            <h2 className={classes.userName}>
+              {user[0].first_name + space + user[0].last_name}
+            </h2>
           </Grid>
         </Grid>
       </div>

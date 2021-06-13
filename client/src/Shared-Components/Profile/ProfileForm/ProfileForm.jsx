@@ -1,5 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Paper,
@@ -10,6 +11,8 @@ import {
   Avatar,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 import PersonIcon from '@material-ui/icons/Person';
 import useStyles from './styles';
 // import { empStatus, expLevel, degrees } from './selectTagValues';
@@ -17,6 +20,17 @@ import useStyles from './styles';
 export const ProfileForm = () => {
   const classes = useStyles();
   document.body.style.backgroundColor = '#F5F5F5';
+  const [credentials, setCredentials] = useState({});
+  const user = useSelector((authState) => authState.auth.user);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
+
+  const handleSaveChanges = () => {
+    axios.patch(`http://localhost:5000/user/${user[0]._id}`, credentials);
+  };
 
   return (
     <div>
@@ -76,7 +90,13 @@ export const ProfileForm = () => {
                   <p className={classes.labelText}>First Name</p>
                 </Grid>
                 <Grid item className={classes.value}>
-                  <TextField variant="outlined" fullWidth />
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    defaultValue={user[0].first_name}
+                    name="first_name"
+                    onChange={handleChange}
+                  />
                 </Grid>
               </Grid>
 
@@ -93,7 +113,37 @@ export const ProfileForm = () => {
                   <p className={classes.labelText}>Last Name</p>
                 </Grid>
                 <Grid item className={classes.value}>
-                  <TextField variant="outlined" fullWidth />
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    defaultValue={user[0].last_name}
+                    name="last_name"
+                    onChange={handleChange}
+                  />
+                </Grid>
+              </Grid>
+
+              {/* Username */}
+
+              <Grid
+                item
+                container
+                alignItems="center"
+                justify="flex-end"
+                className={classes.inputGrid}
+                spacing={3}
+              >
+                <Grid item className={classes.label}>
+                  <p className={classes.labelText}>Username</p>
+                </Grid>
+                <Grid item className={classes.value}>
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    defaultValue={user[0].username}
+                    name="username"
+                    onChange={handleChange}
+                  />
                 </Grid>
               </Grid>
 
@@ -111,7 +161,13 @@ export const ProfileForm = () => {
                   <p className={classes.labelText}>Email</p>
                 </Grid>
                 <Grid item className={classes.value}>
-                  <TextField variant="outlined" fullWidth />
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    defaultValue={user[0].email}
+                    name="email"
+                    onChange={handleChange}
+                  />
                 </Grid>
               </Grid>
 
@@ -129,7 +185,13 @@ export const ProfileForm = () => {
                   <p className={classes.labelText}>Password</p>
                 </Grid>
                 <Grid item className={classes.value}>
-                  <TextField variant="outlined" fullWidth />
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    defaultValue={user[0].password}
+                    name="password"
+                    onChange={handleChange}
+                  />
                 </Grid>
               </Grid>
 
@@ -306,6 +368,7 @@ export const ProfileForm = () => {
                     color="primary"
                     size="large"
                     className={classes.photoBtn}
+                    onClick={handleSaveChanges}
                   >
                     Save Changes
                   </Button>
