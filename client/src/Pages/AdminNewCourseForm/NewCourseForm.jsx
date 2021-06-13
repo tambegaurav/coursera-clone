@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import React, { useState } from 'react';
 import {
@@ -13,10 +14,12 @@ import { useDispatch } from 'react-redux';
 import useStyles from './styles';
 import { categories, levels, obj } from './SelectTagValues';
 import { addCourse } from '../../Redux/Admin/Course/actions';
+import fileUpload from '../../CustomHooks/fileUpload';
 
 export const NewCourseForm = () => {
   const classes = useStyles();
   const [formdata, setFormdata] = useState(obj);
+  const [file, setFile] = useState(null);
   const { course_name, course_details, author, level, category } = formdata;
   const dispatch = useDispatch();
 
@@ -25,8 +28,15 @@ export const NewCourseForm = () => {
     setFormdata({ ...formdata, [name]: value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const url = await fileUpload(file);
+    console.log(url);
     dispatch(addCourse(formdata)).then(() => alert('Course Added'));
+  };
+
+  const handleFileSelect = (e) => {
+    const img = e.target.files[0];
+    setFile(img);
   };
 
   return (
@@ -113,6 +123,9 @@ export const NewCourseForm = () => {
                     value={course_details}
                     onChange={handleChange}
                   />
+                </Grid>
+                <Grid item lg={12}>
+                  <input type="file" onChange={handleFileSelect} />
                 </Grid>
                 <Grid item lg={12} container justify="flex-end">
                   <Grid item>
