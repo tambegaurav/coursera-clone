@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState } from 'react';
 import 'font-awesome/css/font-awesome.css';
 import classNames from 'classnames';
@@ -453,11 +454,11 @@ const Navbar = () => {
                 <Avatar
                   className={classes.avatar}
                   component={Link}
-                  to="/profile"
+                  to={`/profile/${user[0]._id}`}
                 >
                   <PersonIcon className={classes.person} />
                 </Avatar>
-                <Button component={Link} to="/profile">
+                <Button component={Link} to={`/profile/${user[0]._id}`}>
                   {user[0].first_name}
                 </Button>
               </>
