@@ -9,6 +9,7 @@ import {
   TextField,
   Avatar,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
 import useStyles from './styles';
 // import { empStatus, expLevel, degrees } from './selectTagValues';
@@ -39,6 +40,8 @@ export const ProfileForm = () => {
                   color="primary"
                   size="large"
                   className={classes.button}
+                  component={Link}
+                  to="/profile"
                 >
                   View Profile
                 </Button>
