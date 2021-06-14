@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const courseRoutes = require("./routes/courseRoutes");
 const videoRoutes = require("./routes/videoRoutes");
 const userRoutes = require("./routes/userRoutes");
+
 require("dotenv").config();
 
 const app = express();

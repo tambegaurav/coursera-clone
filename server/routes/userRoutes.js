@@ -1,20 +1,33 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const router = express.Router();
 const User = require("../models/User");
 
 //singup user
 router.post("/signup", async (req, res) => {
-  const user = await User.create(req.body);
-  res.status(201).json({ data: user });
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = await User.create({ ...req.body, password: hashedPassword });
+    res.status(201).json({ data: user });
+  } catch {
+    res.status(500).send();
+  }
 });
 
 //login in user
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.find({ username, password });
-  if (user.length !== 0) {
-    res.status(200).json({ data: user, msg: "User Log-In" });
-  } else {
+  const user = await User.find({ username });
+
+  if (user.length === 0) {
+    return res.status(404).send();
+  }
+
+  try {
+    if (await bcrypt.compare(password, user[0].password)) {
+      res.status(200).json({ data: user, msg: "User Log-In" });
+    }
+  } catch {
     res.status(404).json({ msg: "Invalid Credentials" });
   }
 });
