@@ -5,6 +5,7 @@ import {
   UPDATE_USER_REQ,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  LOGOUT_USER,
 } from './actionTypes';
 
 const init = {
@@ -12,7 +13,6 @@ const init = {
   isError: false,
   isAuth: false,
   user: null,
-  updatedUser: null,
 };
 
 export const authReducer = (state = init, { type, payload }) => {
@@ -65,6 +65,14 @@ export const authReducer = (state = init, { type, payload }) => {
         ...state,
         isLoading: false,
         isError: true,
+      };
+    }
+
+    case LOGOUT_USER: {
+      return {
+        ...state,
+        isAuth: false,
+        user: null,
       };
     }
 
