@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -5,6 +6,7 @@ import { Box, Grid, Avatar, Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import Modal from '@material-ui/core/Modal';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 import BreadCrumb from './BreadCrumb';
 import useStyles from './style';
@@ -20,6 +22,8 @@ const CourseBanner = ({ course }) => {
   const color2 = '#021B79';
   const color3 = '#0056D2';
   const rating = (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
+
+  const activeUser = useSelector((state) => state.auth.user);
 
   const [open, setOpen] = React.useState(false);
 
@@ -46,7 +50,7 @@ const CourseBanner = ({ course }) => {
               <h1 className={classes.heading}>{course.course_name}</h1>
 
               {/* Description Container ...here do truncate */}
-
+              {/* {JSON.stringify(activeUser)} */}
               <p>
                 <span className={classes.description}>
                   Build Complete Web and Hybrid Mobile Solutions. Master
@@ -95,11 +99,18 @@ const CourseBanner = ({ course }) => {
               <Grid container style={{ marginTop: '20px' }}>
                 <Grid item>
                   <Button
-                    onClick={handleOpen}
+                    onClick={
+                      activeUser.enrolled_courses.includes(course._id) ||
+                      !activeUser
+                        ? ''
+                        : handleOpen
+                    }
                     variant="contained"
                     className={classes.enrollBtn}
                   >
-                    Enroll
+                    {activeUser.enrolled_courses.includes(course._id)
+                      ? 'Already Enrolled'
+                      : 'Enroll'}
                   </Button>
                 </Grid>
               </Grid>
@@ -111,7 +122,10 @@ const CourseBanner = ({ course }) => {
                 aria-describedby="simple-modal-description"
               >
                 <ModalBox>
-                  <PaymentModal handleClose={handleClose} />
+                  <PaymentModal
+                    courseId={course._id}
+                    handleClose={handleClose}
+                  />
                 </ModalBox>
               </Modal>
 

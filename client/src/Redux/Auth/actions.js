@@ -7,6 +7,9 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
   LOGOUT_USER,
+  ENROLL_FAILURE,
+  ENROLL_REQ,
+  ENROLL_SUCCESS,
 } from './actionTypes';
 
 export const signinReq = () => {
@@ -51,6 +54,39 @@ export const logoutUser = () => {
   return {
     type: LOGOUT_USER,
   };
+};
+
+export const enrollReq = () => {
+  return {
+    type: ENROLL_REQ,
+  };
+};
+
+export const enrollSuccess = (payload) => {
+  return {
+    type: ENROLL_SUCCESS,
+    payload,
+  };
+};
+
+export const enrollFailure = () => {
+  return {
+    type: ENROLL_FAILURE,
+  };
+};
+
+export const enrollUser = (id, payload) => (dispatch) => {
+  dispatch(enrollReq());
+  return axios
+    .patch(`http://localhost:5000/user/${id}`, payload)
+    .then((res) => {
+      dispatch(enrollSuccess(res.data.data));
+      alert('User Enrolled!!');
+    })
+    .catch((err) => {
+      dispatch(enrollFailure());
+      console.log(err);
+    });
 };
 
 export const signin = (data) => (dispatch) => {

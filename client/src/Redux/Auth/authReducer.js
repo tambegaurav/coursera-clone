@@ -6,6 +6,9 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
   LOGOUT_USER,
+  ENROLL_FAILURE,
+  ENROLL_SUCCESS,
+  ENROLL_REQ,
 } from './actionTypes';
 
 const init = {
@@ -73,6 +76,29 @@ export const authReducer = (state = init, { type, payload }) => {
         ...state,
         isAuth: false,
         user: null,
+      };
+    }
+
+    case ENROLL_REQ: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case ENROLL_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        user: payload,
+      };
+    }
+
+    case ENROLL_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
       };
     }
 

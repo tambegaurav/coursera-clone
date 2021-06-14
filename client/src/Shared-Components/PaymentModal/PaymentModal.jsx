@@ -31,12 +31,16 @@ const Buttons = styled.div`
   }
 `;
 
-const PaymentModal = ({ handleClose }) => {
+const PaymentModal = ({ handleClose, courseId }) => {
   return (
     <Box>
       <h1>Are you sure, you want to purchase this Course?</h1>
       <Buttons>
-        <PayByRazorPay amount={500} handleClose={handleClose} />
+        <PayByRazorPay
+          amount={500}
+          handleClose={handleClose}
+          courseId={courseId}
+        />
         <Button onClick={handleClose}>Cancel</Button>
       </Buttons>
     </Box>

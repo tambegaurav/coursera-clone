@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable spaced-comment */
@@ -7,10 +8,11 @@
 import { Button } from '@material-ui/core';
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { enrollUser } from '../../Redux/Auth/actions';
 
-const PayByRazorPay = ({ amount, handleClose }) => {
+const PayByRazorPay = ({ amount, handleClose, courseId }) => {
   const amt = Number(amount) * 100;
   const options = {
     key: 'rzp_test_V8xB38pJhvgTQe',
@@ -35,15 +37,20 @@ const PayByRazorPay = ({ amount, handleClose }) => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const activeUser = useSelector((state) => state.auth.user);
 
   const openPayModal = async () => {
     const rzp1 = await new window.Razorpay(options);
     rzp1.open();
-    console.log('amount', options.amount);
-    // const payload = {
-    //   },
-    // };
-    // dispatch(enrollUser(payload));
+    console.log('amount', amount);
+    console.log(activeUser);
+    const enrolledCourses = [...activeUser.enrolled_courses, courseId];
+    console.log(enrolledCourses);
+    const payload = {
+      enrolled_courses: enrolledCourses,
+    };
+
+    dispatch(enrollUser(activeUser._id, payload));
   };
   useEffect(() => {
     const script = document.createElement('script');
