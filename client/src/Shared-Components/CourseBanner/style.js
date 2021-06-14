@@ -36,11 +36,11 @@ export default makeStyles(() => ({
     fontSize: '15px',
   },
   enrollBtn: {
-    height: '71px',
     backgroundColor: 'white',
     // color: '#021B79',
     fontWeight: 'bold',
     fontSize: '1rem',
+    padding: '10px 20px',
   },
   spanBtn: {
     display: 'block',

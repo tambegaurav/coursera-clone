@@ -99,7 +99,7 @@ const CourseBanner = ({ course }) => {
                     variant="contained"
                     className={classes.enrollBtn}
                   >
-                    Enroll For Free
+                    Enroll
                   </Button>
                 </Grid>
               </Grid>
