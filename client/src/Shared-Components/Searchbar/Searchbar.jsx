@@ -32,8 +32,16 @@ function Searchbar() {
     };
   });
   const handleSearch = () => {
-    setQuery(query);
-    history.push(`/search/query/${query}`);
+    const isPresent = courses.filter((course) => course.course_name === query);
+    if (isPresent.length === 1) {
+      console.log(isPresent[0].course_name);
+      history.push(
+        `/browse/${isPresent[0].category}/${isPresent[0].course_name}`,
+      );
+    } else {
+      setQuery(query);
+      history.push(`/search/query/${query}`);
+    }
   };
 
   React.useEffect(() => {

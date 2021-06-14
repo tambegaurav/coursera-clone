@@ -11,6 +11,7 @@ import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
+import Pagination from '@material-ui/lab/Pagination';
 import Filters from '../Filters/Checkbox';
 import styles from './CoursesList.module.css';
 
@@ -45,9 +46,14 @@ const CoursesList = () => {
   const classes = useStyles();
   const [data, setData] = React.useState([]);
   const [Skip, setSkip] = React.useState(0);
-  const [Limit, setLimit] = React.useState(0);
   const [filters, setFilters] = React.useState([]);
-
+  const [count, setCount] = React.useState(10);
+  const [Limit, setLimit] = React.useState(5);
+  const [page, setPage] = React.useState(1);
+  const handleChange = (e, value) => {
+    console.log(value);
+    setPage(value);
+  };
   const rating = (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
 
   const list = [];
@@ -62,8 +68,9 @@ const CoursesList = () => {
     axios
       .post('http://localhost:5000/course/getCourses', variables)
       .then((res) => {
-        // console.log(res.data.data);
+        // console.log(res.data);
         setData(res.data.data);
+        setCount(res.data.pages);
       })
       .catch((err) => console.log(err));
   };
@@ -76,15 +83,16 @@ const CoursesList = () => {
       query: query.toLowerCase(),
     };
     getData(variables);
-  }, [filters]);
+  }, [filters, page]);
 
-  React.useEffect(() => {
-    const variables = {
-      query: query.toLowerCase(),
-      filters: [],
-    };
-    getData(variables);
-  }, []);
+  // React.useEffect(() => {
+  //   const variables = {
+  //     query: query.toLowerCase(),
+  //     limit: Limit,
+  //     filters: [],
+  //   };
+  //   getData(variables);
+  // }, []);
 
   const handleFilter = (filters1, category) => {
     console.log(filters1, category);
@@ -106,7 +114,10 @@ const CoursesList = () => {
   };
   return (
     <div>
-      <div>
+      <div className={styles.filter}>
+        <h3 style={{ marginLeft: 100 }}>
+          {`Showing  ${list.length} total results for  "${query}"`}{' '}
+        </h3>
         <Filters handleFilter={(filters1) => handleFilter(filters1, 'Level')} />
       </div>
       {/* if filters len ===0 show all courses */}
@@ -115,51 +126,62 @@ const CoursesList = () => {
           <h2>No Course Found.</h2>
           <p>Try Another Filters</p>
         </div>
-      ) : list.length === 1 ? (
-        <Redirect
-          to={`/browse/${list[0].category}/${list[0].course_name}`}
-          push
-        />
       ) : (
-        list?.map((item) => (
-          <div
-            aria-hidden="true"
-            className={styles.list}
-            onClick={() => handleClick(item._id)}
-            onKeyDown={() => handleClick(item._id)}
-          >
-            <div className={classes.img}>
-              <img src="" alt="img" />
-            </div>
-            <div className={styles.info}>
-              <h3>{item.course_name} </h3>
-              <p>{item.author} </p>
-              <p>Course </p>
-              <div>
-                <Grid Grid container spacing={1} style={{ marginTop: '20px' }}>
-                  <Grid item>
-                    <Rating
-                      name="simple-controlled"
-                      value={rating}
-                      precision={0.1}
-                      readOnly
-                      size="small"
-                    />
-                  </Grid>
-                  <Grid item>
-                    <p className={classes.ratingNum}>
-                      {rating} |{' '}
-                      {Math.ceil(Math.random() * (8500 - 5500) + 5500)} K
-                      students
-                    </p>
-                  </Grid>
-                </Grid>
+        <div>
+          {list.slice((page - 1) * Limit, page * Limit).map((item) => (
+            <div
+              aria-hidden="true"
+              className={styles.list}
+              onClick={() => handleClick(item._id)}
+              onKeyDown={() => handleClick(item._id)}
+            >
+              <div className={classes.img}>
+                <img src="" alt="img" />
               </div>
+              <div className={styles.info}>
+                <h3>{item.course_name} </h3>
+                <p>{item.author} </p>
+                <p>Course </p>
+                <div>
+                  <Grid
+                    Grid
+                    container
+                    spacing={1}
+                    style={{ marginTop: '20px' }}
+                  >
+                    <Grid item>
+                      <Rating
+                        name="simple-controlled"
+                        value={rating}
+                        precision={0.1}
+                        readOnly
+                        size="small"
+                      />
+                    </Grid>
+                    <Grid item>
+                      <p className={classes.ratingNum}>
+                        {rating} |
+                        {Math.ceil(Math.random() * (8500 - 5500) + 5500)} K
+                        students
+                      </p>
+                    </Grid>
+                  </Grid>
+                </div>
 
-              <h4>Level: {item.level} </h4>
+                <h4>Level: {item.level} </h4>
+              </div>
             </div>
+          ))}
+          <div className={styles.pagination}>
+            <Pagination
+              count={count}
+              page={page}
+              onChange={handleChange}
+              variant="outlined"
+              shape="rounded"
+            />
           </div>
-        ))
+        </div>
       )}
     </div>
   );

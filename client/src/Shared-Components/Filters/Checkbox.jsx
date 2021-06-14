@@ -180,6 +180,31 @@ export default function Filters(props) {
           </AccordionDetails>
         </Accordion>
       </div>
+
+      <div>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Partner</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.options}>
+            {level.map((el) => (
+              <div style={{ display: 'flex' }}>
+                <Checkbox
+                  // defaultChecked
+                  checked={checked.indexOf(el.name) !== -1}
+                  onChange={() => handleChange(el.name)}
+                  inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                />
+                <span>{el.name} </span>
+              </div>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </div>
   );
 }
