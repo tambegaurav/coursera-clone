@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, IconButton, Avatar } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import PersonIcon from '@material-ui/icons/Person';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
+
 import useStyles from './styles';
 
 export const ProfileBanner = () => {
   const classes = useStyles();
   const { id } = useParams();
-  const [user, setUser] = useState({});
-
-  React.useEffect(() => {
-    axios.get(`http://localhost:5000/user/${id}`).then((res) => {
-      setUser(res.data);
-    });
-  }, []);
+  const user = useSelector((authState) => authState.auth.user);
 
   return (
     <div className={classes.root}>

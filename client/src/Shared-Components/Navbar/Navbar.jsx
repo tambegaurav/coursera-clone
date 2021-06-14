@@ -454,12 +454,12 @@ const Navbar = () => {
                 <Avatar
                   className={classes.avatar}
                   component={Link}
-                  to={`/profile/${user[0]._id}`}
+                  to={`/profile/${user._id}`}
                 >
                   <PersonIcon className={classes.person} />
                 </Avatar>
-                <Button component={Link} to={`/profile/${user[0]._id}`}>
-                  {user[0].first_name}
+                <Button component={Link} to={`/profile/${user._id}`}>
+                  {user.first_name}
                 </Button>
               </>
             )}
