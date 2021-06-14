@@ -81,7 +81,6 @@ export const enrollUser = (id, payload) => (dispatch) => {
     .patch(`http://localhost:5000/user/${id}`, payload)
     .then((res) => {
       dispatch(enrollSuccess(res.data.data));
-      alert('User Enrolled!!');
     })
     .catch((err) => {
       dispatch(enrollFailure());

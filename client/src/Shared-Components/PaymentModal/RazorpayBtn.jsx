@@ -6,10 +6,8 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable func-names */
 import { Button } from '@material-ui/core';
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import { enrollUser } from '../../Redux/Auth/actions';
 
 const PayByRazorPay = ({ amount, handleClose, courseId }) => {
@@ -36,14 +34,11 @@ const PayByRazorPay = ({ amount, handleClose, courseId }) => {
   };
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const activeUser = useSelector((state) => state.auth.user);
 
   const openPayModal = async () => {
     const rzp1 = await new window.Razorpay(options);
     rzp1.open();
-    console.log('amount', amount);
-    console.log(activeUser);
     const enrolledCourses = [...activeUser.enrolled_courses, courseId];
     console.log(enrolledCourses);
     const payload = {
