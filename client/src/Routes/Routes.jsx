@@ -52,7 +52,7 @@ const Routes = () => {
         <Route exact path="/profile/:id">
           <ProfilePage />
         </Route>
-        <Route exact path="/profileForm">
+        <Route exact path="/profileForm/:id">
           <EditProfile />
         </Route>
         <Route>

@@ -10,16 +10,18 @@ import {
   TextField,
   Avatar,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import PersonIcon from '@material-ui/icons/Person';
 import useStyles from './styles';
+import { updateUser } from '../../../Redux/Auth/actions';
 // import { empStatus, expLevel, degrees } from './selectTagValues';
 
 export const ProfileForm = () => {
   const classes = useStyles();
   document.body.style.backgroundColor = '#F5F5F5';
+  const dispatch = useDispatch();
+  const { id } = useParams();
   const [credentials, setCredentials] = useState({});
   const user = useSelector((authState) => authState.auth.user);
 
@@ -29,9 +31,7 @@ export const ProfileForm = () => {
   };
 
   const handleSaveChanges = () => {
-    axios
-      .patch(`http://localhost:5000/user/${user[0]._id}`, credentials)
-      .then(() => alert('Your changes have been saved'));
+    dispatch(updateUser(id, credentials));
   };
 
   return (

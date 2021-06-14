@@ -23,7 +23,7 @@ router.post("/login", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   const id = req.params.id;
   const user = await User.findByIdAndUpdate(id, req.body, { new: true });
-  res.status(203).json({ user });
+  res.status(203).json({ data: user });
 });
 
 //get user by id

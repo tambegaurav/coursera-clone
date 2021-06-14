@@ -26,7 +26,7 @@ export const ProfileBanner = () => {
               size="large"
               className={classes.updateIconBtn}
               component={Link}
-              to="/profileForm"
+              to={`/profileForm/${id}`}
             >
               <CreateIcon size="large" className={classes.updateIcon} />
             </IconButton>

@@ -5,6 +5,9 @@ import {
   GET_USER_REQ,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
+  UPDATE_USER_REQ,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE,
 } from './actionTypes';
 
 const init = {
@@ -61,6 +64,30 @@ export const authReducer = (state = init, { type, payload }) => {
     }
 
     case GET_USER_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+
+    case UPDATE_USER_REQ: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        user: payload,
+      };
+    }
+
+    case UPDATE_USER_FAILURE: {
       return {
         ...state,
         isLoading: false,
