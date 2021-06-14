@@ -391,6 +391,7 @@ const Navbar = () => {
                   color="primary"
                   endIcon={<ExpandMoreIcon />}
                   style={{ marginLeft: 50 }}
+                  className={classes.exploreBtn}
                 >
                   EXPLORE
                 </Button>

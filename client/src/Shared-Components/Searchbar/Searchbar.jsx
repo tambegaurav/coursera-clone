@@ -76,7 +76,7 @@ function Searchbar() {
               {...params}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              label="What do you want to Learn?"
+              placeholder="What do you want to Learn?"
               variant="outlined"
               style={{ outline: 'none', borderBottom: 'none' }}
             />
