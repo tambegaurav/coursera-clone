@@ -140,4 +140,8 @@ export default makeStyles((theme) => ({
   error: {
     color: 'red',
   },
+  exploreBtn: {
+    background: '#0056D2',
+    fontSize: '14px',
+  },
 }));
