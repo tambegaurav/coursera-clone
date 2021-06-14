@@ -12,7 +12,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.find({ username, password });
-  if (user) {
+  if (user.length !== 0) {
     res.status(200).json({ data: user, msg: "User Log-In" });
   } else {
     res.status(404).json({ msg: "Invalid Credentials" });

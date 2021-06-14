@@ -2,9 +2,6 @@ import {
   SIGNIN_FAILURE,
   SIGNIN_SUCCESS,
   SIGNIN_REQ,
-  GET_USER_REQ,
-  GET_USER_SUCCESS,
-  GET_USER_FAILURE,
   UPDATE_USER_REQ,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
@@ -44,30 +41,6 @@ export const authReducer = (state = init, { type, payload }) => {
         isError: true,
         isAuth: false,
         user: null,
-      };
-    }
-
-    case GET_USER_REQ: {
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
-    }
-
-    case GET_USER_SUCCESS: {
-      return {
-        ...state,
-        isLoading: false,
-        updatedUser: payload,
-      };
-    }
-
-    case GET_USER_FAILURE: {
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
       };
     }
 
