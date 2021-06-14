@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    boxShadow: '1px 1px 2px #dedddc',
   },
   menuButton: {
     marginRight: theme.spacing(2),

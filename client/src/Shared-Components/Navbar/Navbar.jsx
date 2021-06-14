@@ -320,8 +320,8 @@ const Navbar = () => {
       <List>
         {[
           'Data Science',
-          'Web Developement',
-          'M.L',
+          'Web Development',
+          'Machine Learning',
           'App Development',
           'Computer Science',
           'Information Technology',

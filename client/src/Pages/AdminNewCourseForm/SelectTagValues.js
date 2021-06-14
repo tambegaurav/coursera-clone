@@ -1,15 +1,15 @@
 export const categories = [
   {
-    value: 'Web developement',
-    label: 'Web Dev',
+    value: 'Web development',
+    label: 'Web development',
   },
   {
-    value: 'Android developement',
-    label: 'App Dev',
+    value: 'Android development',
+    label: 'App development',
   },
   {
     value: 'Machine Learning',
-    label: 'M.L',
+    label: 'Machine Learning',
   },
   {
     value: 'Data Science',
