@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable max-len */
@@ -5,7 +7,7 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   CarouselProvider,
@@ -16,6 +18,7 @@ import {
 } from 'pure-react-carousel';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import styles from './categorycourses.module.css';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import useWindowDimensions from '../../CustomHooks/useWindowDimensions';
 import Course from './Course';
@@ -40,26 +43,6 @@ const Banner = styled.div`
     text-transform: capitalize;
   }
 `;
-const Grid = styled.div`
-  width: 90%;
-  align-items: center;
-  margin: auto;
-  margin-top: 50px;
-  > h2 {
-    margin-left: 60px;
-    margin-bottom: 20px;
-  }
-  & > .carousal {
-    display: grid;
-    grid-template-columns: 50px auto 50px;
-    align-items: center;
-
-    & > .btn {
-      background-color: transparent;
-      border: none;
-    }
-  }
-`;
 
 const CategoryCoursesPage = () => {
   const [courses, setCourses] = React.useState([]);
@@ -73,89 +56,43 @@ const CategoryCoursesPage = () => {
     });
   }, []);
 
-  const handleClick = (courseName, Category) => {
-    history.push(`/browse/${Category}/${courseName}`);
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  const { height, width } = useWindowDimensions();
-
-  const [visbleSlides, setVisibleSlides] = React.useState(4);
-
-  const [dimensions, setDimensions] = React.useState({
-    h: 700,
-    w: 500,
-  });
-
-  React.useEffect(() => {
-    if (width > 1000) {
-      setVisibleSlides(4);
-      setDimensions({
-        h: 700,
-        w: 400,
-      });
-    } else if (width < 1000 && width > 600) {
-      setVisibleSlides(3);
-      setDimensions({
-        h: 900,
-        w: 400,
-      });
-    } else {
-      setVisibleSlides(2);
-      setDimensions({
-        h: 1000,
-        w: 500,
-      });
-    }
-  }, [width]);
   return (
     <div>
       <Banner>
         <h1>{category} </h1>
       </Banner>
       {courses.length > 0 ? (
-        <Grid>
-          <h2>Most Popular {category} Courses</h2>
-          <CarouselProvider
-            naturalSlideWidth={dimensions.w}
-            naturalSlideHeight={dimensions.h}
-            totalSlides={courses.length}
-            infinite
-            step={1}
-            visibleSlides={visbleSlides}
-            className="carousal"
-          >
-            <ButtonBack className="btn">
-              <ArrowBackIosIcon />
-            </ButtonBack>
-            <div style={{ marginBottom: 50, paddingBottom: 50 }}>
-              {courses.length > 0 && (
-                <Slider>
-                  {courses?.map((course, idx) => (
-                    <Slide
-                      onClick={() =>
-                        handleClick(course.course_name, course.category)
-                      }
-                      index={idx}
-                      key={idx}
-                    >
-                      <Course course={course} />
-                    </Slide>
-                  ))}
-                </Slider>
-              )}
-            </div>
-
-            <ButtonNext className="btn">
-              <ArrowForwardIosIcon />
-            </ButtonNext>
-          </CarouselProvider>
-        </Grid>
-      ) : (
         <div>
-          <h2>No Courses Found</h2>
+          <div className={styles.empty}>
+            <h2>Most Popular {category} Courses</h2>
+          </div>
+          <section className={styles.main}>
+            {courses.length > 0 &&
+              courses.map((course) => {
+                return (
+                  <Link
+                    to={`/browse/${course.category}/${course.course_name}`}
+                    key={course._id}
+                    className={styles.card}
+                  >
+                    <Course course={course} />
+                    <div className={styles.cardInfo}>
+                      <h4>{course.category}</h4>
+                    </div>
+                  </Link>
+                );
+              })}
+          </section>
+        </div>
+      ) : (
+        <div className={styles.empty}>
+          <h2>No Courses Found For This Category</h2>
+          <Link style={{ fontSize: 20 }} to="/">
+            Go to Home Page
+          </Link>
         </div>
       )}
+
       <div>
         <Footer />
       </div>
