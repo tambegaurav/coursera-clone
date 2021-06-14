@@ -76,7 +76,7 @@ export const signin = (data) => (dispatch) => {
       password: data.password,
     })
     .then((res) => {
-      dispatch(signinSuccess(res.data.data));
+      dispatch(signinSuccess(res.data.data[0]));
     })
     .catch((err) => {
       console.log(err);
@@ -89,11 +89,11 @@ export const updateUser = (id, payload) => (dispatch) => {
   return axios
     .patch(`http://localhost:5000/user/${id}`, payload)
     .then((res) => {
-      console.log(res.data.data);
-      updateUserSuccess(res.data.data);
+      dispatch(updateUserSuccess(res.data.data));
+      alert('Changes Saved!!');
     })
     .catch((err) => {
-      updateUserFailure();
+      dispatch(updateUserFailure());
       console.log(err);
     });
 };

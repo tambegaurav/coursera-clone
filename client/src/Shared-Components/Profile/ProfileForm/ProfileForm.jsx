@@ -57,7 +57,7 @@ export const ProfileForm = () => {
                   size="large"
                   className={classes.button}
                   component={Link}
-                  to={`/profile/${user[0]._id}`}
+                  to={`/profile/${user._id}`}
                 >
                   View Profile
                 </Button>
@@ -95,7 +95,7 @@ export const ProfileForm = () => {
                   <TextField
                     variant="outlined"
                     fullWidth
-                    defaultValue={user[0].first_name}
+                    defaultValue={user.first_name}
                     name="first_name"
                     onChange={handleChange}
                   />
@@ -118,7 +118,7 @@ export const ProfileForm = () => {
                   <TextField
                     variant="outlined"
                     fullWidth
-                    defaultValue={user[0].last_name}
+                    defaultValue={user.last_name}
                     name="last_name"
                     onChange={handleChange}
                   />
@@ -142,7 +142,7 @@ export const ProfileForm = () => {
                   <TextField
                     variant="outlined"
                     fullWidth
-                    defaultValue={user[0].username}
+                    defaultValue={user.username}
                     name="username"
                     onChange={handleChange}
                   />
@@ -166,7 +166,7 @@ export const ProfileForm = () => {
                   <TextField
                     variant="outlined"
                     fullWidth
-                    defaultValue={user[0].email}
+                    defaultValue={user.email}
                     name="email"
                     onChange={handleChange}
                   />
@@ -190,7 +190,7 @@ export const ProfileForm = () => {
                   <TextField
                     variant="outlined"
                     fullWidth
-                    defaultValue={user[0].password}
+                    defaultValue={user.password}
                     name="password"
                     onChange={handleChange}
                   />
