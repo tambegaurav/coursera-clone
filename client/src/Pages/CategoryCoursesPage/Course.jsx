@@ -12,15 +12,10 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
-    margin: 8,
+    maxWidth: 550,
     height: 320,
     maxHeight: 400,
-    border: '1px solid black',
-    '&:hover': {
-      cursor: 'pointer',
-      boxShadow: '5px 8px #cfd8dc',
-    },
+    textDecoration: 'none',
   },
   media: {
     height: 150,
@@ -36,13 +31,11 @@ export default function Course({ course }) {
         <CardMedia
           className={classes.media}
           image="https://png.pngtree.com/thumb_back/fh260/background/20201023/pngtree-technological-background-vector-illustration-matrix-binary-computer-code-image_432632.jpg"
-          title="Contemplative Reptile"
+          title={course.course_name}
         />
 
         <CardContent>
-          <Typography gutterBottom variant="h6" component="h4">
-            {course.course_name}
-          </Typography>
+          <h2>{course.course_name}</h2>
           <Typography variant="body2" color="textSecondary" component="p">
             University
           </Typography>
