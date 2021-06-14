@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setData } from '../../utils/localStorage';
 import {
   SIGNIN_FAILURE,
   SIGNIN_REQ,
@@ -80,6 +81,7 @@ export const enrollUser = (id, payload) => (dispatch) => {
   return axios
     .patch(`http://localhost:5000/user/${id}`, payload)
     .then((res) => {
+      setData('courserUser', res.data.data);
       dispatch(enrollSuccess(res.data.data));
     })
     .catch((err) => {
@@ -97,6 +99,8 @@ export const signin = (data) => (dispatch) => {
     })
     .then((res) => {
       console.log(res, 'veda');
+      setData('courserUser', res.data.data[0]);
+      setData('isAuth', true);
       dispatch(signinSuccess(res.data.data[0]));
     })
     .catch((err) => {
@@ -110,6 +114,7 @@ export const updateUser = (id, payload) => (dispatch) => {
   return axios
     .patch(`http://localhost:5000/user/${id}`, payload)
     .then((res) => {
+      setData('courserUser', res.data.data);
       dispatch(updateUserSuccess(res.data.data));
       alert('Changes Saved!!');
     })
