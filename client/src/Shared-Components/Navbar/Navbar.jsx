@@ -65,6 +65,7 @@ const Navbar = () => {
   const [password, setPassword] = useState('');
   const isAuth = useSelector((authState) => authState.auth.isAuth);
   const user = useSelector((authState) => authState.auth.user);
+  const isError = useSelector((authState) => authState.auth.isError);
 
   const handleLogin = () => {
     const payload = {
@@ -72,6 +73,8 @@ const Navbar = () => {
       password,
     };
     dispatch(signin(payload));
+    setUsername('');
+    setPassword('');
   };
 
   React.useEffect(() => {
@@ -152,6 +155,10 @@ const Navbar = () => {
                   <h2 style={{ marginBottom: '30px', letterSpacing: '1px' }}>
                     Welcome back
                   </h2>
+                  {isError && (
+                    <h6 className={classes.error}>Wrong Credentials</h6>
+                  )}
+
                   <Box height="75%">
                     <Grid container direction="column" spacing={1}>
                       <Grid

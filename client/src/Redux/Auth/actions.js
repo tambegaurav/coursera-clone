@@ -1,11 +1,8 @@
 import axios from 'axios';
 import {
-  GET_USER_FAILURE,
   SIGNIN_FAILURE,
   SIGNIN_REQ,
   SIGNIN_SUCCESS,
-  GET_USER_REQ,
-  GET_USER_SUCCESS,
   UPDATE_USER_REQ,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
@@ -27,25 +24,6 @@ export const signinSuccess = (payload) => {
 export const signinFailure = () => {
   return {
     type: SIGNIN_FAILURE,
-  };
-};
-
-export const getUserRequest = () => {
-  return {
-    type: GET_USER_REQ,
-  };
-};
-
-export const getUserSuccess = (payload) => {
-  return {
-    type: GET_USER_SUCCESS,
-    payload,
-  };
-};
-
-export const getUserFailure = () => {
-  return {
-    type: GET_USER_FAILURE,
   };
 };
 
@@ -76,6 +54,7 @@ export const signin = (data) => (dispatch) => {
       password: data.password,
     })
     .then((res) => {
+      console.log(res, 'veda');
       dispatch(signinSuccess(res.data.data[0]));
     })
     .catch((err) => {
@@ -95,16 +74,5 @@ export const updateUser = (id, payload) => (dispatch) => {
     .catch((err) => {
       dispatch(updateUserFailure());
       console.log(err);
-    });
-};
-
-export const getSignedInUser = (id) => (dispatch) => {
-  dispatch(getUserRequest());
-  return axios
-    .get(`http://localhost:5000/user/${id}`)
-    .then((res) => dispatch(getUserSuccess(res.data.data)))
-    .catch((err) => {
-      console.log(err);
-      dispatch(getUserFailure());
     });
 };
