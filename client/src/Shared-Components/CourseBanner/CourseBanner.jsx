@@ -3,14 +3,33 @@
 import React from 'react';
 import { Box, Grid, Avatar, Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
+import Modal from '@material-ui/core/Modal';
+import styled from 'styled-components';
+
 import BreadCrumb from './BreadCrumb';
 import useStyles from './style';
+import PaymentModal from '../PaymentModal/PaymentModal';
+
+const ModalBox = styled.div`
+  display: grid;
+  place-items: center;
+`;
 
 const CourseBanner = ({ course }) => {
   const classes = useStyles();
   const color2 = '#021B79';
   const color3 = '#0056D2';
   const rating = (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div
@@ -75,11 +94,26 @@ const CourseBanner = ({ course }) => {
               {/* Enroll Button */}
               <Grid container style={{ marginTop: '20px' }}>
                 <Grid item>
-                  <Button variant="contained" className={classes.enrollBtn}>
+                  <Button
+                    onClick={handleOpen}
+                    variant="contained"
+                    className={classes.enrollBtn}
+                  >
                     Enroll For Free
                   </Button>
                 </Grid>
               </Grid>
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+              >
+                <ModalBox>
+                  <PaymentModal handleClose={handleClose} />
+                </ModalBox>
+              </Modal>
 
               {/* total enrolled   */}
 
