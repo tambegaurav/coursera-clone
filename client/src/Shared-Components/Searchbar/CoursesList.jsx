@@ -8,12 +8,13 @@
 import React from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Grid } from '@material-ui/core';
+import { Grid, Divider } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import Filters from '../Filters/Checkbox';
 import styles from './CoursesList.module.css';
+import Navbar from '../Navbar/Navbar';
 
 const useStyles = makeStyles(() => ({
   iconButton: {
@@ -114,6 +115,7 @@ const CoursesList = () => {
   };
   return (
     <div>
+      <Navbar />
       <div className={styles.filter}>
         <h3 style={{ marginLeft: 100 }}>
           {`Showing  ${list.length} total results for  "${query}"`}{' '}
@@ -129,49 +131,53 @@ const CoursesList = () => {
       ) : (
         <div>
           {list.slice((page - 1) * Limit, page * Limit).map((item) => (
-            <div
-              aria-hidden="true"
-              className={styles.list}
-              onClick={() => handleClick(item._id)}
-              onKeyDown={() => handleClick(item._id)}
-            >
-              <div className={classes.img}>
-                <img src="" alt="img" />
-              </div>
-              <div className={styles.info}>
-                <h3>{item.course_name} </h3>
-                <p>{item.author} </p>
-                <p>Course </p>
-                <div>
-                  <Grid
-                    Grid
-                    container
-                    spacing={1}
-                    style={{ marginTop: '20px' }}
-                  >
-                    <Grid item>
-                      <Rating
-                        name="simple-controlled"
-                        value={rating}
-                        precision={0.1}
-                        readOnly
-                        size="small"
-                      />
-                    </Grid>
-                    <Grid item>
-                      <p className={classes.ratingNum}>
-                        {rating} |
-                        {Math.ceil(Math.random() * (8500 - 5500) + 5500)} K
-                        students
-                      </p>
-                    </Grid>
-                  </Grid>
+            <>
+              <div
+                aria-hidden="true"
+                className={styles.list}
+                onClick={() => handleClick(item._id)}
+                onKeyDown={() => handleClick(item._id)}
+              >
+                <div className={classes.img}>
+                  <img src="" alt="img" />
                 </div>
+                <div className={styles.info}>
+                  <h3>{item.course_name} </h3>
+                  <p>{item.author} </p>
+                  <p>Course </p>
+                  <div>
+                    <Grid
+                      Grid
+                      container
+                      spacing={1}
+                      style={{ marginTop: '20px' }}
+                    >
+                      <Grid item>
+                        <Rating
+                          name="simple-controlled"
+                          value={rating}
+                          precision={0.1}
+                          readOnly
+                          size="small"
+                        />
+                      </Grid>
+                      <Grid item>
+                        <p className={classes.ratingNum}>
+                          {rating} |
+                          {Math.ceil(Math.random() * (8500 - 5500) + 5500)} K
+                          students
+                        </p>
+                      </Grid>
+                    </Grid>
+                  </div>
 
-                <h4>Level: {item.level} </h4>
+                  <h4>Level: {item.level} </h4>
+                </div>
               </div>
-            </div>
+              <Divider style={{ width: '70%', margin: 'auto' }} />
+            </>
           ))}
+
           <div className={styles.pagination}>
             <Pagination
               count={count}

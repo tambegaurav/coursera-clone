@@ -98,20 +98,27 @@ const CourseBanner = ({ course }) => {
               {/* Enroll Button */}
               <Grid container style={{ marginTop: '20px' }}>
                 <Grid item>
-                  <Button
-                    onClick={
-                      activeUser.enrolled_courses.includes(course._id) ||
-                      !activeUser
-                        ? ''
-                        : handleOpen
-                    }
-                    variant="contained"
-                    className={classes.enrollBtn}
-                  >
-                    {activeUser.enrolled_courses.includes(course._id)
-                      ? 'Already Enrolled'
-                      : 'Enroll'}
-                  </Button>
+                  {activeUser === null ? (
+                    // implement login modal/msg
+                    <Button variant="contained" className={classes.enrollBtn}>
+                      Enroll
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={
+                        activeUser.enrolled_courses.includes(course._id) ||
+                        !activeUser
+                          ? ''
+                          : handleOpen
+                      }
+                      variant="contained"
+                      className={classes.enrollBtn}
+                    >
+                      {activeUser.enrolled_courses.includes(course._id)
+                        ? 'Already Enrolled'
+                        : 'Enroll'}
+                    </Button>
+                  )}
                 </Grid>
               </Grid>
 
