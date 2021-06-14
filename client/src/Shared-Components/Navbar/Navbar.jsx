@@ -39,7 +39,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import Searchbar from '../Searchbar/Searchbar';
 import useStyles from './NavbarStyles';
-import { signin } from '../../Redux/Auth/actions';
+import { signin, logoutUser } from '../../Redux/Auth/actions';
 
 const Navbar = () => {
   const classes = useStyles();
@@ -75,6 +75,10 @@ const Navbar = () => {
     dispatch(signin(payload));
     setUsername('');
     setPassword('');
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
   };
 
   React.useEffect(() => {
@@ -467,6 +471,9 @@ const Navbar = () => {
                 </Avatar>
                 <Button component={Link} to={`/profile/${user._id}`}>
                   {user.first_name}
+                </Button>
+                <Button component={Link} to="/" onClick={handleLogout}>
+                  Logout
                 </Button>
               </>
             )}

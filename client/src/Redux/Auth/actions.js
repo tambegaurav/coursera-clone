@@ -6,6 +6,7 @@ import {
   UPDATE_USER_REQ,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE,
+  LOGOUT_USER,
 } from './actionTypes';
 
 export const signinReq = () => {
@@ -43,6 +44,12 @@ export const updateUserSuccess = (payload) => {
 export const updateUserFailure = () => {
   return {
     type: UPDATE_USER_FAILURE,
+  };
+};
+
+export const logoutUser = () => {
+  return {
+    type: LOGOUT_USER,
   };
 };
 
