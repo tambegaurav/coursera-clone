@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Drawer, CssBaseline, List, Grid, ListItem } from '@material-ui/core';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import useStyles from './styles';
 import {
   getVideos,
@@ -15,11 +16,10 @@ export const VideoSideBar = () => {
   const dispatch = useDispatch();
   const videosArr = useSelector((state) => state.userVideo.videos);
   const courseName = useSelector((state) => state.userVideo.courseName);
+  const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getVideos('60c32fbc6d111d51caf0bffb')).then(() =>
-      dispatch(getCourseName('60c32fbc6d111d51caf0bffb')),
-    );
+    dispatch(getVideos(id)).then(() => dispatch(getCourseName(id)));
   }, []);
 
   const handleVideoMetaData = (index) => {

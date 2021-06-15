@@ -1,7 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { ProfileBanner } from '../../Shared-Components/Profile/ProfileBanner/ProfileBanner';
 import Navbar from '../../Shared-Components/Navbar';
 
@@ -65,12 +67,17 @@ export const ProfilePage = () => {
           {enrolledCourses?.map((course) => {
             return (
               <CourseBox>
-                <h2>{course.course_name}</h2>
-                <h3>Level: {course.level}</h3>
-                <div>
-                  <p>Author: {course.author}</p>
-                  <p>Category: {course.category}</p>
-                </div>
+                <Link
+                  to={`/courseMat/${course._id}`}
+                  style={{ color: 'inherit', textDecoration: 'inherit' }}
+                >
+                  <h2>{course.course_name}</h2>
+                  <h3>Level: {course.level}</h3>
+                  <div>
+                    <p>Author: {course.author}</p>
+                    <p>Category: {course.category}</p>
+                  </div>
+                </Link>
               </CourseBox>
             );
           })}

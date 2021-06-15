@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from 'react';
+import { v4 as uuid } from 'uuid';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
 import { Grid, Paper, Typography } from '@material-ui/core';
@@ -137,7 +138,6 @@ export const VidPlayer = () => {
 
   const handleChangeDisplayFormat = () => {
     setTimeDispalyFormat(!timeDispalyFormat);
-    console.log(timeDispalyFormat);
   };
 
   const addBookmark = () => {
@@ -160,7 +160,7 @@ export const VidPlayer = () => {
 
     setBookmarks([
       ...bookmarks,
-      { time: currentTime, display: elapsedTime, image: imageUrl },
+      { time: currentTime, display: elapsedTime, image: imageUrl, id: uuid() },
     ]);
   };
 
@@ -223,7 +223,7 @@ export const VidPlayer = () => {
         <div className={classes.bookmarkCont}>
           <Grid container style={{ marginTop: '20px' }} spacing={3}>
             {bookmarks.map((el) => (
-              <Grid item key={el}>
+              <Grid item key={el.id}>
                 <Paper
                   style={{ cursor: 'pointer' }}
                   onClick={() => playerRef.current.seekTo(el.time)}
