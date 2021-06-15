@@ -2,15 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
   root: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%,-50%)',
+    padding: '20px',
   },
   playerDiv: {
     position: 'relative',
-    height: '100%',
-    width: '100%',
+    width: '90%',
+    margin: 'auto',
+    marginTop: '20px',
   },
   controlsDiv: {
     position: 'absolute',
@@ -25,8 +23,10 @@ export default makeStyles(() => ({
     zIndex: 1,
   },
   bookmarkCont: {
-    position: 'absolute',
-    maxWidth: '770px',
+    width: '90%',
+    margin: 'auto',
+    overflowY: 'scroll',
+    height: '200px',
   },
   controlBtn: {
     color: '#777',
