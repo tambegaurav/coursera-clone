@@ -77,7 +77,7 @@ const CategoryCoursesPage = () => {
                   >
                     <Course course={course} />
                     <div className={styles.cardInfo}>
-                      <h4>{course.category}</h4>
+                      <h4>{course.author}</h4>
                     </div>
                   </Link>
                 );

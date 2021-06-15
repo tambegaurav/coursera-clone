@@ -13,12 +13,15 @@ import {
 const useStyles = makeStyles({
   root: {
     maxWidth: 550,
-    height: 320,
+    height: 350,
     maxHeight: 400,
     textDecoration: 'none',
   },
   media: {
-    height: 150,
+    height: 180,
+    width: '100%',
+    backgroundPosition: 'center',
+    // width: 250,
   },
 });
 
@@ -30,7 +33,7 @@ export default function Course({ course }) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://png.pngtree.com/thumb_back/fh260/background/20201023/pngtree-technological-background-vector-illustration-matrix-binary-computer-code-image_432632.jpg"
+          image={course.course_img}
           title={course.course_name}
         />
 
