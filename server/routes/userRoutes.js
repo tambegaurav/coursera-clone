@@ -17,7 +17,9 @@ router.post("/signup", async (req, res) => {
 //login in user
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.find({ username });
+  const user = await User.find({ username })
+    .populate("enrolled_courses")
+    .exec();
 
   if (user.length === 0) {
     return res.status(404).send();
@@ -35,15 +37,16 @@ router.post("/login", async (req, res) => {
 //updating user credentials
 router.patch("/:id", async (req, res) => {
   const id = req.params.id;
-  const user = await User.findByIdAndUpdate(id, req.body, { new: true });
+  const user = await User.findByIdAndUpdate(id, req.body, { new: true })
+    .populate("enrolled_courses")
+    .exec();
   res.status(203).json({ data: user });
 });
 
 //get user by id
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("enrolled_courses").exec();
   res.status(200).json(user);
 });
 

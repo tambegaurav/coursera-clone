@@ -79,6 +79,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+    localStorage.clear();
   };
 
   React.useEffect(() => {

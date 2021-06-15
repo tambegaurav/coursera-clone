@@ -44,7 +44,6 @@ const PayByRazorPay = ({ amount, handleClose, courseId }) => {
     const payload = {
       enrolled_courses: enrolledCourses,
     };
-
     dispatch(enrollUser(activeUser._id, payload));
   };
   useEffect(() => {

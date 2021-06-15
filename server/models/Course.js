@@ -8,6 +8,7 @@ const course = Schema({
   level: String,
   video_ids: [{ type: Schema.Types.ObjectId, ref: "Video", default: [] }],
   category: String,
+  course_img: { type: String, default: "" },
 });
 
 module.exports = mongoose.model("Course", course);

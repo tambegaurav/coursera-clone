@@ -2,12 +2,12 @@ import { makeStyles } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
   root: {
-    position: 'absolute',
     backgroundImage:
       'url(https://s3.amazonaws.com/coursera_assets/growth_account_profile/account_bg_black2.png)',
     width: '100%',
     height: '368px',
     backgroundSize: 'cover',
+    marginTop: '-20px',
   },
   iconDiv: {
     marginTop: '20px',

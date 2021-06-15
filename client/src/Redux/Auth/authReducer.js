@@ -1,3 +1,4 @@
+import { loadData } from '../../utils/localStorage';
 import {
   SIGNIN_FAILURE,
   SIGNIN_SUCCESS,
@@ -11,11 +12,14 @@ import {
   ENROLL_REQ,
 } from './actionTypes';
 
+const userFromLocalStorage = loadData('courserUser') || null;
+const isAuthFromLocalStorage = loadData('isAuth') || false;
+
 const init = {
   isLoading: false,
   isError: false,
-  isAuth: false,
-  user: null,
+  isAuth: isAuthFromLocalStorage,
+  user: userFromLocalStorage,
 };
 
 export const authReducer = (state = init, { type, payload }) => {

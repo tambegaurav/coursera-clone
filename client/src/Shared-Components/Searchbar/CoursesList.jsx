@@ -31,7 +31,8 @@ const useStyles = makeStyles(() => ({
   },
   img: {
     border: '1px solid black',
-    width: '100%',
+    width: '180px',
+    height: '180px',
   },
   info: {
     display: 'flex',
@@ -139,7 +140,11 @@ const CoursesList = () => {
                 onKeyDown={() => handleClick(item._id)}
               >
                 <div className={classes.img}>
-                  <img src="" alt="img" />
+                  <img
+                    style={{ width: '100%' }}
+                    src={item.course_img || ''}
+                    alt="img"
+                  />
                 </div>
                 <div className={styles.info}>
                   <h3>{item.course_name} </h3>
