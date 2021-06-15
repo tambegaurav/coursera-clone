@@ -27,7 +27,7 @@ const Routes = () => {
         <Route exact path="/browse/:category/:courseName">
           <CourseDetailsPage />
         </Route>
-        <Route exact path="/courseMat">
+        <Route exact path="/courseMat/:id">
           <CourseMaterial />
         </Route>
         <Route exact path="/search/query/:query">

@@ -5,7 +5,8 @@ const bookmark = Schema({
   video_id: String,
   user_id: String,
   img_url: String,
-  time_stamp: Date,
+  display_time: String,
+  time_stamp: Number,
 });
 
 module.exports = mongoose.model("Bookmark", bookmark);
