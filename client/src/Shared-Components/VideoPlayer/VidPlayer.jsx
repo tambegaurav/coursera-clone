@@ -1,7 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from 'react';
-import { v4 as uuid } from 'uuid';
+import axios from 'axios';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
 import { Grid, Paper, Typography } from '@material-ui/core';
@@ -28,6 +29,9 @@ const format = (sec) => {
 export const VidPlayer = () => {
   const videoUrl = useSelector((state) => state.userVideo.videoUrl);
   const videoTitle = useSelector((state) => state.userVideo.videoTitle);
+  const videoId = useSelector((state) => state.userVideo.videoId);
+  const user = useSelector((authState) => authState.auth.user);
+
   const classes = useStyles();
   const [state, setState] = useState({
     playing: false,
@@ -45,6 +49,12 @@ export const VidPlayer = () => {
   // eslint-disable-next-line no-unused-vars
   const [timeDispalyFormat, setTimeDispalyFormat] = useState(true);
   const [bookmarks, setBookmarks] = useState([]);
+
+  React.useEffect(() => {
+    axios
+      .get(`http://localhost:5000/snapshot/get/${user._id}/${videoId}`)
+      .then((res) => setBookmarks(res.data.data));
+  }, [videoId]);
 
   // eslint-disable-next-line no-unused-vars
   const { playing, muted, volume, playbackRate, played, seeking } = state;
@@ -158,10 +168,22 @@ export const VidPlayer = () => {
     canvas.width = 0;
     canvas.height = 0;
 
-    setBookmarks([
-      ...bookmarks,
-      { time: currentTime, display: elapsedTime, image: imageUrl, id: uuid() },
-    ]);
+    // setBookmarks([
+    //   ...bookmarks,
+    //   { time: currentTime, display: elapsedTime, image: imageUrl, id: uuid() },
+    // ]);
+
+    const obj = {
+      video_id: videoId,
+      user_id: user._id,
+      img_url: imageUrl,
+      display_time: elapsedTime,
+      time_stamp: currentTime,
+    };
+
+    axios
+      .post('http://localhost:5000/snapshot/add', obj)
+      .then((res) => setBookmarks([...bookmarks, res.data.data]));
   };
 
   const handleMouseMove = () => {
@@ -221,19 +243,25 @@ export const VidPlayer = () => {
           />
         </div>
         <div className={classes.bookmarkCont}>
-          <Grid container style={{ marginTop: '20px' }} spacing={3}>
-            {bookmarks.map((el) => (
-              <Grid item key={el.id}>
-                <Paper
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => playerRef.current.seekTo(el.time)}
-                >
-                  <img crossOrigin="anonymous" src={el.image} alt="bookmark" />
-                  <Typography>Bookmark at {el.display}</Typography>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
+          {bookmarks && (
+            <Grid container style={{ marginTop: '20px' }} spacing={3}>
+              {bookmarks.map((el) => (
+                <Grid item key={el.id}>
+                  <Paper
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => playerRef.current.seekTo(el.time_stamp)}
+                  >
+                    <img
+                      crossOrigin="anonymous"
+                      src={el.img_url}
+                      alt="bookmark"
+                    />
+                    <Typography>Bookmark at {el.display_time}</Typography>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          )}
           <canvas ref={canvasRef} />
         </div>
       </div>

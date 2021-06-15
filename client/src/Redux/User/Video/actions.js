@@ -8,6 +8,7 @@ import {
   GET_VIDEOS_SUCCESS,
   GET_VIDEO_URL,
   GET_VIDEO_TITLE,
+  GET_VIDEO_ID,
 } from './actionTypes';
 
 export const getVideosRequest = () => {
@@ -39,6 +40,13 @@ export const getVideoUrl = (payload) => {
 export const getVideoTitle = (payload) => {
   return {
     type: GET_VIDEO_TITLE,
+    payload,
+  };
+};
+
+export const getVideoId = (payload) => {
+  return {
+    type: GET_VIDEO_ID,
     payload,
   };
 };
