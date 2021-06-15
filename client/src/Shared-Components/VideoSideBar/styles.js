@@ -21,7 +21,7 @@ export default makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   courseName: {
-    marginTop: '20px',
+    marginTop: '35px',
     fontWeight: 700,
     padding: '6px 15px',
     margin: 0,

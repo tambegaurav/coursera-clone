@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const bookmark = Schema({
+const snapshot = Schema({
   video_id: String,
   user_id: String,
   img_url: String,
@@ -9,4 +9,4 @@ const bookmark = Schema({
   time_stamp: Number,
 });
 
-module.exports = mongoose.model("Bookmark", bookmark);
+module.exports = mongoose.model("Snapshot", snapshot);

@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { Drawer, CssBaseline, List, Grid, ListItem } from '@material-ui/core';
+import {
+  Drawer,
+  CssBaseline,
+  List,
+  Grid,
+  ListItem,
+  Divider,
+} from '@material-ui/core';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -9,6 +16,7 @@ import {
   getVideoUrl,
   getCourseName,
   getVideoTitle,
+  getVideoId,
 } from '../../Redux/User/Video/actions';
 
 export const VideoSideBar = () => {
@@ -24,9 +32,10 @@ export const VideoSideBar = () => {
 
   const handleVideoMetaData = (index) => {
     // eslint-disable-next-line camelcase
-    const { video_url, title } = videosArr[index];
+    const { video_url, title, _id } = videosArr[index];
     dispatch(getVideoUrl(video_url));
     dispatch(getVideoTitle(title));
+    dispatch(getVideoId(_id));
   };
 
   return (
@@ -44,6 +53,7 @@ export const VideoSideBar = () => {
         <div className={classes.courseName}>
           <h2>{courseName}</h2>
         </div>
+        <Divider />
         <List>
           {videosArr.map((el, index) => (
             <ListItem

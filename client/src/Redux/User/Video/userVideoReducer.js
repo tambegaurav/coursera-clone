@@ -8,6 +8,7 @@ import {
   GET_COURSENAME_SUCCESS,
   GET_COURSENAME_FAILURE,
   GET_VIDEO_TITLE,
+  GET_VIDEO_ID,
 } from './actionTypes';
 
 const init = {
@@ -18,6 +19,7 @@ const init = {
     'https://masai-course.s3.ap-south-1.amazonaws.com/lecture/5435/material/88bade49e98db8790df275fcebb37a13/zoom_0.mp4',
   courseName: '',
   videoTitle: 'title',
+  videoId: '',
 };
 
 export const userVideoReducer = (state = init, { type, payload }) => {
@@ -57,6 +59,13 @@ export const userVideoReducer = (state = init, { type, payload }) => {
       return {
         ...state,
         videoTitle: payload,
+      };
+    }
+
+    case GET_VIDEO_ID: {
+      return {
+        ...state,
+        videoId: payload,
       };
     }
 
