@@ -8,6 +8,8 @@ import ReactMarkdown from 'react-markdown';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
+const gfm = require('remark-gfm');
+
 const TextArea = styled.textarea`
   width: 95%;
   height: 75vh;
@@ -137,7 +139,7 @@ export const NotesSideBar = () => {
           rows="100"
         />
       ) : (
-        <ReactMarkdown className="markdown">
+        <ReactMarkdown remarkPlugins={[gfm]} className="markdown">
           {note === ''
             ? 'No Notes Written. Click on edit and you can start making notes.'
             : note}
