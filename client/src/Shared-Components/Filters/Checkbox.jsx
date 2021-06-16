@@ -42,14 +42,17 @@ const subject = [
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '80%',
+    width: '90%',
+    // zIndex: 5,
     display: 'flex',
-    gap: '20px',
-    margin: 'auto',
+    flexWrap: 'wrap',
+    overflowX: 'hidden',
+    gap: '15px',
+    margin: 'auto 90px',
   },
+
   main: {
     width: '20%',
-
     border: '1px solid black',
   },
   heading: {
