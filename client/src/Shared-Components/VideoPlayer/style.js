@@ -46,4 +46,7 @@ export default makeStyles(() => ({
   volSlider: {
     width: 100,
   },
+  bookmarkBtn: {
+    background: '#0056D2',
+  },
 }));
