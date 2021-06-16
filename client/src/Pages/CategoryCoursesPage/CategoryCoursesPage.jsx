@@ -24,17 +24,18 @@ import useWindowDimensions from '../../CustomHooks/useWindowDimensions';
 import Course from './Course';
 import Footer from '../../Shared-Components/Footer/Footer';
 import { getCourses } from '../../CustomHooks/CourseApi';
+import Navbar from '../../Shared-Components/Navbar';
 
 const Banner = styled.div`
   width: 100%;
   background-image: url('https://i.pinimg.com/originals/2f/3b/68/2f3b68716f952953f8222c4df316b709.jpg');
+  height: 200px;
   > h1 {
     width: 80%;
     color: #fff;
     text-transform: capitalize;
     margin: auto;
     padding: 5%;
-    // background: blue;
   }
   .link {
     cursor: pointer;
@@ -58,6 +59,7 @@ const CategoryCoursesPage = () => {
 
   return (
     <div>
+      <Navbar />
       <Banner>
         <h1>{category} </h1>
       </Banner>
