@@ -13,6 +13,7 @@ import { ProfilePage } from '../Pages/ProfilePage/ProfilePage';
 import { EditProfile } from '../Pages/EditProfile/EditProfile';
 import SignupPage from '../Pages/SignupPage';
 import CategoryCoursesPage from '../Pages/CategoryCoursesPage/CategoryCoursesPage';
+import { StudentsList } from '../Pages/AdminCoursePage/StudentsList';
 
 const Routes = () => {
   return (
@@ -48,6 +49,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/admin/course/:id">
           <AdminCoursePage />
+        </Route>
+        <Route exact path="/admin/course/:id/students">
+          <StudentsList />
         </Route>
         <Route exact path="/profile/:id">
           <ProfilePage />

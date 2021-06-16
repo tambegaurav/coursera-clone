@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const router = express.Router();      
+const router = express.Router();
 const User = require("../models/User");
 
 //singup user
@@ -48,6 +48,13 @@ router.get("/:id", async (req, res) => {
   const id = req.params.id;
   const user = await User.findById(id).populate("enrolled_courses").exec();
   res.status(200).json(user);
+});
+
+//get users by course_id
+router.get("/usersByCourse/:id", async (req, res) => {
+  const id = req.params.id;
+  const users = await User.find({ enrolled_courses: id });
+  res.status(200).json({ data: users });
 });
 
 module.exports = router;
