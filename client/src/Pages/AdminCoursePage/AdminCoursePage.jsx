@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import { TextField } from '@material-ui/core';
@@ -123,6 +123,13 @@ const AdminCoursePage = () => {
       <div>
         <Button variant="contained" onClick={handleOpen}>
           <h2>Add Video</h2>
+        </Button>
+        <Button
+          variant="contained"
+          component={Link}
+          to={`/admin/course/${courseId}/students`}
+        >
+          <h2>See Students</h2>
         </Button>
         <div>
           {videos.length > 0 ? (
