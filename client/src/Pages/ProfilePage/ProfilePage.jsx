@@ -24,7 +24,7 @@ const Flex = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 const CourseBox = styled.div`
-  width: 95%;
+  width: 85%;
   background-color: #f8f8f8;
   color: #464646;
   padding: 20px 20px;
