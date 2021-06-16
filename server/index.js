@@ -5,6 +5,7 @@ const courseRoutes = require("./routes/courseRoutes");
 const videoRoutes = require("./routes/videoRoutes");
 const userRoutes = require("./routes/userRoutes");
 const snapshotRoutes = require("./routes/snapshotRoutes");
+const noteRoutes = require("./routes/noteRoutes");
 
 require("dotenv").config();
 
@@ -19,6 +20,7 @@ app.use("/course", courseRoutes);
 app.use("/video", videoRoutes);
 app.use("/user", userRoutes);
 app.use("/snapshot", snapshotRoutes);
+app.use("/notes", noteRoutes);
 
 const uri = process.env.ATLAS_URI;
 

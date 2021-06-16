@@ -1,9 +1,12 @@
+/* eslint-disable no-else-return */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const TextArea = styled.textarea`
   width: 95%;
@@ -12,8 +15,8 @@ const TextArea = styled.textarea`
   margin-bottom: 10px;
   font-size: 18px;
   padding: 10px;
-  box-shadow: 0px 0px 15px #858585;
-  border-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
 `;
 
 const MainWrapper = styled.div`
@@ -25,8 +28,25 @@ const MainWrapper = styled.div`
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid grey;
-    border-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    background-color: #f1f1f1;
   }
+
+  & .editBtns {
+    background-color: #0156d1;
+  }
+`;
+
+const NotesTitle = styled.div`
+  font-size: 30px;
+  background-color: #0156d1;
+  color: white;
+  width: 95%;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  padding: 5px 10px;
+  margin-top: 10px;
 `;
 
 export const NotesSideBar = () => {
@@ -34,9 +54,30 @@ export const NotesSideBar = () => {
   const user = useSelector((authState) => authState.auth.user);
 
   const [editMode, setEditMode] = useState(false);
+  const [isNewNote, setIsNewNote] = useState(false);
 
   const [note, setNote] = useState('');
   const [newEdit, setNewEdit] = useState('');
+
+  const getNoteFromDb = () => {
+    axios
+      .get(`http://localhost:5000/notes/get/${user._id}/${videoId}`)
+      .then((res) => {
+        if (res.data.data.length > 0) {
+          return res.data.data[0];
+        } else {
+          return res.data.data;
+        }
+      })
+      .then((res) => {
+        setNote(res.content);
+        console.log('data', res);
+        if (!res.video_id && !res.user_id) {
+          setIsNewNote(true);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleEdit = () => {
     setNewEdit(note);
@@ -47,15 +88,47 @@ export const NotesSideBar = () => {
     setNewEdit(e.target.value);
   };
 
-  const handleSaveNote = () => {
-    setNote(newEdit);
-    setEditMode(false);
+  const saveIntoDB = () => {
+    if (isNewNote) {
+      axios
+        .post(`http://localhost:5000/notes/add`, {
+          video_id: videoId,
+          user_id: user._id,
+          content: newEdit,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          return res.data.data;
+        })
+        .then((res) => setNote(res.content))
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .patch(`http://localhost:5000/notes/patch/${user._id}/${videoId}`, {
+          content: newEdit,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          return res.data.data;
+        })
+        .then((res) => setNote(res.content))
+        .catch((err) => console.log(err));
+    }
   };
+
+  const handleSaveNote = () => {
+    setEditMode(false);
+    saveIntoDB();
+  };
+
+  useEffect(() => {
+    console.log('Running');
+    getNoteFromDb();
+  }, [videoId]);
 
   return (
     <MainWrapper>
-      <h1>Notes Section</h1>
-
+      <NotesTitle>Note Pad</NotesTitle>
       {editMode ? (
         <TextArea
           placeholder="Write your notes here..."
@@ -72,11 +145,21 @@ export const NotesSideBar = () => {
       )}
 
       {editMode ? (
-        <Button onClick={handleSaveNote} variant="contained" color="primary">
+        <Button
+          className="editBtns"
+          onClick={handleSaveNote}
+          variant="contained"
+          color="primary"
+        >
           Save Note
         </Button>
       ) : (
-        <Button onClick={handleEdit} variant="contained" color="primary">
+        <Button
+          className="editBtns"
+          onClick={handleEdit}
+          variant="contained"
+          color="primary"
+        >
           Edit
         </Button>
       )}
