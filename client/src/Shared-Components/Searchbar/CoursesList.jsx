@@ -15,9 +15,12 @@ import Pagination from '@material-ui/lab/Pagination';
 import Filters from '../Filters/Checkbox';
 import useStyles from './CoursesListStyles.js';
 import Navbar from '../Navbar/Navbar';
+import useDocumentTitle from '../../CustomHooks/useDocumentTitle';
 
 // eslint-disable-next-line react/prop-types
 const CoursesList = () => {
+  useDocumentTitle('Coursera | Search');
+
   const classes = useStyles();
   const { query } = useParams();
   const history = useHistory();
@@ -61,15 +64,6 @@ const CoursesList = () => {
     };
     getData(variables);
   }, [filters, page]);
-
-  // React.useEffect(() => {
-  //   const variables = {
-  //     query: query.toLowerCase(),
-  //     limit: Limit,
-  //     filters: [],
-  //   };
-  //   getData(variables);
-  // }, []);
 
   const handleFilter = (filters1, category) => {
     console.log(filters1, category);

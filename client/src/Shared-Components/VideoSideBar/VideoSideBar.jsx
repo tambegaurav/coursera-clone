@@ -18,6 +18,7 @@ import {
   getVideoTitle,
   getVideoId,
 } from '../../Redux/User/Video/actions';
+import useDocumentTitle from '../../CustomHooks/useDocumentTitle';
 
 export const VideoSideBar = () => {
   const classes = useStyles();
@@ -25,6 +26,8 @@ export const VideoSideBar = () => {
   const videosArr = useSelector((state) => state.userVideo.videos);
   const courseName = useSelector((state) => state.userVideo.courseName);
   const { id } = useParams();
+
+  useDocumentTitle(`${courseName}`);
 
   useEffect(() => {
     dispatch(getVideos(id)).then(() => dispatch(getCourseName(id)));

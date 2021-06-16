@@ -25,6 +25,7 @@ import Course from './Course';
 import Footer from '../../Shared-Components/Footer/Footer';
 import { getCourses } from '../../CustomHooks/CourseApi';
 import Navbar from '../../Shared-Components/Navbar';
+import useDocumentTitle from '../../CustomHooks/useDocumentTitle';
 
 const Banner = styled.div`
   width: 100%;
@@ -49,6 +50,8 @@ const CategoryCoursesPage = () => {
   const [courses, setCourses] = React.useState([]);
   const { category } = useParams();
   const history = useHistory();
+
+  useDocumentTitle(`Coursera | Browse`);
 
   console.log(courses);
   React.useEffect(() => {

@@ -6,7 +6,7 @@ export default makeStyles(() => ({
   },
   table: {
     borderCollapse: 'collapse',
-    width: '80%',
+    width: '95%',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginTop: '30px',
