@@ -22,6 +22,8 @@
     "react/jsx-one-expression-per-line": ["off"],
     "global-require": ["off"],
     "react/jsx-curly-newline": ["off"],
-    "import/extensions": ["off"]
+    "import/extensions": ["off"],
+    "no-console": "off",
+    "no-alert": "off"
   }
 }
