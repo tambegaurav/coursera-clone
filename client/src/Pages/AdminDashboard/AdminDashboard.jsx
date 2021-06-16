@@ -1,19 +1,36 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
 import styled from 'styled-components';
 import { fetchAllCourses } from '../../Redux/Admin/Course/actions';
 import CourseBox from './CourseBox';
 
+const Container = styled.div`
+  & .MuiButtonBase-root {
+    position: fixed;
+    background-color: #39393a;
+    right: 3%;
+    top: 90%;
+    box-shadow: 2px 2px 10px #39393a;
+    color: white;
+
+    &:hover {
+      background-color: #272727;
+      box-shadow: 5px 2px 10px #5e5e5e;
+    }
+  }
+`;
+
 const CoursesGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 85%;
+  width: 95%;
   margin: auto;
   margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const Heading = styled.h1`
@@ -22,7 +39,7 @@ const Heading = styled.h1`
   font-weight: 600;
   margin-top: 30px;
   text-decoration: underline;
-  color: #077c7c;
+  color: #3a3a3a;
 `;
 
 const AdminDashboard = () => {
@@ -34,22 +51,19 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div>
-      <Heading>Dashboard</Heading>
-      <Button
-        variant="contained"
-        color="primary"
-        component={Link}
-        to="/admin/newCourse"
-      >
-        Add New Course
-      </Button>
+    <Container>
+      <Heading>Dashboard: Courses</Heading>
+      <Tooltip title="Add New Course" classname="add-btn">
+        <IconButton component={Link} to="/admin/newCourse" aria-label="add">
+          <AddIcon />
+        </IconButton>
+      </Tooltip>
       <CoursesGrid>
         {allCourses.map((el) => (
           <CourseBox key={el._id} course={el} />
         ))}
       </CoursesGrid>
-    </div>
+    </Container>
   );
 };
 

@@ -6,43 +6,72 @@ import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 50px 15px;
-  border-radius: 10px;
-  box-shadow: 12px 15px 29px -8px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 12px 15px 29px -8px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 12px 15px 29px -8px rgba(0, 0, 0, 0.75);
-  margin: 10px 25px;
-  background-color: #077c7c;
+  width: 80%;
+  background-color: #f8f8f8;
+  color: #464646;
+  padding: 20px 20px;
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px #5c8dd3;
   cursor: pointer;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+  gap: 20px;
 
-  & h1 {
-    color: #94e6e2;
+  & > .imgBox {
+    border-radius: 7px;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &:hover {
+    box-shadow: 2px 2px 10px #71a7f3;
   }
 
   & h2 {
-    color: #f1f1f1;
+    font-size: 32px;
   }
 
   & h3 {
-    color: #53bd9a;
+    font-size: 22px;
+  }
+
+  & p {
+    font-size: 18px;
+  }
+
+  & .level-badge {
+    background-color: #0156d1;
+    color: white;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 7px;
+    margin-top: 10px;
   }
 `;
 
 const CourseBox = ({ course }) => {
-  const { _id, course_name, level, category, author } = course;
+  const { _id, course_name, level, category, author, course_img } = course;
   const history = useHistory();
   const handleSelectCourse = () => {
     history.push(`/admin/course/${_id}`);
   };
   return (
     <Box onClick={handleSelectCourse}>
-      <h1>{course_name}</h1>
-      <h3>LEVEL: {level}</h3>
-      <h3>CATEGORY: {category}</h3>
-      <h2>By {author}</h2>
+      <div className="imgBox">
+        <img src={course_img} alt="" />
+      </div>
+      <div>
+        <h2>{course_name}</h2>
+        <div>
+          <p>Author: {author}</p>
+          <p>Category: {category}</p>
+        </div>
+        <div className="level-badge">{level}</div>
+      </div>
     </Box>
   );
 };

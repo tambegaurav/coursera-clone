@@ -1,3 +1,5 @@
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 import React from 'react';
@@ -8,33 +10,40 @@ import { ProfileBanner } from '../../Shared-Components/Profile/ProfileBanner/Pro
 import Navbar from '../../Shared-Components/Navbar';
 
 const Container = styled.div`
-  width: 80%;
+  width: 90%;
   margin: auto;
 
   & > h1 {
-    color: #113972;
+    color: #464646;
     margin: 20px;
   }
 `;
 
 const Flex = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 const CourseBox = styled.div`
-  width: 40%;
-  height: 230px;
-  background-color: #e0e0e0;
-  color: #113972;
-  padding: 20px 30px;
+  width: 85%;
+  background-color: #f8f8f8;
+  color: #464646;
+  padding: 20px 20px;
   margin: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   border-radius: 20px;
   box-shadow: 2px 2px 5px #5c8dd3;
   cursor: pointer;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
+  gap: 20px;
+
+  & > .imgBox {
+    border-radius: 7px;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
 
   &:hover {
     box-shadow: 2px 2px 10px #71a7f3;
@@ -51,6 +60,15 @@ const CourseBox = styled.div`
   & p {
     font-size: 18px;
   }
+
+  & .level-badge {
+    background-color: #0156d1;
+    color: white;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 7px;
+    margin-top: 10px;
+  }
 `;
 
 export const ProfilePage = () => {
@@ -66,19 +84,24 @@ export const ProfilePage = () => {
         <Flex>
           {enrolledCourses?.map((course) => {
             return (
-              <CourseBox>
-                <Link
-                  to={`/courseMat/${course._id}`}
-                  style={{ color: 'inherit', textDecoration: 'inherit' }}
-                >
-                  <h2>{course.course_name}</h2>
-                  <h3>Level: {course.level}</h3>
-                  <div>
-                    <p>Author: {course.author}</p>
-                    <p>Category: {course.category}</p>
+              <Link
+                to={`/courseMat/${course._id}`}
+                style={{ color: 'inherit', textDecoration: 'inherit' }}
+              >
+                <CourseBox>
+                  <div className="imgBox">
+                    <img src={course.course_img} alt="" />
                   </div>
-                </Link>
-              </CourseBox>
+                  <div>
+                    <h2>{course.course_name}</h2>
+                    <div>
+                      <p>Author: {course.author}</p>
+                      <p>Category: {course.category}</p>
+                    </div>
+                    <div className="level-badge">{course.level}</div>
+                  </div>
+                </CourseBox>
+              </Link>
             );
           })}
           {enrolledCourses.length === 0 && (

@@ -30,7 +30,7 @@ const MainWrapper = styled.div`
     border: 1px solid grey;
     border-bottom-right-radius: 7px;
     border-bottom-left-radius: 7px;
-    background-color: #f1f1f1;
+    background-color: #f8f8f8;
   }
 
   & .editBtns {
