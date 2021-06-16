@@ -13,39 +13,14 @@ import { Rating } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import Filters from '../Filters/Checkbox';
-import styles from './CoursesList.module.css';
+import useStyles from './CoursesListStyles.js';
 import Navbar from '../Navbar/Navbar';
-
-const useStyles = makeStyles(() => ({
-  iconButton: {
-    padding: 10,
-  },
-  ratingNum: {
-    color: 'rgb(247, 187, 86)',
-    fontWeight: '600',
-    fontSize: '15px',
-  },
-  totalRating: {
-    fontWeight: 'normal',
-    fontSize: '15px',
-  },
-  img: {
-    border: '1px solid black',
-    width: '180px',
-    height: '180px',
-  },
-  info: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 5,
-  },
-}));
 
 // eslint-disable-next-line react/prop-types
 const CoursesList = () => {
+  const classes = useStyles();
   const { query } = useParams();
   const history = useHistory();
-  const classes = useStyles();
   const [data, setData] = React.useState([]);
   const [Skip, setSkip] = React.useState(0);
   const [filters, setFilters] = React.useState([]);
@@ -117,83 +92,85 @@ const CoursesList = () => {
   return (
     <div>
       <Navbar />
-      <div className={styles.filter}>
+      <div className={classes.filter}>
         <h3 style={{ marginLeft: 100 }}>
           {`Showing  ${list.length} total results for  "${query}"`}{' '}
         </h3>
         <Filters handleFilter={(filters1) => handleFilter(filters1, 'Level')} />
       </div>
       {/* if filters len ===0 show all courses */}
-      {list.length === 0 ? (
-        <div className={styles.emptylist}>
-          <h2>No Course Found.</h2>
-          <p>Try Another Filters</p>
-        </div>
-      ) : (
-        <div>
-          {list.slice((page - 1) * Limit, page * Limit).map((item) => (
-            <>
-              <div
-                aria-hidden="true"
-                className={styles.list}
-                onClick={() => handleClick(item._id)}
-                onKeyDown={() => handleClick(item._id)}
-              >
-                <div className={classes.img}>
-                  <img
-                    style={{ width: '100%' }}
-                    src={item.course_img || ''}
-                    alt="img"
-                  />
-                </div>
-                <div className={styles.info}>
-                  <h3>{item.course_name} </h3>
-                  <p>{item.author} </p>
-                  <p>Course </p>
-                  <div>
-                    <Grid
-                      Grid
-                      container
-                      spacing={1}
-                      style={{ marginTop: '20px' }}
-                    >
-                      <Grid item>
-                        <Rating
-                          name="simple-controlled"
-                          value={rating}
-                          precision={0.1}
-                          readOnly
-                          size="small"
-                        />
-                      </Grid>
-                      <Grid item>
-                        <p className={classes.ratingNum}>
-                          {rating} |
-                          {Math.ceil(Math.random() * (8500 - 5500) + 5500)} K
-                          students
-                        </p>
-                      </Grid>
-                    </Grid>
-                  </div>
-
-                  <h4>Level: {item.level} </h4>
-                </div>
-              </div>
-              <Divider style={{ width: '70%', margin: 'auto' }} />
-            </>
-          ))}
-
-          <div className={styles.pagination}>
-            <Pagination
-              count={count}
-              page={page}
-              onChange={handleChange}
-              variant="outlined"
-              shape="rounded"
-            />
+      <div>
+        {list.length === 0 ? (
+          <div className={classes.emptylist}>
+            <h2>No Course Found.</h2>
+            <p>Try Another Filters</p>
           </div>
-        </div>
-      )}
+        ) : (
+          <div>
+            {list.slice((page - 1) * Limit, page * Limit).map((item) => (
+              <>
+                <div
+                  aria-hidden="true"
+                  className={classes.list}
+                  onClick={() => handleClick(item._id)}
+                  onKeyDown={() => handleClick(item._id)}
+                >
+                  <div className={classes.img}>
+                    <img
+                      style={{ width: '100%' }}
+                      src={item.course_img || ''}
+                      alt="img"
+                    />
+                  </div>
+                  <div className={classes.info}>
+                    <h3>{item.course_name} </h3>
+                    <p>{item.author} </p>
+                    <p>Course </p>
+                    <div>
+                      <Grid
+                        Grid
+                        container
+                        spacing={1}
+                        style={{ marginTop: '20px' }}
+                      >
+                        <Grid item>
+                          <Rating
+                            name="simple-controlled"
+                            value={rating}
+                            precision={0.1}
+                            readOnly
+                            size="small"
+                          />
+                        </Grid>
+                        <Grid item>
+                          <p className={classes.ratingNum}>
+                            {rating} |
+                            {Math.ceil(Math.random() * (8500 - 5500) + 5500)} K
+                            students
+                          </p>
+                        </Grid>
+                      </Grid>
+                    </div>
+
+                    <h4>Level: {item.level} </h4>
+                  </div>
+                </div>
+                <Divider style={{ width: '70%', margin: 'auto' }} />
+              </>
+            ))}
+
+            <div className={classes.pagination}>
+              <Pagination
+                count={count}
+                page={page}
+                onChange={handleChange}
+                variant="outlined"
+                shape="rounded"
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

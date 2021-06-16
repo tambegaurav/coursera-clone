@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -24,6 +25,15 @@ const CourseBanner = ({ course }) => {
   const rating = (Math.random() * (5 - 3.5) + 3.5).toFixed(1);
 
   const activeUser = useSelector((state) => state.auth.user);
+
+  let isEnrolled = false;
+  for (let i = 0; i < activeUser.enrolled_courses.length; i++) {
+    if (activeUser.enrolled_courses[i]._id === course._id) {
+      isEnrolled = true;
+      // console.log('Course is Already enrolled');
+      break;
+    }
+  }
 
   const [open, setOpen] = React.useState(false);
 
@@ -105,18 +115,11 @@ const CourseBanner = ({ course }) => {
                     </Button>
                   ) : (
                     <Button
-                      onClick={
-                        activeUser.enrolled_courses.includes(course._id) ||
-                        !activeUser
-                          ? ''
-                          : handleOpen
-                      }
+                      onClick={isEnrolled || !activeUser ? '' : handleOpen}
                       variant="contained"
                       className={classes.enrollBtn}
                     >
-                      {activeUser.enrolled_courses.includes(course._id)
-                        ? 'Already Enrolled'
-                        : 'Enroll'}
+                      {isEnrolled ? 'Already Enrolled' : 'Enroll'}
                     </Button>
                   )}
                 </Grid>
