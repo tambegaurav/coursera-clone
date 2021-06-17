@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React from 'react';
@@ -29,7 +30,7 @@ const CourseDetailsPage = () => {
       <CourseNav />
       <CourseAbout courseDetails={course.course_details} />
       <hr />
-      <Syllabus />
+      <Syllabus course={course} />
     </div>
   );
 };

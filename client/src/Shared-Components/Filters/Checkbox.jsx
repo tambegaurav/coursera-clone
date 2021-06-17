@@ -24,7 +24,7 @@ const level = [
 const subject = [
   {
     idx: 1,
-    name: 'Web Dev',
+    name: 'Web Development',
   },
   {
     idx: 2,
@@ -32,11 +32,11 @@ const subject = [
   },
   {
     idx: 3,
-    name: 'M.L',
+    name: 'Machine Learning',
   },
   {
     idx: 4,
-    name: 'App Dev',
+    name: 'App Development',
   },
 ];
 
@@ -62,6 +62,8 @@ const useStyles = makeStyles((theme) => ({
   options: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'start',
+    justifyContent: 'center',
   },
 }));
 
@@ -95,7 +97,7 @@ export default function Filters(props) {
           </AccordionSummary>
           <AccordionDetails className={classes.options}>
             {level.map((el) => (
-              <div style={{ display: 'flex' }}>
+              <div>
                 <Checkbox
                   // defaultChecked
                   checked={checked.indexOf(el.name) !== -1}
@@ -120,7 +122,7 @@ export default function Filters(props) {
           </AccordionSummary>
           <AccordionDetails className={classes.options}>
             {subject.map((el) => (
-              <div style={{ display: 'flex' }}>
+              <div>
                 <Checkbox
                   // defaultChecked
                   checked={checked.indexOf(el.name) !== -1}
@@ -145,7 +147,7 @@ export default function Filters(props) {
           </AccordionSummary>
           <AccordionDetails className={classes.options}>
             {level.map((el) => (
-              <div style={{ display: 'flex' }}>
+              <div>
                 <Checkbox
                   // defaultChecked
                   checked={checked.indexOf(el.name) !== -1}
@@ -170,7 +172,7 @@ export default function Filters(props) {
           </AccordionSummary>
           <AccordionDetails className={classes.options}>
             {level.map((el) => (
-              <div style={{ display: 'flex' }}>
+              <div>
                 <Checkbox
                   // defaultChecked
                   checked={checked.indexOf(el.name) !== -1}
@@ -195,7 +197,7 @@ export default function Filters(props) {
           </AccordionSummary>
           <AccordionDetails className={classes.options}>
             {level.map((el) => (
-              <div style={{ display: 'flex' }}>
+              <div>
                 <Checkbox
                   // defaultChecked
                   checked={checked.indexOf(el.name) !== -1}

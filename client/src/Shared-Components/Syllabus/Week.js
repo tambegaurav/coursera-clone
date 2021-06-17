@@ -13,6 +13,7 @@ function Week({
 }) {
   const [readMore, setReadMore] = useState(false);
   const [readMore1, setReadMore1] = useState(false);
+  console.log(videos);
   return (
     <div className={styles.main}>
       <div className={styles.left}>
@@ -26,7 +27,9 @@ function Week({
         <h2>{title} </h2>
         <div>
           <p>
-            {readMore ? description : `${description.substring(0, 300)}...`}
+            {readMore
+              ? description
+              : `${description.substring(0, description.length / 1.3)}...`}
             <button
               type="button"
               className={styles.description}
@@ -54,7 +57,7 @@ function Week({
               <h4>{videos.length} Videos</h4>
               {videos.map((video) => (
                 <div style={{ marginTop: 10 }}>
-                  {video.title} : {video.time_in_minutes} minutes
+                  {video} : {(Math.random() * (10 - 5) + 3).toFixed(0)} minutes
                 </div>
               ))}
               <br />
