@@ -236,7 +236,8 @@ export const ProfileForm = () => {
                   <TextField
                     variant="outlined"
                     fullWidth
-                    defaultValue={user.password}
+                    placeholder="Change your password"
+                    defaultValue=""
                     name="password"
                     onChange={handleChange}
                   />
@@ -264,9 +265,10 @@ export const ProfileForm = () => {
                         alt=""
                         src={user.profile_picture}
                         className={classes.personIcon}
+                        variant="square"
                       />
                     ) : (
-                      <Avatar className={classes.avatar}>
+                      <Avatar variant="square" className={classes.avatar}>
                         <PersonIcon className={classes.personIcon} />
                       </Avatar>
                     )}
@@ -275,6 +277,7 @@ export const ProfileForm = () => {
                     <input
                       type="file"
                       onChange={(e) => setNewImg(e.target.files[0])}
+                      className={classes.chooseFileBtn}
                     />
                     <Button
                       variant="contained"

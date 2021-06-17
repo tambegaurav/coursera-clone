@@ -37,6 +37,14 @@ router.post("/login", async (req, res) => {
 //updating user credentials
 router.patch("/:id", async (req, res) => {
   const id = req.params.id;
+  if (req.body.password) {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const body = { ...req.body, password: hashedPassword };
+    const user = await User.findByIdAndUpdate(id, body, { new: true })
+      .populate("enrolled_courses")
+      .exec();
+    return res.status(203).json({ data: user });
+  }
   const user = await User.findByIdAndUpdate(id, req.body, { new: true })
     .populate("enrolled_courses")
     .exec();
