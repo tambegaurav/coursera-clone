@@ -74,4 +74,7 @@ export default makeStyles((theme) => ({
   selectTag: {
     textAlign: 'left',
   },
+  chooseFileBtn: {
+    marginLeft: '10px',
+  },
 }));
