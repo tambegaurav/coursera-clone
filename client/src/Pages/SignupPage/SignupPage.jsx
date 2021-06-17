@@ -51,8 +51,6 @@ const SignupPage = () => {
       .then((res) => console.log(res))
       .catch((err) => console.error(err));
 
-    console.log(formdata);
-
     setFormdata(init);
   };
 
