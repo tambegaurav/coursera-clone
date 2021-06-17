@@ -464,13 +464,30 @@ const Navbar = () => {
             {isAuth && (
               <>
                 <Divider orientation="vertical" flexItem />
-                <Avatar
+                {/* <Avatar
                   className={classes.avatar}
                   component={Link}
                   to={`/profile/${user._id}`}
                 >
                   <PersonIcon className={classes.person} />
-                </Avatar>
+                </Avatar> */}
+                {user.profile_picture ? (
+                  <Avatar
+                    alt=""
+                    src={user.profile_picture}
+                    className={classes.person}
+                    component={Link}
+                    to={`/profile/${user._id}`}
+                  />
+                ) : (
+                  <Avatar
+                    className={classes.avatar}
+                    component={Link}
+                    to={`/profile/${user._id}`}
+                  >
+                    <PersonIcon className={classes.person} />
+                  </Avatar>
+                )}
                 <Button component={Link} to={`/profile/${user._id}`}>
                   {user.first_name}
                 </Button>

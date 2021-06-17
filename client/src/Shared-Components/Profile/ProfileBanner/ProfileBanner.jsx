@@ -31,9 +31,17 @@ export const ProfileBanner = () => {
       <div>
         <Grid container direction="column" alignItems="center" spacing={3}>
           <Grid item>
-            <Avatar className={classes.avatar}>
-              <PersonIcon className={classes.personIcon} />
-            </Avatar>
+            {user.profile_picture ? (
+              <Avatar
+                alt=""
+                src={user.profile_picture}
+                className={classes.personIcon}
+              />
+            ) : (
+              <Avatar className={classes.avatar}>
+                <PersonIcon className={classes.personIcon} />
+              </Avatar>
+            )}
           </Grid>
           <Grid item>
             <h2 className={classes.userName}>

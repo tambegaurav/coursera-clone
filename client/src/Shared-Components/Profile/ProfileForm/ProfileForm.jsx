@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable spaced-comment */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
@@ -10,11 +12,14 @@ import {
   TextField,
   Avatar,
 } from '@material-ui/core';
+import axios from 'axios';
+import { v4 as uuid } from 'uuid';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PersonIcon from '@material-ui/icons/Person';
 import useStyles from './styles';
 import { updateUser } from '../../../Redux/Auth/actions';
+import { storage } from '../../../utils/firebase';
 // import { empStatus, expLevel, degrees } from './selectTagValues';
 
 export const ProfileForm = () => {
@@ -24,6 +29,7 @@ export const ProfileForm = () => {
   const { id } = useParams();
   const [credentials, setCredentials] = useState({});
   const user = useSelector((authState) => authState.auth.user);
+  const [newImg, setNewImg] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +38,46 @@ export const ProfileForm = () => {
 
   const handleSaveChanges = () => {
     dispatch(updateUser(id, credentials));
+  };
+
+  const handleUpdateProfilePic = () => {
+    console.log(newImg);
+    // Create a storage reference from our storage service
+    const storageRef = storage.ref();
+    // Create a child reference
+    const randomId = uuid();
+    const imagesRef = storageRef.child(`profilePicture/${randomId}`);
+    // imagesRef now points to 'images'
+    const uploadTask = imagesRef.put(newImg);
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // eslint-disable-next-line prefer-template
+        console.log('Upload is ' + progress + '% done');
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+        console.log(error);
+      },
+      () => {
+        // Handle successful uploads on complete
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log('File available at', downloadURL);
+
+          //patch req
+          axios
+            .patch(`http://localhost:5000/user/${user._id}`, {
+              profile_picture: downloadURL,
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => console.log(err));
+        });
+      },
+    );
   };
 
   return (
@@ -210,16 +256,31 @@ export const ProfileForm = () => {
                 </Grid>
                 <Grid item className={classes.value} container>
                   <Grid item>
-                    <Avatar variant="square" className={classes.avatar}>
+                    {/* <Avatar variant="square" className={classes.avatar}>
                       <PersonIcon className={classes.personIcon} />
-                    </Avatar>
+                    </Avatar> */}
+                    {user.profile_picture ? (
+                      <Avatar
+                        alt=""
+                        src={user.profile_picture}
+                        className={classes.personIcon}
+                      />
+                    ) : (
+                      <Avatar className={classes.avatar}>
+                        <PersonIcon className={classes.personIcon} />
+                      </Avatar>
+                    )}
                   </Grid>
                   <Grid item>
+                    <input
+                      type="file"
+                      onChange={(e) => setNewImg(e.target.files[0])}
+                    />
                     <Button
                       variant="contained"
                       color="primary"
                       className={classes.photoBtn}
-                      type="file"
+                      onClick={handleUpdateProfilePic}
                     >
                       Upload a photo
                     </Button>

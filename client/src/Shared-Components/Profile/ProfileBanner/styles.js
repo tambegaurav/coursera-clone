@@ -29,8 +29,8 @@ export default makeStyles((theme) => ({
     height: theme.spacing(17),
   },
   personIcon: {
-    width: theme.spacing(13),
-    height: theme.spacing(13),
+    width: theme.spacing(17),
+    height: theme.spacing(17),
   },
   userName: {
     color: 'white',

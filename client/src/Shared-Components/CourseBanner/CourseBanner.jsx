@@ -100,7 +100,15 @@ const CourseBanner = ({ course }) => {
                 style={{ marginTop: '20px' }}
               >
                 <Grid item>
-                  <Avatar alt="name" src="https://bit.ly/3p5nbtK" />
+                  <Avatar
+                    alt="name"
+                    src={
+                      course.author_img
+                        ? course.author_img
+                        : 'https://bit.ly/3p5nbtK'
+                    }
+                    style={{ width: '50px', height: '50px' }}
+                  />
                 </Grid>
                 <Grid item>{course.author}</Grid>
               </Grid>
