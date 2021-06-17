@@ -51,7 +51,25 @@ Inside Client & Server install with npm
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+**Homepage**
+
+<img width="1440" alt="Screenshot 2021-06-17 at 8 09 36 PM" src="https://user-images.githubusercontent.com/42139446/122419364-79cf0d80-cfa8-11eb-8aa3-66e99eebfdf4.png">
+
+**Course Search by Category**
+
+<img width="1440" alt="Screenshot 2021-06-17 at 8 11 12 PM" src="https://user-images.githubusercontent.com/42139446/122419515-979c7280-cfa8-11eb-9153-cb684ddf9113.png">
+
+**Search by keyword Page**
+
+<img width="1440" alt="Screenshot 2021-06-17 at 8 11 48 PM" src="https://user-images.githubusercontent.com/42139446/122419632-aedb6000-cfa8-11eb-8dc0-18e192760f8c.png">
+
+**Course Details Page**
+
+<img width="1440" alt="Screenshot 2021-06-17 at 8 11 28 PM" src="https://user-images.githubusercontent.com/42139446/122419748-c74b7a80-cfa8-11eb-92eb-6a8e88aee233.png">
+
+**Course Material View**
+
+<img width="1440" alt="Screenshot 2021-06-17 at 8 12 18 PM" src="https://user-images.githubusercontent.com/42139446/122419910-e6e2a300-cfa8-11eb-8a7e-02604f1b99ae.png">
 
 ## Tech Stack
 
