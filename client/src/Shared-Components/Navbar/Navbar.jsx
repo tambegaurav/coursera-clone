@@ -40,6 +40,7 @@ import { useHistory, Link } from 'react-router-dom';
 import Searchbar from '../Searchbar/Searchbar';
 import useStyles from './NavbarStyles';
 import { signin, logoutUser } from '../../Redux/Auth/actions';
+import Spinner from '../Spinner';
 
 const Navbar = () => {
   const classes = useStyles();
@@ -66,6 +67,7 @@ const Navbar = () => {
   const isAuth = useSelector((authState) => authState.auth.isAuth);
   const user = useSelector((authState) => authState.auth.user);
   const isError = useSelector((authState) => authState.auth.isError);
+  const isLoading = useSelector((authState) => authState.auth.isLoading);
 
   const handleLogin = () => {
     const payload = {
@@ -119,6 +121,10 @@ const Navbar = () => {
   const handleJoin = () => {
     history.push('/signup');
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
