@@ -8,13 +8,22 @@ import React from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, IconButton } from '@material-ui/core';
+import { TextField, IconButton, InputAdornment } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   iconButton: {
     padding: 10,
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+  },
+  icon: {
+    marginTop: '70%',
+    color: 'white',
+  },
+  iconBtnDiv: {
+    background: '#0056D2',
   },
 }));
 
@@ -79,17 +88,28 @@ function Searchbar() {
               placeholder="What do you want to Learn?"
               variant="outlined"
               style={{ outline: 'none', borderBottom: 'none' }}
+              // InputProps={{
+              //   endAdornment: (
+              //     <InputAdornment position="end">
+              //       <IconButton>
+              //         <SearchIcon />
+              //       </IconButton>
+              //     </InputAdornment>
+              //   ),
+              // }}
             />
-            <IconButton
-              variant="contained"
-              color="primary"
-              type="submit"
-              onClick={handleSearch}
-              className={classes.iconButton}
-              aria-label="search"
-            >
-              <SearchIcon />
-            </IconButton>
+            <div className={classes.iconBtnDiv}>
+              <IconButton
+                variant="contained"
+                color="primary"
+                type="submit"
+                onClick={handleSearch}
+                className={classes.iconButton}
+                aria-label="search"
+              >
+                <SearchIcon className={classes.icon} />
+              </IconButton>
+            </div>
           </div>
         )}
       />
