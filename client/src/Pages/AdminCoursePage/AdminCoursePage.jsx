@@ -17,7 +17,7 @@ const ModalCont = styled.div`
   display: grid;
   place-items: center;
   margin: auto;
-  margin-top: 20%;
+  margin-top: 150px;
   padding: 20px 10px;
   border-radius: 7px;
   padding-bottom: 0;

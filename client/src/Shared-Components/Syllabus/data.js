@@ -11,16 +11,7 @@ export default [
       : what kinds of test cases there are,
        how to organize the search for a bugtest, and particularly 
        a method of automating testing called stress-testing.`,
-    videos: [
-      {
-        title: 'Introduction and Course Structure',
-        time_in_minutes: 5,
-      },
-      {
-        title: 'Introduction and Course Structure',
-        time_in_minutes: 5,
-      },
-    ],
+
     readings: [
       {
         title: 'Welcome',
@@ -51,16 +42,7 @@ export default [
            We'll also identify a special class of solutions — brute force solutions
             — which are always correct, but often very slow. And we'll learn how to estimate
              running time of our solutions by using a powerful concept of big-O notation.`,
-    videos: [
-      {
-        title: 'Introduction and Course Structure',
-        time_in_minutes: 5,
-      },
-      {
-        title: 'Introduction and Course Structure',
-        time_in_minutes: 5,
-      },
-    ],
+
     readings: [
       {
         title: 'Welcome',
@@ -88,16 +70,7 @@ export default [
          point arithmetic, and learn to overcome them. We'll also
           discuss how to get stuck less in general, 
          especially when debugging solutions.`,
-    videos: [
-      {
-        title: 'Introduction and Course Structure',
-        time_in_minutes: 5,
-      },
-      {
-        title: 'Introduction and Course Structure',
-        time_in_minutes: 5,
-      },
-    ],
+
     readings: [
       {
         title: 'Welcome',
