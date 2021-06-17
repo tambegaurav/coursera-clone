@@ -11,18 +11,25 @@ import Navbar from '../../Shared-Components/Navbar';
 import Syllabus from '../../Shared-Components/Syllabus/Syllabus';
 import { fetchCourse } from '../../Redux/courseDetails/actions';
 import useDocumentTitle from '../../CustomHooks/useDocumentTitle';
+import Spinner from '../../Shared-Components/Spinner';
 
 const CourseDetailsPage = () => {
   const { category, courseName } = useParams();
 
   const dispatch = useDispatch();
   const course = useSelector((state) => state.courseDetails.course);
+  const isLoading = useSelector((state) => state.courseDetails.isLoading);
 
   useDocumentTitle(`Coursera | ${course.course_name}`);
 
   React.useEffect(() => {
     dispatch(fetchCourse(category, courseName));
   }, [category, courseName]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div>
       <Navbar />
