@@ -6,16 +6,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const VideoBox = styled.div`
-  background-color: #f0efef;
+  background-color: #f8f8f8;
+  color: #464646;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  margin: 30px auto;
+  /* width: 80%; */
+  /* margin: 30px auto; */
   border-radius: 7px;
   padding: 20px 0;
-  box-shadow: 7px 7px 2px #858585;
+  box-shadow: 2px 2px 5px #5c8dd3;
 
   & > .text-content {
     display: flex;

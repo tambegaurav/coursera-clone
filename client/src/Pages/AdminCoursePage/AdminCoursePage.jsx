@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
-import { TextField } from '@material-ui/core';
+import { TextField, Container, Button, Modal, Grid } from '@material-ui/core';
 import styled from 'styled-components';
 import { fetchAllVideosParticularCourse } from '../../Redux/Admin/Course/actions';
 import { addVideoToCourse } from '../../Redux/Admin/Video/actions';
 import VideoComponent from './VideoComponent';
+import useStyles from './coursePageStyles';
 
 const ModalCont = styled.div`
   background-color: azure;
@@ -39,6 +38,9 @@ const FormBox = styled.div`
 const AdminCoursePage = () => {
   const params = useParams();
   const [courseId, setCourseId] = useState('');
+  const classes = useStyles();
+
+  const [courseTitle, setCourseTitle] = useState('');
 
   const videos = useSelector((state) => state.course.videos);
   const [videoIds, setVideoIds] = useState([]);
@@ -116,30 +118,47 @@ const AdminCoursePage = () => {
     }
   }, [courseId]);
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/course/${courseId}`)
+      .then((res) => setCourseTitle(res.data.data.course_name));
+  }, [courseId]);
+
   return (
-    <div>
-      <h1>AdminCoursePage</h1>
+    <Container className={classes.root} maxWidth="xl">
+      <h1 className={classes.heading}>{courseTitle}</h1>
 
       <div>
-        <Button variant="contained" onClick={handleOpen}>
-          <h2>Add Video</h2>
-        </Button>
-        <Button
-          variant="contained"
-          component={Link}
-          to={`/admin/course/${courseId}/students`}
-        >
-          <h2>See Students</h2>
-        </Button>
-        <div>
+        <Grid container justify="space-between" className={classes.btnGrid}>
+          <Button
+            variant="contained"
+            onClick={handleOpen}
+            color="primary"
+            className={classes.btn}
+          >
+            <h2>Add Video</h2>
+          </Button>
+          <Button
+            variant="contained"
+            component={Link}
+            color="primary"
+            to={`/admin/course/${courseId}/students`}
+            className={classes.btn}
+          >
+            <h2>See Students</h2>
+          </Button>
+        </Grid>
+        <Grid container spacing={2} className={classes.videoGrid}>
           {videos.length > 0 ? (
             videos.map((video) => (
-              <VideoComponent key={video._id} video={video} />
+              <Grid item lg={6}>
+                <VideoComponent key={video._id} video={video} />
+              </Grid>
             ))
           ) : (
             <h2>No Videos Found. Add One</h2>
           )}
-        </div>
+        </Grid>
         <Modal
           open={open}
           onClose={handleClose}
@@ -180,7 +199,7 @@ const AdminCoursePage = () => {
           </ModalCont>
         </Modal>
       </div>
-    </div>
+    </Container>
   );
 };
 

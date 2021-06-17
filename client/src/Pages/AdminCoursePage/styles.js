@@ -9,7 +9,7 @@ export default makeStyles(() => ({
     width: '95%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: '30px',
+    marginTop: '50px',
     fontFamily: 'arial, sans-serif',
   },
   tableData: {
@@ -19,5 +19,13 @@ export default makeStyles(() => ({
   },
   'tr:nth-child(even)': {
     backgroundColor: '#dddddd',
+  },
+  heading: {
+    textAlign: 'center',
+    fontSize: '40px',
+    fontWeight: 600,
+    marginTop: '30px',
+    textDecoration: 'underline',
+    color: '#3a3a3a',
   },
 }));

@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-tag-spacing */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Typography } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import axios from 'axios';
 import useStyles from './styles';
 
@@ -24,9 +24,7 @@ export const StudentsList = () => {
   return (
     <div>
       <Container className={classes.root}>
-        <Typography variant="h3" gutterBottom>
-          Students Enrolled
-        </Typography>
+        <h1 className={classes.heading}> Students Enrolled </h1>
 
         <table className={classes.table}>
           <tr>
