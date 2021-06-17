@@ -12,14 +12,14 @@ import CourseBox from './CourseBox';
 const Container = styled.div`
   & .MuiButtonBase-root {
     position: fixed;
-    background-color: #39393a;
+    background-color: #0056d2;
     right: 3%;
     top: 90%;
     box-shadow: 2px 2px 10px #39393a;
     color: white;
 
     &:hover {
-      background-color: #272727;
+      background-color: #084aa7;
       box-shadow: 5px 2px 10px #5e5e5e;
     }
   }

@@ -9,12 +9,15 @@ import CourseNav from '../../Shared-Components/CourseBanner/CourseNav';
 import Navbar from '../../Shared-Components/Navbar';
 import Syllabus from '../../Shared-Components/Syllabus/Syllabus';
 import { fetchCourse } from '../../Redux/courseDetails/actions';
+import useDocumentTitle from '../../CustomHooks/useDocumentTitle';
 
 const CourseDetailsPage = () => {
   const { category, courseName } = useParams();
 
   const dispatch = useDispatch();
   const course = useSelector((state) => state.courseDetails.course);
+
+  useDocumentTitle(`Coursera | ${course.course_name}`);
 
   React.useEffect(() => {
     dispatch(fetchCourse(category, courseName));

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import React, { useState } from 'react';
@@ -22,6 +23,7 @@ export const NewCourseForm = () => {
   const classes = useStyles();
   const [formdata, setFormdata] = useState(obj);
   const [file, setFile] = useState(null);
+  const [authorImg, setAuthorImg] = useState(null);
   const { course_name, course_details, author, level, category } = formdata;
   const dispatch = useDispatch();
 
@@ -52,11 +54,40 @@ export const NewCourseForm = () => {
       },
       () => {
         // Handle successful uploads on complete
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          console.log('File available at', downloadURL);
+        uploadTask.snapshot.ref.getDownloadURL().then((courseUrl) => {
+          const newId = uuid();
+          const authorRef = storageRef.child(`authors/${newId}`);
+          // imagesRef now points to 'images'
+          const uploadAuthorTask = authorRef.put(authorImg);
+          uploadAuthorTask.on(
+            'state_changed',
+            (snapshot) => {
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              // eslint-disable-next-line prefer-template
+              console.log('Upload is ' + progress + '% done');
+            },
+            (error) => {
+              // Handle unsuccessful uploads
+              console.log(error);
+            },
+            () => {
+              // Handle successful uploads on complete
+              uploadAuthorTask.snapshot.ref
+                .getDownloadURL()
+                .then((authorUrl) => {
+                  console.log(courseUrl);
+                  console.log(authorUrl);
 
-          dispatch(addCourse({ ...formdata, course_img: downloadURL })).then(
-            () => alert('Course Added'),
+                  dispatch(
+                    addCourse({
+                      ...formdata,
+                      course_img: courseUrl,
+                      author_img: authorUrl,
+                    }),
+                  ).then(() => alert('Course Added'));
+                });
+            },
           );
         });
       },
@@ -66,6 +97,11 @@ export const NewCourseForm = () => {
   const handleFileSelect = (e) => {
     const img = e.target.files[0];
     setFile(img);
+  };
+
+  const handleAuthorImgSelect = (e) => {
+    const authorImgFile = e.target.files[0];
+    setAuthorImg(authorImgFile);
   };
 
   return (
@@ -154,7 +190,16 @@ export const NewCourseForm = () => {
                   />
                 </Grid>
                 <Grid item lg={12}>
-                  <input type="file" onChange={handleFileSelect} />
+                  <label htmlFor="">Course Img :</label>{' '}
+                  <input type="file" required onChange={handleFileSelect} />
+                </Grid>
+                <Grid item lg={12}>
+                  <label htmlFor="">Author Img :</label>{' '}
+                  <input
+                    type="file"
+                    required
+                    onChange={handleAuthorImgSelect}
+                  />
                 </Grid>
                 <Grid item lg={12} container justify="flex-end">
                   <Grid item>

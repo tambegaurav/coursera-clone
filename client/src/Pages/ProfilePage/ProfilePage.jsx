@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ProfileBanner } from '../../Shared-Components/Profile/ProfileBanner/ProfileBanner';
 import Navbar from '../../Shared-Components/Navbar';
+import useDocumentTitle from '../../CustomHooks/useDocumentTitle';
 
 const Container = styled.div`
   width: 90%;
@@ -75,6 +76,9 @@ export const ProfilePage = () => {
   const enrolledCourses = useSelector(
     (state) => state.auth.user.enrolled_courses,
   );
+
+  useDocumentTitle('Coursera | Profile');
+
   return (
     <div>
       <Navbar />

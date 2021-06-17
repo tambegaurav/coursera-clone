@@ -9,8 +9,11 @@ import {
   HomeCont2,
   HomeCont3,
 } from '../../Shared-Components/Home/HomeContainers';
+import useDocumentTitle from '../../CustomHooks/useDocumentTitle';
 
 const Home = () => {
+  useDocumentTitle(`Coursera`);
+
   return (
     <div>
       <Navbar />

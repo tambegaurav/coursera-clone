@@ -5,6 +5,7 @@ const drawerWidth = 240;
 export default makeStyles((theme) => ({
   root: {
     display: 'flex',
+    color: '#464646',
   },
   drawer: {
     width: drawerWidth,

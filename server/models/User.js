@@ -18,11 +18,9 @@ const user = new Schema({
     type: Array,
     default: [],
   },
-  //notes: [{
-  //   videoId,
-  //   img_ul,
-  //   array
-  // }]
+  profile_picture: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", user);
