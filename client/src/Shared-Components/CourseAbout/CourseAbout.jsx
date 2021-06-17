@@ -12,6 +12,7 @@ const Grid = styled.div`
   margin-top: 20px;
   gap: 30px;
   margin-bottom: 30px;
+  color: #373a3c;
 
   & .about-title {
     font-size: 28px;

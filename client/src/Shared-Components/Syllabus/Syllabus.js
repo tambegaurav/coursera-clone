@@ -9,6 +9,8 @@ import list from './data.js';
 const Cont = styled.div`
   width: 90%;
   margin: auto;
+  color: #373a3c;
+  margin-top: 20px;
 `;
 
 function Syllabus({ course }) {

@@ -30,6 +30,7 @@ const CourseDetailsPage = () => {
     return <Spinner />;
   }
 
+  // eslint-disable-next-line no-unreachable
   return (
     <div>
       <Navbar />

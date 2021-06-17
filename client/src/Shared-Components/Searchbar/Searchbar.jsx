@@ -78,7 +78,6 @@ function Searchbar() {
           <div
             style={{
               display: 'flex',
-              // border: '1px solid #0156D1',
               padding: '0 10px',
             }}
           >
@@ -89,15 +88,6 @@ function Searchbar() {
               placeholder="What do you want to Learn?"
               variant="outlined"
               style={{ outline: 'none', borderBottom: 'none' }}
-              // InputProps={{
-              //   endAdornment: (
-              //     <InputAdornment position="end">
-              //       <IconButton>
-              //         <SearchIcon />
-              //       </IconButton>
-              //     </InputAdornment>
-              //   ),
-              // }}
             />
             <div className={classes.iconBtnDiv}>
               <IconButton

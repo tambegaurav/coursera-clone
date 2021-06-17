@@ -1,6 +1,6 @@
-# Coursera Clone
+# Coursera Clone (MERN Stack)
 
-Coursera is a edu-tech platform where anybody can browse for what they want to learn and can enroll and earn a skill for themselves. This Project is build as part of Masai School (30 weeks Bootcamp) Curriculum project and completed in duration of 2 weeks.
+Coursera is a ed-tech platform where anybody can browse for what they want to learn and can enroll and earn a skill for themselves. This Project is build as part of Masai School (30 weeks Bootcamp) Curriculum project and completed in duration of 2 weeks.
 
 ## Demo
 
@@ -12,7 +12,7 @@ To run this project, you will need to add the following environment variables to
 
 Inside Client Folder :
 
-`FIREBASE_CREDENTIALS_HERE`
+`REACT_APP__ALL_FIREBASE_CREDENTIALS_HERE`
 
 Inside Server Folder :
 
@@ -25,18 +25,20 @@ User Side:
 - User can browse through courses by category
 - User can search by keywords or name of Course
 - User can view Course details without signing in.
-- User login Feature
+- User Sign in Feature
 - User Sign up Feature
 - User can Enroll into any Course and start learning.
 - Razorpay Payment Feature while Enrolling (Test Mode)
 - Course Material Learning Page
+- User can save bookmarks/snapshots of any enrolled Course Video
+- User can write/save notes of any enrolled Course Video
 - Update Profile data
 
 Admin Side:
 
 - View all Courses on Platform
 - Add New Course
-- Add Course Content
+- Add Course Content (Videos & Author Content)
 - View Enrolled students in particular course
 
 ## Installation
@@ -53,19 +55,21 @@ Inside Client & Server install with npm
 
 ## Tech Stack
 
-**Client:** React, Redux, Material Ui, Styled-Components
+**Client:** React, Redux
 
 **Server:** Node, Express, MongoDb, Mongoose, Firebase
 
+## Libraries Used
+
+**Client:** Material Ui, Styled-Components, Axios, Firebase, React-Player, React-Markdown
+
+**Server:** Cors, Bcrypt
+
 ## Authors
 
-- Hinduraj Kadam [@tambegaurav](https://github.com/tambegaurav)
+- Hinduraj Kadam - [@Hinduraj8199](https://github.com/Hinduraj8199)
 - Vedansh Wani [@vedascript](https://github.com/vedascript)
-- Gaurav Tambe - [@Hinduraj8199](https://github.com/Hinduraj8199)
-
-## Lessons Learned
-
-What did you learn while building this project? What challenges did you face and how did you overcome them?
+- Gaurav Tambe [@tambegaurav](https://github.com/tambegaurav)
 
 ## Acknowledgements
 

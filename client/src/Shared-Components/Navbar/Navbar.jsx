@@ -323,7 +323,7 @@ const Navbar = () => {
         position: 'fixed',
         marginTop: 86,
         top: 0,
-
+        color: '#373a3c',
         background: 'white',
         marginLeft: 190,
         padding: 10,

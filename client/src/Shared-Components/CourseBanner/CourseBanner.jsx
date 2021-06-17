@@ -27,11 +27,13 @@ const CourseBanner = ({ course }) => {
   const activeUser = useSelector((state) => state.auth.user);
 
   let isEnrolled = false;
-  for (let i = 0; i < activeUser.enrolled_courses.length; i++) {
-    if (activeUser.enrolled_courses[i]._id === course._id) {
-      isEnrolled = true;
-      // console.log('Course is Already enrolled');
-      break;
+  if (activeUser) {
+    for (let i = 0; i < activeUser.enrolled_courses.length; i++) {
+      if (activeUser?.enrolled_courses[i]._id === course._id) {
+        isEnrolled = true;
+        // console.log('Course is Already enrolled');
+        break;
+      }
     }
   }
 
