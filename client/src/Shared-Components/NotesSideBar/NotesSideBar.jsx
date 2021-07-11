@@ -65,18 +65,11 @@ export const NotesSideBar = () => {
     axios
       .get(`http://localhost:5000/notes/get/${user._id}/${videoId}`)
       .then((res) => {
-        if (res.data.data.length > 0) {
-          return res.data.data[0];
-        } else {
-          return res.data.data;
-        }
+        return res.data.data;
       })
       .then((res) => {
         setNote(res.content);
-        console.log('data', res);
-        if (!res.video_id && !res.user_id) {
-          setIsNewNote(true);
-        }
+        // console.log('get note', res);
       })
       .catch((err) => console.log(err));
   };
@@ -91,31 +84,24 @@ export const NotesSideBar = () => {
   };
 
   const saveIntoDB = () => {
-    if (isNewNote) {
-      axios
-        .post(`http://localhost:5000/notes/add`, {
-          video_id: videoId,
-          user_id: user._id,
+    return axios
+      .put(
+        `http://localhost:5000/notes/patch/${user._id}/${videoId}`,
+        {
           content: newEdit,
-        })
-        .then((res) => {
-          console.log(res.data.data);
-          return res.data.data;
-        })
-        .then((res) => setNote(res.content))
-        .catch((err) => console.log(err));
-    } else {
-      axios
-        .patch(`http://localhost:5000/notes/patch/${user._id}/${videoId}`, {
-          content: newEdit,
-        })
-        .then((res) => {
-          console.log(res.data.data);
-          return res.data.data;
-        })
-        .then((res) => setNote(res.content))
-        .catch((err) => console.log(err));
-    }
+        },
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        },
+      )
+      .then((res) => {
+        console.log(res.data.data);
+        return res.data.data;
+      })
+      .then((res) => setNote(res.content))
+      .catch((err) => console.log(err));
   };
 
   const handleSaveNote = () => {
