@@ -37,7 +37,7 @@ export const ProfileForm = () => {
   };
 
   const handleSaveChanges = () => {
-    dispatch(updateUser(id, credentials));
+    dispatch(updateUser(id, { ...user, ...credentials }));
   };
 
   const handleUpdateProfilePic = () => {
@@ -68,7 +68,8 @@ export const ProfileForm = () => {
 
           //patch req
           axios
-            .patch(`http://localhost:5000/user/${user._id}`, {
+            .put(`http://localhost:5000/user/${user._id}`, {
+              ...user,
               profile_picture: downloadURL,
             })
             .then((res) => {

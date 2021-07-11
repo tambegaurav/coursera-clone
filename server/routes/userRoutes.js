@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
 });
 
 //updating user credentials
-router.patch("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const id = req.params.id;
   if (req.body.password) {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);

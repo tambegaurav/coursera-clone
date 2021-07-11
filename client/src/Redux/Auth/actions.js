@@ -79,7 +79,7 @@ export const enrollFailure = () => {
 export const enrollUser = (id, payload) => (dispatch) => {
   dispatch(enrollReq());
   return axios
-    .patch(`http://localhost:5000/user/${id}`, payload)
+    .put(`http://localhost:5000/user/${id}`, payload)
     .then((res) => {
       setData('courserUser', res.data.data);
       dispatch(enrollSuccess(res.data.data));
@@ -112,7 +112,7 @@ export const signin = (data) => (dispatch) => {
 export const updateUser = (id, payload) => (dispatch) => {
   dispatch(updateUserRequest());
   return axios
-    .patch(`http://localhost:5000/user/${id}`, payload)
+    .put(`http://localhost:5000/user/${id}`, payload)
     .then((res) => {
       setData('courserUser', res.data.data);
       dispatch(updateUserSuccess(res.data.data));

@@ -42,6 +42,7 @@ const PayByRazorPay = ({ amount, handleClose, courseId }) => {
     const enrolledCourses = [...activeUser.enrolled_courses, courseId];
     console.log(enrolledCourses);
     const payload = {
+      ...activeUser,
       enrolled_courses: enrolledCourses,
     };
     dispatch(enrollUser(activeUser._id, payload));
