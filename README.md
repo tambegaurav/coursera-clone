@@ -4,7 +4,7 @@ Coursera is a ed-tech platform where anybody can browse for what they want to le
 
 ## Demo
 
-Will upload a link soon here. Stay tuned!
+![CPT2107162132-1419x767](https://user-images.githubusercontent.com/42139446/125976344-d3d8c044-4e26-4136-8f2f-21307892085a.gif)
 
 ## Environment Variables
 
