@@ -12,7 +12,7 @@ import {
   ENROLL_REQ,
 } from './actionTypes';
 
-const userFromLocalStorage = loadData('courserUser') || null;
+const userFromLocalStorage = loadData('courseraUser') || null;
 const isAuthFromLocalStorage = loadData('isAuth') || false;
 
 const init = {

@@ -81,7 +81,7 @@ export const enrollUser = (id, payload) => (dispatch) => {
   return axios
     .put(`http://localhost:5000/user/${id}`, payload)
     .then((res) => {
-      setData('courserUser', res.data.data);
+      setData('courseraUser', res.data.data);
       dispatch(enrollSuccess(res.data.data));
     })
     .catch((err) => {
@@ -99,7 +99,7 @@ export const signin = (data) => (dispatch) => {
     })
     .then((res) => {
       console.log(res, 'veda');
-      setData('courserUser', res.data.data[0]);
+      setData('courseraUser', res.data.data[0]);
       setData('isAuth', true);
       dispatch(signinSuccess(res.data.data[0]));
     })
@@ -114,7 +114,7 @@ export const updateUser = (id, payload) => (dispatch) => {
   return axios
     .put(`http://localhost:5000/user/${id}`, payload)
     .then((res) => {
-      setData('courserUser', res.data.data);
+      setData('courseraUser', res.data.data);
       dispatch(updateUserSuccess(res.data.data));
       alert('Changes Saved!!');
     })
