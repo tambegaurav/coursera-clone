@@ -17,20 +17,22 @@ router.post("/signup", async (req, res) => {
 //login in user
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
+  console.log(username, password);
   const user = await User.find({ username })
     .populate("enrolled_courses")
     .exec();
 
   if (user.length === 0) {
+    console.log("User not found");
     return res.status(404).send();
   }
+  console.log(user);
 
-  try {
-    if (await bcrypt.compare(password, user[0].password)) {
-      res.status(200).json({ data: user, msg: "User Log-In" });
-    }
-  } catch {
-    res.status(404).json({ msg: "Invalid Credentials" });
+  console.log(await bcrypt.compare(password, user[0].password));
+  if (await bcrypt.compare(password, user[0].password)) {
+    return res.status(200).json({ data: user, msg: "User Log-In" });
+  } else {
+    return res.status(404).json({ msg: "Invalid Credentials" });
   }
 });
 
